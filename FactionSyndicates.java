@@ -58,10 +58,10 @@ public class FactionSyndicates {
     }
 
     static void getRank() {
-        for (int i = 0; i < factionSyndicates[0].length; i++) {
+        for (int i = 0; i < factionRankTitles[0].length; i++) {
             Main.printArray(factionRankTitles[i]);
             userRank[i] = Main.getUserInput(
-                factionSyndicates[i] + "rank: ", 
+                factionSyndicates[i] + " rank: ", 
                 1, 8);
         }
     }

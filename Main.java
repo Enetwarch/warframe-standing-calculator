@@ -1,9 +1,4 @@
-import java.util.Scanner;
 public class Main {
-    public static Scanner scanner = new Scanner(System.in);
-    public static String 
-    inputInstance = "+========================================================================+",
-    printInstance = "+------------------------------------------------------------------------+";
     public static int 
     masteryRank = 0, 
     standingCap = 16000,
@@ -24,103 +19,10 @@ public class Main {
         "Cavia"
     };
 
-    static void startPrint() {
-        System.out.printf(
-            """
-            %s        
-            """
-            , printInstance
-        );
-    }
 
-    static void endPrint() {
-        System.out.printf(
-            """
-            %s
-
-            """
-            , printInstance
-        );
-    }
-
-    public static void printMessage(String message) {
-        startPrint();
-        System.out.print(
-            message
-        );
-        endPrint();
-    }
-
-    public static void printArray(String[] list) {
-        startPrint();
-        for (int i = 0; i < list.length; i++) {
-            System.out.printf(
-                """
-                %d %s     
-                """
-                , i + 1
-                , list[i]
-            );
-        }
-        endPrint();
-    }
-
-    static void startInput() {
-        System.out.printf(
-            """
-            %s        
-            """
-            , inputInstance
-        );
-    }
-
-    static void endInput() {
-        System.out.print(
-            """
-                    
-            """
-        );
-    }
-
-    static void inputError(int min, int max) {
-        System.out.printf(
-            """
-            Invalid input.
-            Only accepts numbers from %d to %d
-
-            """
-            , min
-            , max
-        );
-        scanner.nextLine();
-    }
-
-    public static int getUserInput(String message, int min, int max) {
-        int userInput = -1;
-        while (true) {
-            startInput();
-            System.out.printf(
-                "%s: >> %s"
-                , message
-                , ""
-            );
-            try {
-                userInput = scanner.nextInt();
-                if (userInput >= min && userInput <= max) {
-                    break;
-                } else {
-                    inputError(min, max);
-                }
-            } catch (Exception e) {
-                inputError(min, max);
-            }
-        }
-        endInput();
-        return userInput;
-    }
 
     static void printWelcomeMessage() {
-        printMessage(
+        Format.printMessage(
             """
             Welcome to Warframe Standing Calculator! This is where it will display
             the amount of days it takes to reach a particular rank, the grinding
@@ -132,7 +34,7 @@ public class Main {
     }
 
     static void getMasteryRank() {
-        masteryRank = getUserInput(
+        masteryRank = Format.getUserInput(
             "Enter your mastery rank",
             0, 34
         );
@@ -140,20 +42,13 @@ public class Main {
     }
 
     static void getSyndicate() {
-        printArray(syndicateOptions);
-        userInput = getUserInput(
+        Format.printArray(syndicateOptions);
+        userInput = Format.getUserInput(
             "Choose a syndicate",
-            0, 12
+            0, syndicateOptions.length
         );
         switch (userInput) {
-            case 0: 
-                printMessage(
-                    """
-                    Program terminated
-                    """
-                );
-                scanner.close();
-                System.exit(0);
+            case 0: Format.terminateProgram();
             case 1: 
             case 2: 
             case 3: 
