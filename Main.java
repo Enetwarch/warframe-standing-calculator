@@ -82,12 +82,15 @@ public class Main {
         );
     }
 
-    static void inputError() {
-        System.out.print(
+    static void inputError(int min, int max) {
+        System.out.printf(
             """
             Invalid input.
+            Only accepts numbers from %d to %d
 
             """
+            , min
+            , max
         );
         scanner.nextLine();
     }
@@ -106,10 +109,10 @@ public class Main {
                 if (userInput >= min && userInput <= max) {
                     break;
                 } else {
-                    inputError();
+                    inputError(min, max);
                 }
             } catch (Exception e) {
-                inputError();
+                inputError(min, max);
             }
         }
         endInput();
@@ -130,19 +133,16 @@ public class Main {
 
     static void getMasteryRank() {
         masteryRank = getUserInput(
-            "Enter your mastery rank (Accepts ranks 0 to 34)",
+            "Enter your mastery rank",
             0, 34
         );
         standingCap += masteryRank * 500;
     }
 
-    static void printSyndicates() {
-        printArray(syndicateOptions);
-    }
-
     static void getSyndicate() {
+        printArray(syndicateOptions);
         userInput = getUserInput(
-            "Choose a syndicate (0 to 12)",
+            "Choose a syndicate",
             0, 12
         );
         switch (userInput) {
@@ -173,7 +173,6 @@ public class Main {
         printWelcomeMessage();
         getMasteryRank();
         while (true) { 
-            printSyndicates();
             getSyndicate();
         }
     }

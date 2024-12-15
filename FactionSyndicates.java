@@ -1,4 +1,15 @@
 public class FactionSyndicates {
+    static int 
+    userFaction;
+    static int[]
+    userRank = {
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+    };
     static String[] 
     factionSyndicates = {
         "Steel Meridian", 
@@ -39,40 +50,26 @@ public class FactionSyndicates {
         {0, 132000}
     };
 
-    static void chooseFactionSyndicate() {
-        Main.printArray(factionSyndicates);
-    }
-
     static void getFaction() {
-        while (true) { 
-            Main.startInput(
-                "Choose a faction (1 to 6): >> "
-            );
-            try {
-                int userFaction = Main.scanner.nextInt();
-                if (userFaction >= 1 && userFaction <= 6) {
-                    break;
-                } else {
-                    Main.inputError();
-                }
-            } catch (Exception e) {
-                Main.inputError();
-            }
-        }
+        Main.printArray(factionSyndicates);
+        userFaction = Main.getUserInput(
+            "Choose a syndicate", 1, 6
+        );
     }
-
-
 
     static void getRank() {
-        Main.getUserInput(
-            "", 0, 0);
+        for (int i = 0; i < factionSyndicates[0].length; i++) {
+            Main.printArray(factionRankTitles[i]);
+            userRank[i] = Main.getUserInput(
+                factionSyndicates[i] + "rank: ", 
+                1, 8);
+        }
     }
 
     public static void main(String[] args) {
         while (true) {
-            chooseFactionSyndicate();
             getFaction();
-            
+            getRank();
         }
     }
 }
