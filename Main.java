@@ -6,7 +6,8 @@ public class Main {
     printInstance = "+------------------------------------------------------------------------+";
     public static int 
     masteryRank = 0, 
-    standingCap = 16000;
+    standingCap = 16000,
+    userInput;
     static String[]
     syndicateOptions = {
         "Faction Syndicates",
@@ -22,16 +23,6 @@ public class Main {
         "The Holdfasts",
         "Cavia"
     };
-
-    static void inputError() {
-        System.out.print(
-            """
-            Invalid input.
-
-            """
-        );
-        scanner.nextLine();
-    }
 
     static void startPrint() {
         System.out.printf(
@@ -74,20 +65,45 @@ public class Main {
         endPrint();
     }
 
-    public static int getUserInput(String message, boolean condition) {
-        int userInput;
+    static void startInput() {
+        System.out.printf(
+            """
+            %s        
+            """
+            , inputInstance
+        );
+    }
+
+    static void endInput() {
+        System.out.print(
+            """
+                    
+            """
+        );
+    }
+
+    static void inputError() {
+        System.out.print(
+            """
+            Invalid input.
+
+            """
+        );
+        scanner.nextLine();
+    }
+
+    public static int getUserInput(String message, int min, int max) {
+        int userInput = -1;
         while (true) {
+            startInput();
             System.out.printf(
-                """
-                %s
-                %s: >> %s"""
-                , inputInstance
+                "%s: >> %s"
                 , message
                 , ""
             );
             try {
                 userInput = scanner.nextInt();
-                if (condition) {
+                if (userInput >= min && userInput <= max) {
                     break;
                 } else {
                     inputError();
@@ -96,7 +112,7 @@ public class Main {
                 inputError();
             }
         }
-        scanner.close();
+        endInput();
         return userInput;
     }
 
@@ -113,19 +129,22 @@ public class Main {
     }
 
     static void getMasteryRank() {
-        int userInput;
-        getUserInput(
-            "Please enter your mastery rank (Accepts ranks 0 to 34)",
-            userInput >= 0 && userInput <= 34
+        masteryRank = getUserInput(
+            "Enter your mastery rank (Accepts ranks 0 to 34)",
+            0, 34
         );
         standingCap += masteryRank * 500;
     }
 
     static void syndicateOptions() {
-        Main.printArray(syndicateOptions);
+        printArray(syndicateOptions);
     }
 
-    static void selectedSyndicate(int userInput) {
+    static void getSyndicate() {
+        userInput = getUserInput(
+            "Choose a syndicate (0 to 12)",
+            0, 12
+        );
         switch (userInput) {
             case 0: 
                 System.out.print("Program terminated."); 
@@ -152,7 +171,6 @@ public class Main {
         while (true) { 
             syndicateOptions();
             getSyndicate();
-            selectedSyndicate(userInput);
         }
     }
 }
