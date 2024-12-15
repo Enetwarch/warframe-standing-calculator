@@ -116,7 +116,7 @@ public class Main {
         return userInput;
     }
 
-    static void welcomeMessage() {
+    static void printWelcomeMessage() {
         printMessage(
             """
             Welcome to Warframe Standing Calculator! This is where it will display
@@ -136,7 +136,7 @@ public class Main {
         standingCap += masteryRank * 500;
     }
 
-    static void syndicateOptions() {
+    static void printSyndicates() {
         printArray(syndicateOptions);
     }
 
@@ -170,10 +170,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        welcomeMessage();
+        printWelcomeMessage();
         getMasteryRank();
         while (true) { 
-            syndicateOptions();
+            printSyndicates();
             getSyndicate();
         }
     }

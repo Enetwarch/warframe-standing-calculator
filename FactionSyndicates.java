@@ -40,15 +40,7 @@ public class FactionSyndicates {
     };
 
     static void chooseFactionSyndicate() {
-        Main.startPrint("Choose a faction");
-        for (int i = 0; i < factionSyndicates.length; i++) {
-            System.out.printf(
-                "%d. %s\n"
-                , i + 1
-                , factionSyndicates[i]
-            );
-        }
-        Main.endPrint();
+        Main.printArray(factionSyndicates);
     }
 
     static void getFaction() {
@@ -69,10 +61,11 @@ public class FactionSyndicates {
         }
     }
 
-    static void chooseRank() {
-        while (true) { 
-            
-        }
+
+
+    static void getRank() {
+        Main.getUserInput(
+            "", 0, 0);
     }
 
     public static void main(String[] args) {
