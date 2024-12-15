@@ -2,11 +2,26 @@ import java.util.Scanner;
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
     public static String 
-    newInputInstance = "+========================================================================+",
-    newPrintInstance = "+------------------------------------------------------------------------+";
+    inputInstance = "+========================================================================+",
+    printInstance = "+------------------------------------------------------------------------+";
     public static int 
     masteryRank = 0, 
     standingCap = 16000;
+    static String[]
+    syndicateOptions = {
+        "Faction Syndicates",
+        "Conclave",
+        "Cephalon Simaris",
+        "Ostron",
+        "The Quills",
+        "Solaris United",
+        "Vox Solaris",
+        "Ventkids",
+        "Entrati",
+        "Necraloid",
+        "The Holdfasts",
+        "Cavia"
+    };
 
     static void inputError() {
         System.out.print(
@@ -15,94 +30,102 @@ public class Main {
 
             """
         );
+        scanner.nextLine();
     }
 
-    static void welcomeMessage() {
+    static void startPrint() {
+        System.out.printf(
+            """
+            %s        
+            """
+            , printInstance
+        );
+    }
+
+    static void endPrint() {
         System.out.printf(
             """
             %s
-            Welcome to Warframe Standing Calculator! This is where it will display
-            the amount of days it takes to reach a particular rank, the grinding
-            needed for the materials needed, and the days your excess standing
-            materials will last for. Do note that this was made in November 2024,
-            which is before the Warframe 1999 update.
-            %s
 
             """
-            , newPrintInstance
-            , newPrintInstance
+            , printInstance
+        );
+    }
+
+    public static void printMessage(String message) {
+        startPrint();
+        System.out.print(
+            message
+        );
+        endPrint();
+    }
+
+    public static void printArray(String[] list) {
+        startPrint();
+        for (int i = 0; i < list.length; i++) {
+            System.out.printf(
+                """
+                %d %s     
+                """
+                , i + 1
+                , list[i]
+            );
+        }
+        endPrint();
+    }
+
+    public static int getUserInput(String message, boolean condition) {
+        int userInput;
+        while (true) {
+            System.out.printf(
+                """
+                %s
+                %s: >> %s"""
+                , inputInstance
+                , message
+                , ""
+            );
+            try {
+                userInput = scanner.nextInt();
+                if (condition) {
+                    break;
+                } else {
+                    inputError();
+                }
+            } catch (Exception e) {
+                inputError();
+            }
+        }
+        scanner.close();
+        return userInput;
+    }
+
+    static void welcomeMessage() {
+        printMessage(
+            """
+            Welcome to Warframe Standing Calculator! This is where it will display
+            the amount of days it takes to reach a particular rank, the grinding
+            needed for the materials required, and the days your excess standing
+            materials will last for. Do note that this was made in November 2024,
+            which is before the Warframe 1999 update. 
+            """
         );
     }
 
     static void getMasteryRank() {
-        while (true) { 
-            System.out.printf(
-                "%s\nPlease enter your master rank (Accepts ranks 0 to 34): >> "
-                , newInputInstance
-            );
-            try {
-                masteryRank = scanner.nextInt(); 
-                if (masteryRank >= 0 && masteryRank <= 34) {
-                    System.out.print("\n");
-                    break;
-                } else {
-                    InputError();
-                }
-            } catch (Exception e) {
-                InputError();
-            }
-        }
+        int userInput;
+        getUserInput(
+            "Please enter your mastery rank (Accepts ranks 0 to 34)",
+            userInput >= 0 && userInput <= 34
+        );
         standingCap += masteryRank * 500;
     }
 
     static void syndicateOptions() {
-        System.out.printf(
-            """
-            %s
-            Choose a syndicate
-            1. Faction Syndicates
-            2. Conclave
-            3. Cephalon Simaris
-            4. Ostron
-            5. The Quills
-            6. Solaris United
-            7. Vox Solaris
-            8. Ventkids
-            9. Entrati
-            10. Necraloid
-            11. The Holdfasts
-            12. Cavia
-            0. Exit
-            %s
-
-            """
-            , newPrintInstance
-            , newPrintInstance
-        );
-    }
-    
-    static int getUserInput() {
-        int userInput;
-        while (true) {
-            System.out.printf(
-                "%s\nChoose a syndicate (Enter a number from 0 to 12): >> "
-                , newInputInstance
-            );
-            try {
-                userInput = scanner.nextInt();
-                if (userInput >= 0 && userInput <= 12) {
-                    break;
-                } else {
-                    InputError();
-                }
-            } catch (Exception e) {
-                InputError();
-            }
-        }
-        return userInput;
+        Main.printArray(syndicateOptions);
     }
 
-    static void syndicateSelect(int userInput) {
+    static void selectedSyndicate(int userInput) {
         switch (userInput) {
             case 0: 
                 System.out.print("Program terminated."); 
@@ -128,8 +151,8 @@ public class Main {
         getMasteryRank();
         while (true) { 
             syndicateOptions();
-            int userInput = getUserInput();
-            syndicateSelect(userInput);
+            getSyndicate();
+            selectedSyndicate(userInput);
         }
     }
 }

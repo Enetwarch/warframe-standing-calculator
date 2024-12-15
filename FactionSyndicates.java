@@ -1,5 +1,4 @@
 public class FactionSyndicates {
-
     static String[] 
     factionSyndicates = {
         "Steel Meridian", 
@@ -8,6 +7,15 @@ public class FactionSyndicates {
         "The Perrin Sequence", 
         "Red Veil", 
         "New Loka"
+    };
+    static String[][]
+    factionRankTitles = {
+        {"Enemy", "Outcast", "Neutral", "Initiation", "Brave", "Valiant", "Defender", "Protector", "General"},
+        {"Fraud", "Deceiver", "Neutral", "Initiation", "Principled", "Authentic", "Lawful", "Crusader", "Maxim"},
+        {"Waste", "Debris", "Neutral", "Initiation", "Competent", "Intriguing", "Intelligent", "Wise", "Genius"},
+        {"Write-Off", "Liability", "Neutral", "Initiation", "Associate", "Senior Associate", "Executive", "Partner"},
+        {"Corrupt", "Suspect", "Neutral", "Initiation", "Respected", "Honored", "Esteemed", "Revered", "Exalted"},
+        {"Exiled", "Condemned", "Neutral", "Initiation", "Humane", "Bountiful", "Benevolent", "Pure", "Flawless"}
     };
     static double[][]
     alliedOpposedEnemy = {
@@ -18,31 +26,35 @@ public class FactionSyndicates {
         {0.50, -1.00, -0.50, 0, 1.00, 0},
         {-0.50, 0, -1.00, 0.50, 0, 1.00}
     };
+    static int[][]
+    standingPerRank = {
+        {-44000, 0},
+        {-22000, 0},
+        {-5000, 5000},
+        {0, 5000},
+        {0, 22000},
+        {0, 44000},
+        {0, 70000},
+        {0, 99000},
+        {0, 132000}
+    };
 
     static void chooseFactionSyndicate() {
-        System.out.printf(
-            """
-            %s
-            Choose a faction syndicate
-            1. Steel Meridian
-            2. Arbiters of Hexis
-            3. Cephalon Suda
-            4. The Perrin Sequence
-            5. Red Veil
-            6. New Loka
-            %s
-
-            """
-            , Main.newPrintInstance
-            , Main.newPrintInstance
-        );
+        Main.startPrint("Choose a faction");
+        for (int i = 0; i < factionSyndicates.length; i++) {
+            System.out.printf(
+                "%d. %s\n"
+                , i + 1
+                , factionSyndicates[i]
+            );
+        }
+        Main.endPrint();
     }
 
-    static void getUserInput() {
+    static void getFaction() {
         while (true) { 
-            System.out.printf(
-                "%s\nSelect the faction you chose: >> "
-                , Main.newInputInstance
+            Main.startInput(
+                "Choose a faction (1 to 6): >> "
             );
             try {
                 int userFaction = Main.scanner.nextInt();
@@ -52,18 +64,22 @@ public class FactionSyndicates {
                     Main.inputError();
                 }
             } catch (Exception e) {
-                break;
+                Main.inputError();
             }
         }
     }
 
-    static void 
+    static void chooseRank() {
+        while (true) { 
+            
+        }
+    }
 
     public static void main(String[] args) {
         while (true) {
             chooseFactionSyndicate();
-            getUserInput();
-
+            getFaction();
+            
         }
     }
 }
