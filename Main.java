@@ -147,7 +147,11 @@ public class Main {
         );
         switch (userInput) {
             case 0: 
-                System.out.print("Program terminated."); 
+                printMessage(
+                    """
+                    Program terminated
+                    """
+                );
                 scanner.close();
                 System.exit(0);
             case 1: 
