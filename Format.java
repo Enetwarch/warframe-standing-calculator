@@ -34,6 +34,14 @@ public class Format {
         );
     }
 
+    public static void printSyndicateSelect() {
+        System.out.print(
+            """
+            0. Return to syndicate select.          
+            """
+        );
+    }
+
     public static void terminateProgram() {
         System.out.print(
             """
