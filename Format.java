@@ -15,6 +15,18 @@ public class Format {
         }
     }
 
+    public static void printRankArray(String[] rank, String[] title) {
+        for (int i = 0; i < rank.length; i++) {
+            System.out.printf(
+                """
+                (%s) %s        
+                """
+                , rank
+                , title
+            );
+        }
+    }
+
     static void inputError(int min, int max) {
         System.out.printf(
             """
