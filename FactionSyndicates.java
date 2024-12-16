@@ -17,8 +17,19 @@ public class FactionSyndicates {
         0,
         0,
         0
+    },
+    standingPerMedallion = {
+        500, 1000, 5000
     };
     static int[][]
+    userMedallion = {
+        {0, 0, 0},
+        {0, 0, 0},
+        {0, 0, 0},
+        {0, 0, 0},
+        {0, 0, 0},
+        {0, 0, 0}
+    },
     standingPerRank = {
         {-44000, 0},
         {-22000, 0},
@@ -57,8 +68,16 @@ public class FactionSyndicates {
         {"(-2) Corrupt", "(-1) Suspect", "(-) Neutral", "(0) Initiation", "(1) Respected", "(2) Honored", "(3) Esteemed", "(4) Revered", "(5) Exalted"},
         {"(-2) Exiled", "(-1) Condemned", "(-) Neutral", "(0) Initiation", "(1) Humane", "(2) Bountiful", "(3) Benevolent", "(4) Pure", "(5) Flawless"}
     },
+    syndicateMedallions = {
+        {"Insignia", "Defender Insignia", "General Insignia"},
+        {"Medallion", "Lawful Medallion", "Maxim Medallion"},
+        {"Datum", "Intriguing Datum", "Genius Datum"},
+        {"Quittance", "Executive Quittance", "Partner Quittance"},
+        {"Mark", "Honored Mark", "Exalted Mark"},
+        {"Seed", "Bountiful Seed", "Flawless Seed"}
+    },
     resourcesPerRank = {
-        {"1 Orokin Catalyst", "1 Forma", "1000 Salvage", "2 Morphic", "1 Forma", "1 Orokin Catalyst", "2 Aya", "3 Aya"},
+        {"1 Orokin Catalyst", "1 Forma", "1000 Salvages", "2 Morphics", "1 Forma", "1 Orokin Catalyst", "2 Aya", "3 Aya"},
         {"1 Orokin Reactor", "1 Forma", "500 Alloy Plate", "2 Gallium", "1 Forma", "1 Orokin Reactor", "2 Aya", "3 Aya"},
         {"1 Orokin Catalyst", "1 Forma", "500 Circuit", "2 Control Module", "1 Forma", "1 Orokin Catalyst", "2 Aya", "3 Aya"},
         {"1 Orokin Reactor", "1 Forma", "100 Polymer Bundle", "2 Detonite Ampule", "1 Forma", "1 Orokin Reactor", "2 Aya", "3 Aya"},
@@ -75,26 +94,33 @@ public class FactionSyndicates {
         );
     }
 
-    static void getRank() {
-        for (int i = 0; i < factionSyndicates.length; i++) {
-            Format.printArray(factionRankTitles[i]);
-            userRank[i] = Format.getUserInput(
-                factionSyndicates[i] + " rank", 
-                1,
-                factionRankTitles[i].length
+    static void getRank(int i) {
+        Format.printArray(factionRankTitles[i]);
+        userRank[i] = Format.getUserInput(
+            factionSyndicates[i] + " rank", 
+            1,
+            factionRankTitles[i].length
+        );
+    }
+
+    static void getStanding(int i) {
+        userStanding[i] = Format.getUserInput(
+            factionSyndicates[i] + " standing",
+            standingPerRank[userRank[i] - 1][0],
+            standingPerRank[userRank[i] - 1][1]
+        );
+    }
+
+    static void getMedallions(int i) {
+        for (int j = 0; j < syndicateMedallions[i].length; j++) {
+            userMedallion[i][j] = Format.getUserInput(
+                syndicateMedallions[i][j] + " owned",
+                0,
+                Integer.MAX_VALUE
             );
         }
     }
 
-    static void getStanding() {
-        for (int i = 0; i < userStanding.length; i++) {
-            userStanding[i] = Format.getUserInput(
-                factionSyndicates[i] + " standing",
-                standingPerRank[userRank[i] - 1][0],
-                standingPerRank[userRank[i] - 1][1]
-            );
-        }
-    }
 
     static void analyzeSteelMeridian() {
 
@@ -141,8 +167,7 @@ public class FactionSyndicates {
 
     public static void main(String[] args) {
         getFaction();
-        getRank();
-        getStanding();
+
         while (true) { 
             getAnalysis();
         }
