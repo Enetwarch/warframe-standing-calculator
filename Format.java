@@ -2,8 +2,6 @@ import java.util.Scanner;
 public class Format {
     public static Scanner 
     scanner = new Scanner(System.in);
-    public static int
-    min = 0;
 
     public static void printArray(String[] list) {
         for (int i = 0; i < list.length; i++) {
@@ -15,11 +13,6 @@ public class Format {
                 , list[i]
             );
         }
-        System.out.printf(
-            """
-            0. Exit Program
-            """
-        );
     }
 
     static void inputError(int min, int max) {
@@ -31,6 +24,14 @@ public class Format {
             , max
         );
         scanner.nextLine();
+    }
+
+    public static void printExitProgram() {
+        System.out.print(
+            """
+            0. Exit Program     
+            """
+        );
     }
 
     public static void terminateProgram() {
@@ -47,9 +48,8 @@ public class Format {
         int userInput = -1;
         while (true) {
             System.out.printf(
-                "%s: >> %s"
+                "%s: >> "
                 , message
-                , ""
             );
             try {
                 userInput = scanner.nextInt();
@@ -65,12 +65,13 @@ public class Format {
         if (userInput == 0) {
             terminateProgram();
         }
-        System.out.printf(
-            """
-            %s
-            """
-            , ""
-        );
         return userInput;
+    }
+
+    public static void inputBuffer() {
+        System.out.print(
+            "Press enter to proceed >> "
+        );
+        scanner.nextLine();
     }
 }

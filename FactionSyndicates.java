@@ -11,8 +11,6 @@ public class FactionSyndicates {
         0
     },
     userStanding = {
-        -44000,
-        -22000,
         0,
         0,
         0,
@@ -31,12 +29,12 @@ public class FactionSyndicates {
     };
     static String[][]
     factionRankTitles = {
-        {"Enemy", "Outcast", "Neutral", "Initiation", "Brave", "Valiant", "Defender", "Protector", "General"},
-        {"Fraud", "Deceiver", "Neutral", "Initiation", "Principled", "Authentic", "Lawful", "Crusader", "Maxim"},
-        {"Waste", "Debris", "Neutral", "Initiation", "Competent", "Intriguing", "Intelligent", "Wise", "Genius"},
-        {"Write-Off", "Liability", "Neutral", "Initiation", "Associate", "Senior Associate", "Executive", "Partner"},
-        {"Corrupt", "Suspect", "Neutral", "Initiation", "Respected", "Honored", "Esteemed", "Revered", "Exalted"},
-        {"Exiled", "Condemned", "Neutral", "Initiation", "Humane", "Bountiful", "Benevolent", "Pure", "Flawless"}
+        {"(-2) Enemy", "(-1) Outcast", "(-) Neutral", "(0) Initiation", "(1) Brave", "(2) Valiant", "(3) Defender", "(4) Protector", "(5) General"},
+        {"(-2) Fraud", "(-1) Deceiver", "(-) Neutral", "(0) Initiation", "(1) Principled", "(2) Authentic", "(3) Lawful", "(4) Crusader", "(5) Maxim"},
+        {"(-2) Waste", "(-1) Debris", "(-) Neutral", "(0) Initiation", "(1) Competent", "(2) Intriguing", "(3) Intelligent", "(4) Wise", "(5) Genius"},
+        {"(-2) Write-Off", "(-1) Liability", "(-) Neutral", "(0) Initiation", "(1) Associate", "(2) Senior Associate", "(3) Executive", "(4) Senior Executive", "(5) Partner"},
+        {"(-2) Corrupt", "(-1) Suspect", "(-) Neutral", "(0) Initiation", "(1) Respected", "(2) Honored", "(3) Esteemed", "(4) Revered", "(5) Exalted"},
+        {"(-2) Exiled", "(-1) Condemned", "(-) Neutral", "(0) Initiation", "(1) Humane", "(2) Bountiful", "(3) Benevolent", "(4) Pure", "(5) Flawless"}
     };
     static double[][]
     alliedOpposedEnemy = {
@@ -64,17 +62,19 @@ public class FactionSyndicates {
         Format.printArray(factionSyndicates);
         userFaction = Format.getUserInput(
             "Choose a syndicate",
-            Format.min,
+            1, 
             factionSyndicates.length
         );
     }
 
     static void getRank() {
-        for (int i = 0; i < factionRankTitles[i].length; i++) {
+        for (int i = 0; i < factionSyndicates.length; i++) {
+            Format.printArray(factionRankTitles[i]);
             userRank[i] = Format.getUserInput(
                 factionSyndicates[i] + " rank", 
-                Format.min, 
-                factionRankTitles[i].length);
+                1,
+                factionRankTitles[i].length
+            );
         }
     }
 
@@ -82,17 +82,15 @@ public class FactionSyndicates {
         for (int i = 0; i < userStanding.length; i++) {
             userStanding[i] = Format.getUserInput(
                 factionSyndicates[i] + " standing",
-                Format.min,
-                factionSyndicates.length
+                standingPerRank[userRank[i - 1]][0],
+                standingPerRank[i - 1][1]
             );
         }
     }
 
     public static void main(String[] args) {
-        while (true) {
-            getFaction();
-            getRank();
-            getStanding();
-        }
+        getFaction();
+        getRank();
+        getStanding();
     }
 }
