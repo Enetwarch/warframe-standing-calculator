@@ -2,39 +2,10 @@ import java.util.Scanner;
 public class Format {
     public static Scanner 
     scanner = new Scanner(System.in);
-    public static String 
-    inputInstance = "+========================================================================+",
-    printInstance = "+------------------------------------------------------------------------+";
     public static int
-    min = -1;
-
-    static void startPrint() {
-        System.out.printf(
-            """
-            %s        
-            """
-            , printInstance
-        );
-    }
-
-    static void endPrint() {
-        System.out.printf(
-            """
-            %s
-
-            """
-            , printInstance
-        );
-    }
-
-    public static void printMessage(String message) {
-        startPrint();
-        System.out.print(message);
-        endPrint();
-    }
+    min = 0;
 
     public static void printArray(String[] list) {
-        startPrint();
         for (int i = 0; i < list.length; i++) {
             System.out.printf(
                 """
@@ -46,25 +17,7 @@ public class Format {
         }
         System.out.printf(
             """
-            -1. Exit Program
-            """
-        );
-        endPrint();
-    }
-
-    static void startInput() {
-        System.out.printf(
-            """
-            %s        
-            """
-            , inputInstance
-        );
-    }
-
-    static void endInput() {
-        System.out.print(
-            """
-                    
+            0. Exit Program
             """
         );
     }
@@ -72,8 +25,7 @@ public class Format {
     static void inputError(int min, int max) {
         System.out.printf(
             """
-            Invalid input. Only accepts numbers from %d to %d
-
+            Invalid input. Only accepts numbers from %d to %d.
             """
             , min
             , max
@@ -82,7 +34,7 @@ public class Format {
     }
 
     public static void terminateProgram() {
-        printMessage(
+        System.out.print(
             """
             Program terminated.
             """
@@ -94,7 +46,6 @@ public class Format {
     public static int getUserInput(String message, int min, int max) {
         int userInput = -1;
         while (true) {
-            startInput();
             System.out.printf(
                 "%s: >> %s"
                 , message
@@ -111,12 +62,15 @@ public class Format {
                 inputError(min, max);
             }
         }
-        endInput();
-        if (userInput == -1) {
-            switch (userInput) {
-                case -1: terminateProgram();
-            }
+        if (userInput == 0) {
+            terminateProgram();
         }
+        System.out.printf(
+            """
+            %s
+            """
+            , ""
+        );
         return userInput;
     }
 }
