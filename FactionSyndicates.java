@@ -82,8 +82,8 @@ public class FactionSyndicates {
         for (int i = 0; i < userStanding.length; i++) {
             userStanding[i] = Format.getUserInput(
                 factionSyndicates[i] + " standing",
-                standingPerRank[userRank[i - 1]][0],
-                standingPerRank[i - 1][1]
+                standingPerRank[userRank[i] - 1][0],
+                standingPerRank[userRank[i] - 1][1]
             );
         }
     }
