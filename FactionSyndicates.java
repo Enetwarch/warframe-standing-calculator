@@ -19,7 +19,9 @@ public class FactionSyndicates {
         0
     },
     standingPerMedallion = {
-        500, 1000, 5000
+        500,
+        1000,
+        5000
     };
     static int[][]
     userMedallion = {
@@ -69,12 +71,12 @@ public class FactionSyndicates {
         {"(-2) Exiled", "(-1) Condemned", "(-) Neutral", "(0) Initiation", "(1) Humane", "(2) Bountiful", "(3) Benevolent", "(4) Pure", "(5) Flawless"}
     },
     syndicateMedallions = {
-        {"Insignia", "Defender Insignia", "General Insignia"},
-        {"Medallion", "Lawful Medallion", "Maxim Medallion"},
-        {"Datum", "Intriguing Datum", "Genius Datum"},
-        {"Quittance", "Executive Quittance", "Partner Quittance"},
-        {"Mark", "Honored Mark", "Exalted Mark"},
-        {"Seed", "Bountiful Seed", "Flawless Seed"}
+        {"(500 standing) Insignia", "(1,000 standing) Defender Insignia", "(5,000 standing) General Insignia"},
+        {"(500 standing) Medallion", "(1,000 standing) Lawful Medallion", "(5,000 standing) Maxim Medallion"},
+        {"(500 standing) Datum", "(1,000 standing) Intriguing Datum", "(5,000 standing) Genius Datum"},
+        {"(500 standing) Quittance", "(1,000 standing) Executive Quittance", "(5,000 standing) Partner Quittance"},
+        {"(500 standing) Mark", "(1,000 standing) Honored Mark", "(5,000) Exalted Mark"},
+        {"(500 standing) Seed", "(1,000 standing) Bountiful Seed", "(5,000 standing) Flawless Seed"}
     },
     resourcesPerRank = {
         {"1 Orokin Catalyst", "1 Forma", "1000 Salvages", "2 Morphics", "1 Forma", "1 Orokin Catalyst", "2 Aya", "3 Aya"},
@@ -114,36 +116,49 @@ public class FactionSyndicates {
     static void getMedallions(int i) {
         for (int j = 0; j < syndicateMedallions[i].length; j++) {
             userMedallion[i][j] = Format.getUserInput(
-                syndicateMedallions[i][j] + " owned",
+                "(" + standingPerMedallion[j] + " standing) " + syndicateMedallions[i][j] + " owned",
                 0,
                 Integer.MAX_VALUE
             );
         }
     }
 
+    static void getUserSyndicateInfo(int i) {
+        getRank(i);
+        getStanding(i);
+        getMedallions(i);
+    }
+
+    static void calculateDaysToMax(int i) {
+        int days = 0;
+    }
+
+    static void analyzeSyndicate(int i) {
+        getUserSyndicateInfo(i);
+    }
 
     static void analyzeSteelMeridian() {
-
+        analyzeSyndicate(0);
     }
 
     static void analyzeArbitersOfHexis() {
-
+        analyzeSyndicate(1);
     }
 
     static void analyzeCephalonSuda() {
-
+        analyzeSyndicate (2);
     }
 
     static void analyzeThePerrinSequence() {
-
+        analyzeSyndicate(3);
     }
 
     static void analyzeRedVeil() {
-
+        analyzeSyndicate(4);
     }
 
     static void analyzeNewLoka() {
-
+        analyzeSyndicate(5);
     }
 
     static void getAnalysis() {
@@ -155,21 +170,34 @@ public class FactionSyndicates {
             factionSyndicates.length
         );
         switch (userInput) {
-            case 0: break;
-            case 1: analyzeSteelMeridian();
-            case 2: analyzeArbitersOfHexis();
-            case 3: analyzeCephalonSuda();
-            case 4: analyzeThePerrinSequence();
-            case 5: analyzeRedVeil();
-            case 6: analyzeNewLoka();
+            case 0: 
+                break;
+            case 1: 
+                analyzeSteelMeridian();
+                break;
+            case 2: 
+                analyzeArbitersOfHexis();
+                break;
+            case 3: 
+                analyzeCephalonSuda();
+                break;
+            case 4: 
+                analyzeThePerrinSequence();
+                break;
+            case 5: 
+                analyzeRedVeil();
+                break;
+            case 6: 
+                analyzeNewLoka();
+                break;
         }
     }
 
     public static void main(String[] args) {
         getFaction();
-
         while (true) { 
             getAnalysis();
+            break;
         }
     }
 }
