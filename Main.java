@@ -1,3 +1,7 @@
+
+import java.io.ObjectStreamConstants;
+import javax.xml.stream.events.EntityDeclaration;
+
 public class Main {
     public static int 
     masteryRank = 0, 
@@ -40,18 +44,18 @@ public class Main {
         );
         switch (userInput) {
             case 0: Format.terminateProgram();
-            case 1: 
-            case 2: 
-            case 3: 
-            case 4: 
-            case 5: 
-            case 6: 
-            case 7: 
-            case 8: 
-            case 9: 
-            case 10: 
-            case 11: 
-            case 12: 
+            case 1: FactionSyndicates.main();
+            case 2: Conclave.main();
+            case 3: CephalonSimaris.main();
+            case 4: Ostron.main();
+            case 5: TheQuills.main();
+            case 6: SolarisUnited.main();
+            case 7: VoxSolaris.main();
+            case 8: Ventkids.main();
+            case 9: Entrati.main();
+            case 10: Necraloid.main();
+            case 11: TheHoldfasts.main();
+            case 12: Cavia.main();
         }
     }
 
