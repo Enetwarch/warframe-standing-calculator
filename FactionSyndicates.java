@@ -18,6 +18,27 @@ public class FactionSyndicates {
         0,
         0
     };
+    static int[][]
+    standingPerRank = {
+        {-44000, 0},
+        {-22000, 0},
+        {-5000, 5000},
+        {0, 5000},
+        {0, 22000},
+        {0, 44000},
+        {0, 70000},
+        {0, 99000},
+        {0, 132000}
+    };
+    static double[][]
+    alliedOpposedEnemy = {
+        {1.00, 0, 0, -1.00, 0.50, -0.50},
+        {0, 1.00, 0.50, -0.50, -1.00, 0},
+        {0, .50, 1.00, 0, -0.50, -1.00},
+        {-1.00, -0.50, 0, 1.00, 0, 0.50},
+        {0.50, -1.00, -0.50, 0, 1.00, 0},
+        {-0.50, 0, -1.00, 0.50, 0, 1.00}
+    };
     static String[] 
     factionSyndicates = {
         "Steel Meridian", 
@@ -35,27 +56,14 @@ public class FactionSyndicates {
         {"(-2) Write-Off", "(-1) Liability", "(-) Neutral", "(0) Initiation", "(1) Associate", "(2) Senior Associate", "(3) Executive", "(4) Senior Executive", "(5) Partner"},
         {"(-2) Corrupt", "(-1) Suspect", "(-) Neutral", "(0) Initiation", "(1) Respected", "(2) Honored", "(3) Esteemed", "(4) Revered", "(5) Exalted"},
         {"(-2) Exiled", "(-1) Condemned", "(-) Neutral", "(0) Initiation", "(1) Humane", "(2) Bountiful", "(3) Benevolent", "(4) Pure", "(5) Flawless"}
-    };
-    static double[][]
-    alliedOpposedEnemy = {
-        {1.00, 0, 0, -1.00, 0.50, -0.50},
-        {0, 1.00, 0.50, -0.50, -1.00, 0},
-        {0, .50, 1.00, 0, -0.50, -1.00},
-        {-1.00, -0.50, 0, 1.00, 0, 0.50},
-        {0.50, -1.00, -0.50, 0, 1.00, 0},
-        {-0.50, 0, -1.00, 0.50, 0, 1.00}
-    };
-    static int[][]
-    standingPerRank = {
-        {-44000, 0},
-        {-22000, 0},
-        {-5000, 5000},
-        {0, 5000},
-        {0, 22000},
-        {0, 44000},
-        {0, 70000},
-        {0, 99000},
-        {0, 132000}
+    },
+    resourcesPerRank = {
+        {"1 Orokin Catalyst", "1 Forma", "1000 Salvage", "2 Morphic", "1 Forma", "1 Orokin Catalyst", "2 Aya", "3 Aya"},
+        {"1 Orokin Reactor", "1 Forma", "500 Alloy Plate", "2 Gallium", "1 Forma", "1 Orokin Reactor", "2 Aya", "3 Aya"},
+        {"1 Orokin Catalyst", "1 Forma", "500 Circuit", "2 Control Module", "1 Forma", "1 Orokin Catalyst", "2 Aya", "3 Aya"},
+        {"1 Orokin Reactor", "1 Forma", "100 Polymer Bundle", "2 Detonite Ampule", "1 Forma", "1 Orokin Reactor", "2 Aya", "3 Aya"},
+        {"1 Orokin Catalyst", "1 Forma", "500 Alloy Plate", "2 Gallium", "1 Forma", "1 Orokin Catalyst", "2 Aya", "3 Aya"},
+        {"1 Orokin Reactor", "1 Forma", "1000 Ferrite", "2 Fieldron Sample", "1 Forma", "1 Orokin Reactor", "2 Aya", "3 Aya"}
     };
 
     static void getFaction() {
