@@ -96,9 +96,55 @@ public class FactionSyndicates {
         }
     }
 
+    static void analyzeSteelMeridian() {
+
+    }
+
+    static void analyzeArbitersOfHexis() {
+
+    }
+
+    static void analyzeCephalonSuda() {
+
+    }
+
+    static void analyzeThePerrinSequence() {
+
+    }
+
+    static void analyzeRedVeil() {
+
+    }
+
+    static void analyzeNewLoka() {
+
+    }
+
+    static void getAnalysis() {
+        Format.printArray(factionSyndicates);
+        Format.printSyndicateSelect();
+        int userInput = Format.getUserInput(
+            "Choose a syndicate to analyze",
+            0,
+            factionSyndicates.length
+        );
+        switch (userInput) {
+            case 0: break;
+            case 1: analyzeSteelMeridian();
+            case 2: analyzeArbitersOfHexis();
+            case 3: analyzeCephalonSuda();
+            case 4: analyzeThePerrinSequence();
+            case 5: analyzeRedVeil();
+            case 6: analyzeNewLoka();
+        }
+    }
+
     public static void main(String[] args) {
         getFaction();
         getRank();
         getStanding();
+        while (true) { 
+            getAnalysis();
+        }
     }
 }
