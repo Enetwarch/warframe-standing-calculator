@@ -5,6 +5,8 @@ public class Format {
     public static String 
     inputInstance = "+========================================================================+",
     printInstance = "+------------------------------------------------------------------------+";
+    public static int
+    min = -1;
 
     static void startPrint() {
         System.out.printf(
@@ -27,9 +29,7 @@ public class Format {
 
     public static void printMessage(String message) {
         startPrint();
-        System.out.print(
-            message
-        );
+        System.out.print(message);
         endPrint();
     }
 
@@ -44,6 +44,11 @@ public class Format {
                 , list[i]
             );
         }
+        System.out.printf(
+            """
+            -1. Exit Program
+            """
+        );
         endPrint();
     }
 
@@ -76,6 +81,16 @@ public class Format {
         scanner.nextLine();
     }
 
+    public static void terminateProgram() {
+        printMessage(
+            """
+            Program terminated.
+            """
+        );
+        scanner.close();
+        System.exit(0);
+    }
+
     public static int getUserInput(String message, int min, int max) {
         int userInput = -1;
         while (true) {
@@ -97,16 +112,11 @@ public class Format {
             }
         }
         endInput();
+        if (userInput == -1) {
+            switch (userInput) {
+                case -1: terminateProgram();
+            }
+        }
         return userInput;
-    }
-
-    public static void terminateProgram() {
-        printMessage(
-            """
-            Program terminated
-            """
-        );
-        scanner.close();
-        System.exit(0);
     }
 }

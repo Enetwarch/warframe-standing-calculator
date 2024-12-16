@@ -9,6 +9,16 @@ public class FactionSyndicates {
         0,
         0,
         0
+    },
+    userStanding = {
+        -44000,
+        -22000,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
     };
     static String[] 
     factionSyndicates = {
@@ -51,18 +61,30 @@ public class FactionSyndicates {
     };
 
     static void getFaction() {
-        Main.printArray(factionSyndicates);
-        userFaction = Main.getUserInput(
-            "Choose a syndicate", 1, 6
+        Format.printArray(factionSyndicates);
+        userFaction = Format.getUserInput(
+            "Choose a syndicate",
+            Format.min,
+            factionSyndicates.length
         );
     }
 
     static void getRank() {
-        for (int i = 0; i < factionRankTitles[0].length; i++) {
-            Main.printArray(factionRankTitles[i]);
-            userRank[i] = Main.getUserInput(
-                factionSyndicates[i] + " rank: ", 
-                1, 8);
+        for (int i = 0; i < factionRankTitles[i].length; i++) {
+            userRank[i] = Format.getUserInput(
+                factionSyndicates[i] + " rank", 
+                Format.min, 
+                factionRankTitles[i].length);
+        }
+    }
+
+    static void getStanding() {
+        for (int i = 0; i < userStanding.length; i++) {
+            userStanding[i] = Format.getUserInput(
+                factionSyndicates[i] + " standing",
+                Format.min,
+                factionSyndicates.length
+            );
         }
     }
 
@@ -70,6 +92,7 @@ public class FactionSyndicates {
         while (true) {
             getFaction();
             getRank();
+            getStanding();
         }
     }
 }

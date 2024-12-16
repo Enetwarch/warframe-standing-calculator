@@ -19,24 +19,11 @@ public class Main {
         "Cavia"
     };
 
-
-
-    static void printWelcomeMessage() {
-        Format.printMessage(
-            """
-            Welcome to Warframe Standing Calculator! This is where it will display
-            the amount of days it takes to reach a particular rank, the grinding
-            needed for the materials required, and the days your excess standing
-            materials will last for. Do note that this was made in November 2024,
-            which is before the Warframe 1999 update. 
-            """
-        );
-    }
-
     static void getMasteryRank() {
         masteryRank = Format.getUserInput(
             "Enter your mastery rank",
-            0, 34
+            Format.min,
+             34
         );
         standingCap += masteryRank * 500;
     }
@@ -45,10 +32,10 @@ public class Main {
         Format.printArray(syndicateOptions);
         userInput = Format.getUserInput(
             "Choose a syndicate",
-            0, syndicateOptions.length
+            Format.min, 
+            syndicateOptions.length
         );
         switch (userInput) {
-            case 0: Format.terminateProgram();
             case 1: 
             case 2: 
             case 3: 
@@ -65,7 +52,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        printWelcomeMessage();
         getMasteryRank();
         while (true) { 
             getSyndicate();
