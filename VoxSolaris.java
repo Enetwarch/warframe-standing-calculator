@@ -1,3 +1,4 @@
+
 public class VoxSolaris {
     static String syndicateName = "Vox Solaris";
 
@@ -34,7 +35,7 @@ public class VoxSolaris {
     }
 
     static void getToroids() {
-
+        toroidOwned = Main.getResources(toroidNames);
     }
 
     static void getAnalysis() {

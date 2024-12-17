@@ -127,6 +127,17 @@ public class Main {
         return userInput;
     }
 
+    public static int[] getResources(String[] resourceNames) {
+        int[] resourceOwned = new int[resourceNames.length];
+        for (int i = 0; i < resourceNames.length; i++)
+        resourceOwned[i] = Main.getUserInput(
+            resourceNames[i] + " owned",
+            0,
+            Integer.MAX_VALUE
+        );
+        return resourceOwned;
+    }
+
     static void getMasteryRank() {
         masteryRank = getUserInput(
             "Enter your mastery rank",
