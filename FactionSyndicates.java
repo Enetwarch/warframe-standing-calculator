@@ -90,7 +90,7 @@ public class FactionSyndicates {
     static void getFaction() {
         Format.printArray(factionSyndicates);
         userFaction = Format.getUserInput(
-            "Choose a syndicate",
+            "Choose selected syndicate",
             1, 
             factionSyndicates.length
         );
@@ -116,7 +116,7 @@ public class FactionSyndicates {
     static void getMedallions(int i) {
         for (int j = 0; j < syndicateMedallions[i].length; j++) {
             userMedallion[i][j] = Format.getUserInput(
-                "(" + standingPerMedallion[j] + " standing) " + syndicateMedallions[i][j] + " owned",
+                syndicateMedallions[i][j] + " owned",
                 0,
                 Integer.MAX_VALUE
             );
@@ -131,6 +131,7 @@ public class FactionSyndicates {
 
     static void calculateDaysToMax(int i) {
         int days = 0;
+        standingPerRank[userRank]
     }
 
     static void analyzeSyndicate(int i) {
@@ -170,8 +171,6 @@ public class FactionSyndicates {
             factionSyndicates.length
         );
         switch (userInput) {
-            case 0: 
-                break;
             case 1: 
                 analyzeSteelMeridian();
                 break;
@@ -189,6 +188,8 @@ public class FactionSyndicates {
                 break;
             case 6: 
                 analyzeNewLoka();
+                break;
+            case 0: 
                 break;
         }
     }
