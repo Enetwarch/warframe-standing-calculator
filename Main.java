@@ -24,6 +24,45 @@ public class Main {
         "Cavia"
     };
 
+
+
+
+
+    public static void inputError(int min, int max) {
+        System.out.printf(
+            """
+            Invalid input. Only accepts numbers from %d to %d.
+            """
+            , min
+            , max
+        );
+    }
+
+    public static int getUserInput(String message, int min, int max) {
+        int userInput = -1;
+        while (true) {
+            try {
+                System.out.printf(
+                    "%s: >> "
+                    , message
+                );
+                userInput = scanner.nextInt();
+                if (userInput >= min && userInput <= max) {
+                    break;
+                } else {
+                    inputError(min, max);
+                }
+            } catch (Exception e) {
+                inputError(min, max);
+            }
+        }
+        return userInput;
+    }
+
+
+
+
+
     public static void printArray(String[] list) {
         for (int i = 0; i < list.length; i++) {
             System.out.printf(
@@ -72,28 +111,14 @@ public class Main {
         }
     }
 
-    public static void inputError(int min, int max) {
-        System.out.printf(
-            """
-            Invalid input. Only accepts numbers from %d to %d.
-            """
-            , min
-            , max
-        );
-    }
+
+
+
 
     public static void printExitProgram() {
         System.out.print(
             """
             0. Exit Program     
-            """
-        );
-    }
-
-    public static void printSyndicateSelect() {
-        System.out.print(
-            """
-            0. Return to syndicate select.          
             """
         );
     }
@@ -108,33 +133,9 @@ public class Main {
         System.exit(0);
     }
 
-    public static int getUserInput(String message, int min, int max) {
-        int userInput = -1;
-        while (true) {
-            try {
-                System.out.printf(
-                    "%s: >> "
-                    , message
-                );
-                userInput = scanner.nextInt();
-                if (userInput >= min && userInput <= max) {
-                    break;
-                } else {
-                    inputError(min, max);
-                }
-            } catch (Exception e) {
-                inputError(min, max);
-            }
-        }
-        return userInput;
-    }
 
-    public static void inputBuffer() {
-        System.out.print(
-            "Press enter to proceed >> "
-        );
-        scanner.nextLine();
-    }
+    
+
 
     public static int getRank(String[] rankTitles, String syndicateName) {
         printRankArray(rankTitles);
@@ -164,23 +165,6 @@ public class Main {
             Integer.MAX_VALUE
         );
         return resourceOwned;
-    }
-
-    public static int getAnalysis() {
-        System.out.print(
-            """
-            1. Days to reach max rank
-            2. Sacrifice resources needed for max rank
-            3. Excess standing from standing resources
-            """
-        );
-        printSyndicateSelect();
-        int userInput = getUserInput(
-            "Choose what to analyze",
-            0,
-            3
-        );
-        return userInput;
     }
 
     public static void analyzeDaysToMax(int userRank, int userStanding) {
@@ -261,6 +245,13 @@ public class Main {
         );
     }
 
+    public static void inputBuffer() {
+        System.out.print(
+            "Press enter to proceed >> "
+        );
+        scanner.nextLine();
+    }
+
     public static void getAnalysis(int userRank, int userStanding, String[][] rankSacrificeNames, int[][] rankSacrificeAmount, int[] resourceOwned, int[] resourceStanding) {
         analyzeDaysToMax( 
             userRank,
@@ -275,7 +266,12 @@ public class Main {
             resourceOwned,
             resourceStanding
         );
+        inputBuffer();
     }
+
+
+
+
 
     static void getMasteryRank() {
         masteryRank = getUserInput(
