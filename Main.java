@@ -238,7 +238,7 @@ public class Main {
         int days = totalStanding / standingCap;
         System.out.printf(
             """
-            You have %,d total standing from syndicate standing resources that can last for %d days.     
+            You have %,d total standing from syndicate standing resources that can last for %,d days.     
             """
             , totalStanding
             , days
@@ -246,6 +246,7 @@ public class Main {
     }
 
     public static void inputBuffer() {
+        scanner.nextLine();
         System.out.print(
             "Press enter to proceed >> "
         );
@@ -299,7 +300,8 @@ public class Main {
                 break;
             case 4: 
                 break;
-            case 5:    
+            case 5:
+                TheQuills.main();
                 break;
             case 6: 
                 break;
