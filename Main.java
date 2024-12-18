@@ -5,10 +5,8 @@ public class Main {
 
     public static int masteryRank = 0;
     public static int standingCap = 16000;
-
-    public static int[] rankNumbers = {0, 1, 2, 3, 4, 5};
     public static int[] standingPerRank = {5000, 22000, 44000, 70000, 99000, 132000};
-
+    
     static String[] syndicateOptions = {
         "Faction Syndicates",
         "Conclave",
@@ -25,9 +23,9 @@ public class Main {
     };
 
 
+    /////////////////////////////////////////////////
 
-
-
+    
     public static void inputError(int min, int max) {
         System.out.printf(
             """
@@ -37,7 +35,7 @@ public class Main {
             , max
         );
     }
-
+    
     public static int getUserInput(String message, int min, int max) {
         int userInput = -1;
         while (true) {
@@ -59,10 +57,10 @@ public class Main {
         return userInput;
     }
 
+    
+    //////////////////////////////////////////////
 
-
-
-
+    
     public static void printArray(String[] list) {
         for (int i = 0; i < list.length; i++) {
             System.out.printf(
@@ -94,7 +92,7 @@ public class Main {
             }
         }
     }
-
+    
     public static void printResourceArray(int[] amount, String[] name) {
         pluralizeNames(
             amount,
@@ -112,7 +110,7 @@ public class Main {
     }
 
 
-
+    ///////////////////////////////////////
 
 
     public static void printExitProgram() {
@@ -122,7 +120,7 @@ public class Main {
             """
         );
     }
-
+    
     public static void terminateProgram() {
         System.out.print(
             """
@@ -134,7 +132,7 @@ public class Main {
     }
 
 
-    
+    //////////////////////////////////////////////////////////////////////
 
 
     public static int getRank(String[] rankTitles, String syndicateName) {
@@ -271,7 +269,7 @@ public class Main {
     }
 
 
-
+    //////////////////////////////
 
 
     static void getMasteryRank() {
@@ -299,11 +297,13 @@ public class Main {
             case 3: 
                 break;
             case 4: 
+                Ostron.main();
                 break;
             case 5:
                 TheQuills.main();
                 break;
             case 6: 
+                SolarisUnited.main();
                 break;
             case 7: 
                 VoxSolaris.main();
@@ -311,6 +311,7 @@ public class Main {
             case 8: 
                 break;
             case 9: 
+                Entrati.main();
                 break;
             case 10: 
                 break;
@@ -322,6 +323,10 @@ public class Main {
                 terminateProgram();
         }
     }
+
+
+    ////////////////////////////////////////
+
 
     public static void main(String[] args) {
         getMasteryRank();

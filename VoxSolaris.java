@@ -2,9 +2,15 @@ public class VoxSolaris {
     static String syndicateName = "Vox Solaris";
     static int userRank = 0;
     static int userStanding = 0;
-    static int[] toroidOwned = {0, 0, 0, 0, 0, 0};
 
-    static String[] rankTitles = {"Neutral", "Operative", "Agent", "Hand", "Instrument", "Shadow"};
+    static String[] rankTitles = {
+        "Neutral", 
+        "Operative", 
+        "Agent", 
+        "Hand", 
+        "Instrument", 
+        "Shadow"
+    };
     static String[][] rankSacrificeNames = {
         {"Calda Toroid", "Vega Toroid", "Sola Toroid", "Credit"},
         {"Gyromag System", "Vega Toroid", "Credit"},
@@ -20,8 +26,20 @@ public class VoxSolaris {
         {1, 1000000}
     };
 
-    static String[] toroidNames = {"Vega Toroid", "Calda Toroid", "Sola Toroid", "Narmer Isoplast", "Crisma Toroid", "Lazulite Toroid"};
+    static String[] toroidNames = {
+        "Vega Toroid", 
+        "Calda Toroid", 
+        "Sola Toroid", 
+        "Narmer Isoplast", 
+        "Crisma Toroid", 
+        "Lazulite Toroid"
+    };
     static int[] toroidStanding = {1000, 1000, 1000, 2000, 6000, 12000};
+    static int[] toroidOwned = {0, 0, 0, 0, 0, 0};
+
+
+    ///////////////////////
+
 
     static void getRank() {
         userRank = Main.getRank(
@@ -51,6 +69,10 @@ public class VoxSolaris {
             toroidStanding
         );
     }
+
+
+    ///////////////////////////
+
 
     public static void main() {
         getRank();

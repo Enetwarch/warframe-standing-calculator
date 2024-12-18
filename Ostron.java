@@ -1,20 +1,83 @@
 public class Ostron {
-    static String syndicateName = "Vox Solaris";
+    static String syndicateName = "Ostron";
     static int userRank = 0;
     static int userStanding = 0;
-    static int[] toroidOwned = {0, 0, 0, 0, 0, 0};
 
-    static String[] rankTitles = {"Neutral", "Operative", "Agent", "Hand", "Instrument", "Shadow"};
-    static String[][] rankSacrificeNames = {
-        {"Calda Toroid", "Vega Toroid", "Sola Toroid", "Credit"},
-        {"Gyromag System", "Vega Toroid", "Credit"},
-        {"Atmo System", "Calda Toroid", "Credit"},
-        {"Repeller System", "Sola Toroid", "Credit"},
-        {"Crisma Toroid", "Credit"}
+    static String[] rankTitles = {
+        "Neutral", 
+        "Offworlder",
+        "Visitor",
+        "Trusted",
+        "Surah",
+        "Kin"
     };
-    static int[][] rankSacrificeAmount= {{1, 1, 1, 50000}, {1, 1, 100000}, {1, 1, 250000}, {1, 1, 500000}, {1, 1000000}};
+    static String[][] rankSacrificeNames = {
+        {"Nistlepod", "Iradite", "Grokdrul", "Credit"},
+        {"Tear Azurite", "Pyrol", "Fish Scale", "Credit"},
+        {"Cetus Wisp", "Maprico", "Credit"},
+        {"Maprico", "Fersteel Alloy", "Murkray Liver", "Credit"},
+        {"Nyth", "Sentirum", "Norg Brain", "Cuthol Tendril", "Credit"}
+    };
+    static int[][] rankSacrificeAmount= {
+        {25, 25, 25, 10000},
+        {10, 40, 60, 25000},
+        {1, 5, 50000},
+        {10, 40, 5, 100000},
+        {1, 1, 1, 1, 200000}
+    };
 
-    static String[] toroidNames = {"Vega Toroid", "Calda Toroid", "Sola Toroid", "Narmer Isoplast", "Crisma Toroid", "Lazulite Toroid"};
-    static int[] toroidStanding = {1000, 1000, 1000, 2000, 6000, 12000};
-   
+    static String[] oreNames = {
+        "Azurite",
+        "Devar", 
+        "Veridos", 
+        "Crimzian", 
+        "Sentirum", 
+        "Nyth"
+    };
+    static int[] oreStanding = {50, 50, 75, 100, 400, 400};
+    static int[] oreOwned = {0, 0, 0, 0, 0};
+
+
+    ///////////////////////
+
+
+    static void getRank() {
+        userRank = Main.getRank(
+            rankTitles,
+            syndicateName
+        );
+    }
+
+    static void getStanding() {
+        userStanding = Main.getStanding(
+            syndicateName, 
+            Main.standingPerRank, 
+            userRank);
+    }
+
+    static void getToroids() {
+        oreOwned = Main.getResources(oreNames);
+    }
+
+    static void getAnalysis() {
+        Main.getAnalysis(
+            userRank,
+            userStanding,
+            rankSacrificeNames,
+            rankSacrificeAmount,
+            oreOwned,
+            oreStanding
+        );
+    }
+
+
+    ///////////////////////////
+
+
+    public static void main() {
+        getRank();
+        getStanding();
+        getToroids();
+        getAnalysis();
+    }
 }

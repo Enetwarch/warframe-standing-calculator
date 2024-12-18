@@ -2,9 +2,15 @@ public class TheQuills {
     static String syndicateName = "The Quills";
     static int userRank = 0;
     static int userStanding = 0;
-    static int[] sentientCoreOwned = {0, 0, 0, 0};
 
-    static String[] rankTitles = {"Neutral", "Mote", "Observer", "Adherent", "Instrument", "Architect"};
+    static String[] rankTitles = {
+        "Neutral", 
+        "Mote", 
+        "Observer", 
+        "Adherent", 
+        "Instrument", 
+        "Architect"
+    };
     static String[][] rankSacrificeNames = {
         {"Intact Sentient Core", "Credit"},
         {"Intact Sentient Core", "Credit"},
@@ -20,8 +26,18 @@ public class TheQuills {
         {30, 500000}
     };
 
-    static String[] sentientCoreNames = {"Intact Sentient Core", "Exceptional Sentient Core", "Flawless Sentient Core", "Narmer Isoplast"};
+    static String[] sentientCoreNames = {
+        "Intact Sentient Core", 
+        "Exceptional Sentient Core", 
+        "Flawless Sentient Core", 
+        "Narmer Isoplast"
+    };
     static int[] sentientCoreStanding = {250, 750, 1500, 2000};
+    static int[] sentientCoreOwned = {0, 0, 0, 0};
+
+
+    ///////////////////////
+
 
     static void getRank() {
         userRank = Main.getRank(
@@ -52,11 +68,14 @@ public class TheQuills {
         );
     }
 
+
+    ///////////////////////////
+
+
     public static void main() {
         getRank();
         getStanding();
         getToroids();
         getAnalysis();
     }
-
 }
