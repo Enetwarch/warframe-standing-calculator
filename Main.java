@@ -5,6 +5,9 @@ public class Main {
     public static int masteryRank = 0;
     public static int standingCap = 16000;
 
+    public static int[] rankNumbers = {0, 1, 2, 3, 4, 5};
+    public static int[] standingPerRank = {5000, 22000, 44000, 70000, 99000, 132000};
+
     static String[] syndicateOptions = {
         "Faction Syndicates",
         "Conclave",
@@ -136,6 +139,59 @@ public class Main {
             Integer.MAX_VALUE
         );
         return resourceOwned;
+    }
+
+    static int getAnalysis() {
+        System.out.print(
+            """
+            1. Days to reach max rank
+            2. Sacrifice resources needed for max rank
+            3. Excess standing from standing resources
+            """
+        );
+        printSyndicateSelect();
+        int userInput = getUserInput(
+            "Choose what to analyze",
+            0,
+            3
+        );
+        return userInput;
+    }
+
+    public static void analyzeDaysToMax(int userRank, int userStanding) {
+        int days = 0;
+        if (userRank == 5) {
+            System.out.printf(
+                """
+                You are already max rank in this syndicate.     
+                """
+            );
+            return;
+        }
+        while (userRank != 5) {
+            days += 1;
+            if (standingPerRank[userRank] >= userStanding + standingCap) {
+                userStanding += standingCap;
+            } else {
+                userStanding = userStanding + standingCap - standingPerRank[userRank];
+                userRank += 1;
+            }
+        }
+        System.out.printf(
+            """
+            It will take %d days to max out your rank with %,d leftover standing.     
+            """
+            , days
+            , userStanding
+        );
+    }
+
+    static void analyzeResourcesToMax() {
+
+    }
+
+    static void analyzeExcessStanding() {
+
     }
 
     static void getMasteryRank() {

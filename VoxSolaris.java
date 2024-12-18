@@ -7,7 +7,6 @@ public class VoxSolaris {
     static int[] toroidOwned = {0, 0, 0, 0, 0, 0};
 
     static String[] rankTitles = {"Neutral", "Operative", "Agent", "Hand", "Instrument", "Shadow"};
-    static int[] standingPerRank = {5000, 22000, 44000, 70000, 99000, 132000};
     static String[][] rankSacrificesNames = {
         {"Calda Toroid", "Vega Toroid", "Sola Toroid", "Credit"},
         {"Gyromag System", "Vega Toroid", "Credit"},
@@ -30,7 +29,7 @@ public class VoxSolaris {
     static void getStanding() {
         userStanding = Main.getStanding(
             syndicateName, 
-            standingPerRank, 
+            Main.standingPerRank, 
             userRank);
     }
 
@@ -39,11 +38,28 @@ public class VoxSolaris {
     }
 
     static void getAnalysis() {
-
+        int userInput = Main.getAnalysis();
+        switch (userInput) {
+            case 1:
+                analyzeDaysToMax();
+                break;
+            case 2:
+                analyzeResourcesToMax();
+                break;
+            case 3:
+                analyzeExcessStanding();
+                break;
+            case 0:
+                
+        }
     }
 
     static void analyzeDaysToMax() {
-
+        Main.analyzeDaysToMax(
+            userRank,
+            userStanding
+        );
+        Main.inputBuffer();
     }
 
     static void analyzeResourcesToMax() {
