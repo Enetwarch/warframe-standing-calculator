@@ -1,3 +1,6 @@
+package syndicates;
+import Main;
+
 public class CephalonSimaris {
     static String syndicateName = "Cephalon Simaris";
     static int userStanding = 0;

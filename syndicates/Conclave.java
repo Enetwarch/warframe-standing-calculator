@@ -1,29 +1,34 @@
-public class SolarisUnited {
-    static String syndicateName = "Solaris United";
+package syndicates;
+import Main;
+
+public class Conclave {
+    static String syndicateName = "Conclave";
     static int userRank = 0;
     static int userStanding = 0;
 
     static String[] rankTitles = {
         "Neutral", 
-        "Outworlder",
-        "Rapscallion",
-        "Doer",
-        "Cove",
-        "Old Mate"
+        "Mistral",
+        "Whirlwind",
+        "Tempest",
+        "Hurricane",
+        "Typhoon"
     };
     static String[][] rankSacrificeNames = {
-        {"Training Debt-Bond", "Credit"},
-        {"Shelter Debt-Bond", "Training Debt-Bond", "Credit"},
-        {"Medical Debt-Bond", "Shelter Debt-Bond", "Training Debt-Bond", "Credit"},
-        {"Advances Debt-Bond", "Medical Debt-Bond", "Shelter Debt-Bond", "Credit"},
-        {"Familial Debt-Bond", "Advances Debt-Bond", "Medical Debt-Bond", "Credit"}
+        {"Plastid", "Credit"},
+        {"Neurode", "Credit"},
+        {"Forma", "Credit"},
+        {"Orokin Reactor", "Credit"},
+        {"Orokin Catalyst", "Credit"},
+        {"Orokin Ducat", "Credit"}
     };
     static int[][] rankSacrificeAmount= {
-        {2, 10000},
-        {3, 2, 25000},
-        {4, 3, 2, 50000},
-        {5, 4, 3, 100000},
-        {5, 5, 3, 200000}
+        {100, 10000},
+        {2, 30000},
+        {1, 50000},
+        {1, 100000},
+        {1, 250000},
+        {100, 500000}
     };
 
     static String[] resourceNames = {
@@ -61,6 +66,7 @@ public class SolarisUnited {
     static void getAnalysis() {
         Main.getAnalysis(
             userRank,
+            rankTitles,
             userStanding,
             rankSacrificeNames,
             rankSacrificeAmount,

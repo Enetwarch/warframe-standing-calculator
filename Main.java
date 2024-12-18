@@ -1,6 +1,32 @@
+import factions.FactionSyndicates;
 import java.util.ArrayList;
 import java.util.Scanner;
+import syndicates.Cavia;
+import syndicates.CephalonSimaris;
+import syndicates.Conclave;
+import syndicates.Entrati;
+import syndicates.Necraloid;
+import syndicates.Ostron;
+import syndicates.SolarisUnited;
+import syndicates.TheHoldfasts;
+import syndicates.TheQuills;
+import syndicates.Ventkids;
+import syndicates.VoxSolaris;
+
 public class Main {
+    static FactionSyndicates factionsSyndicates = new FactionSyndicates();
+    static Conclave conclave = new Conclave();
+    static CephalonSimaris cephalonSimaris = new CephalonSimaris();
+    static Ostron ostron = new Ostron();
+    static TheQuills theQuills = new TheQuills();
+    static SolarisUnited solarisUnited = new SolarisUnited();
+    static VoxSolaris voxSolaris = new VoxSolaris();
+    static Ventkids ventkids = new Ventkids();
+    static Entrati entrati = new Entrati();
+    static Necraloid necraloid = new Necraloid();
+    static TheHoldfasts theHoldfasts = new TheHoldfasts();
+    static Cavia cavia = new Cavia();
+
     public static Scanner scanner = new Scanner(System.in);
 
     public static int masteryRank = 0;
@@ -173,9 +199,9 @@ public class Main {
         }
     }
 
-    public static void analyzeDaysToMax(int userRank, int userStanding) {
+    public static void analyzeDaysToMax(int userRank, String[] rankTitles, int userStanding) {
         int days = 0;
-        if (userRank == 5) {
+        if (userRank == rankTitles.length) {
             System.out.printf(
                 """
                 You are already max rank in this syndicate.     
@@ -183,7 +209,7 @@ public class Main {
             );
             return;
         }
-        while (userRank != 5) {
+        while (userRank != rankTitles.length) {
             days += 1;
             if (standingPerRank[userRank] > userStanding + standingCap) {
                 userStanding += standingCap;
@@ -203,13 +229,13 @@ public class Main {
         );
     }
 
-    public static void analyzeResourcesToMax(int userRank, String[][] rankSacrificeNames, int[][] rankSacrificeAmount) {
+    public static void analyzeResourcesToMax(int userRank, String[] rankTitles, String[][] rankSacrificeNames, int[][] rankSacrificeAmount) {
         ArrayList<String> sacrificeNames = new ArrayList<>();
         ArrayList<Integer> sacrificeAmount = new ArrayList<>();
-        if (userRank == 5) {
+        if (userRank == rankTitles.length) {
             return;
         }
-        for (int i = 0; i < rankSacrificeNames.length; i++) {
+        for (int i = userRank; i < rankSacrificeNames.length; i++) {
             for (int j = 0; j < rankSacrificeNames[i].length; j++) {
                 String sacrificeNameString = rankSacrificeNames[i][j];
                 int sacrificeAmountInt = rankSacrificeAmount[i][j];
@@ -244,12 +270,14 @@ public class Main {
             totalStanding += resourceOwned[i] * resourceStanding[i];
         }
         int days = totalStanding / standingCap;
+        String isPlural = pluralizeDays(days);
         System.out.printf(
             """
-            You have %,d total standing from syndicate standing resources that can last for %,d days.     
+            You have %,d total standing from syndicate standing resources that can last for %,d day%s.     
             """
             , totalStanding
             , days
+            , isPlural
         );
     }
 
@@ -261,13 +289,15 @@ public class Main {
         scanner.nextLine();
     }
 
-    public static void getAnalysis(int userRank, int userStanding, String[][] rankSacrificeNames, int[][] rankSacrificeAmount, int[] resourceOwned, int[] resourceStanding) {
+    public static void getAnalysis(int userRank, String[] rankTitles, int userStanding, String[][] rankSacrificeNames, int[][] rankSacrificeAmount, int[] resourceOwned, int[] resourceStanding) {
         analyzeDaysToMax( 
             userRank,
+            rankTitles,
             userStanding
         );
         analyzeResourcesToMax(
             userRank,
+            rankTitles,
             rankSacrificeNames,
             rankSacrificeAmount
         );
@@ -347,38 +377,40 @@ public class Main {
         );
         switch (userInput) {
             case 1: 
+                factionsSyndicates.main();
                 break;
             case 2: 
+                conclave.main();
                 break;
             case 3: 
-                CephalonSimaris.main();
+                cephalonSimaris.main();
                 break;
             case 4: 
-                Ostron.main();
+                ostron.main();
                 break;
             case 5:
-                TheQuills.main();
+                theQuills.main();
                 break;
             case 6: 
-                SolarisUnited.main();
+                solarisUnited.main();
                 break;
             case 7: 
-                VoxSolaris.main();
+                voxSolaris.main();
                 break;
             case 8: 
-                Ventkids.main();
+                ventkids.main();
                 break;
             case 9: 
-                Entrati.main();
+                entrati.main();
                 break;
             case 10: 
-                Necraloid.main();
+                necraloid.main();
                 break;
             case 11: 
-                TheHoldfasts.main();
+                theHoldfasts.main();
                 break;
             case 12:
-                Cavia.main();
+                cavia.main();
                 break;
             case 0: 
                 terminateProgram();

@@ -1,40 +1,42 @@
-public class Ostron {
-    static String syndicateName = "Ostron";
+package syndicates;
+import Main;
+
+public class TheHoldfasts {
+    static String syndicateName = "The Holdfasts";
     static int userRank = 0;
     static int userStanding = 0;
 
     static String[] rankTitles = {
         "Neutral", 
-        "Offworlder",
-        "Visitor",
-        "Trusted",
-        "Surah",
-        "Kin"
+        "Fallen",
+        "Watcher",
+        "Guardian",
+        "Seraph",
+        "Angel"
     };
     static String[][] rankSacrificeNames = {
-        {"Nistlepod", "Iradite", "Grokdrul", "Credit"},
-        {"Tear Azurite", "Pyrol", "Fish Scale", "Credit"},
-        {"Cetus Wisp", "Maprico", "Credit"},
-        {"Maprico", "Fersteel Alloy", "Murkray Liver", "Credit"},
-        {"Nyth", "Sentirum", "Norg Brain", "Cuthol Tendril", "Credit"}
+        {"Voidplume Down", "Ferrite", "Alloy Plate", "Credit"},
+        {"Voidplume Vane", "Voidgel Orb", "Alloy Plate", "Credit"},
+        {"Voidplume Crest", "Entrati Lanthorn", "Ferrite", "Credit"},
+        {"Voidplume Quill", "Thrax Plasm", "Voidgel Orb", "Credit"},
+        {"Voidplume Pinion", "Thrax PLasm", "Entrati Lanthorn", "Credit"}
     };
     static int[][] rankSacrificeAmount= {
-        {25, 25, 25, 10000},
-        {10, 40, 60, 25000},
-        {1, 5, 50000},
-        {10, 40, 5, 100000},
-        {1, 1, 1, 1, 200000}
+        {5, 2000, 2000, 10000},
+        {10, 10, 5000, 25000}, 
+        {10, 10, 5000, 50000}, 
+        {15, 60, 40, 100000}, 
+        {5, 90, 20, 200000}
     };
 
     static String[] resourceNames = {
-        "Azurite",
-        "Devar", 
-        "Veridos", 
-        "Crimzian", 
-        "Sentirum", 
-        "Nyth"
+        "Voidplume Down", 
+        "Voidplume Vane",
+        "Voidplume Crest",
+        "Voidplume Quill",
+        "Voidplume Pinion"
     };
-    static int[] resourceStanding = {50, 50, 75, 100, 400, 400};
+    static int[] resourceStanding = {500, 1000, 2000, 2500, 5000};
     static int[] resourceOwned = {0, 0, 0, 0, 0};
 
 

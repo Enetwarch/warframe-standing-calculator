@@ -1,41 +1,43 @@
-public class VoxSolaris {
-    static String syndicateName = "Vox Solaris";
+package syndicates;
+import Main;
+
+public class SolarisUnited {
+    static String syndicateName = "Solaris United";
     static int userRank = 0;
     static int userStanding = 0;
 
     static String[] rankTitles = {
         "Neutral", 
-        "Operative", 
-        "Agent", 
-        "Hand", 
-        "Instrument", 
-        "Shadow"
+        "Outworlder",
+        "Rapscallion",
+        "Doer",
+        "Cove",
+        "Old Mate"
     };
     static String[][] rankSacrificeNames = {
-        {"Calda Toroid", "Vega Toroid", "Sola Toroid", "Credit"},
-        {"Gyromag System", "Vega Toroid", "Credit"},
-        {"Atmo System", "Calda Toroid", "Credit"},
-        {"Repeller System", "Sola Toroid", "Credit"},
-        {"Crisma Toroid", "Credit"}
+        {"Training Debt-Bond", "Credit"},
+        {"Shelter Debt-Bond", "Training Debt-Bond", "Credit"},
+        {"Medical Debt-Bond", "Shelter Debt-Bond", "Training Debt-Bond", "Credit"},
+        {"Advances Debt-Bond", "Medical Debt-Bond", "Shelter Debt-Bond", "Credit"},
+        {"Familial Debt-Bond", "Advances Debt-Bond", "Medical Debt-Bond", "Credit"}
     };
     static int[][] rankSacrificeAmount= {
-        {1, 1, 1, 50000},
-        {1, 1, 100000}, 
-        {1, 1, 250000}, 
-        {1, 1, 500000}, 
-        {1, 1000000}
+        {2, 10000},
+        {3, 2, 25000},
+        {4, 3, 2, 50000},
+        {5, 4, 3, 100000},
+        {5, 5, 3, 200000}
     };
 
     static String[] resourceNames = {
-        "Vega Toroid", 
-        "Calda Toroid", 
-        "Sola Toroid", 
-        "Narmer Isoplast", 
-        "Crisma Toroid", 
-        "Lazulite Toroid"
+        "Training Debt-Bond",
+        "Shelter Debt-Bond",
+        "Medical Debt-Bond",
+        "Advances Debt-Bond",
+        "Familial Debt-Bond"
     };
-    static int[] resourceStanding = {1000, 1000, 1000, 2000, 6000, 12000};
-    static int[] resourceOwned = {0, 0, 0, 0, 0, 0};
+    static int[] resourceStanding = {100, 200, 300, 400, 500};
+    static int[] resourceOwned = {0, 0, 0, 0, 0};
 
 
     ///////////////////////
@@ -62,6 +64,7 @@ public class VoxSolaris {
     static void getAnalysis() {
         Main.getAnalysis(
             userRank,
+            rankTitles,
             userStanding,
             rankSacrificeNames,
             rankSacrificeAmount,
@@ -79,5 +82,5 @@ public class VoxSolaris {
         getStanding();
         getResources();
         getAnalysis();
-    }
+    }   
 }

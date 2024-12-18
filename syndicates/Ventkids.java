@@ -1,3 +1,6 @@
+package syndicates;
+import Main;
+
 public class Ventkids {
     static String syndicateName = "Ventkids";
     static int userRank = 0;
@@ -33,6 +36,7 @@ public class Ventkids {
     static void getAnalysis() {
         Main.analyzeDaysToMax(
             userRank, 
+            rankTitles,
             userStanding);
     }
 

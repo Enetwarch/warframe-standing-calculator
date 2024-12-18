@@ -1,41 +1,42 @@
-public class Entrati {
-    static String syndicateName = "Entrati";
+package syndicates;
+import Main;
+
+public class TheQuills {
+    static String syndicateName = "The Quills";
     static int userRank = 0;
     static int userStanding = 0;
 
     static String[] rankTitles = {
         "Neutral", 
-        "Stranger", 
-        "Acquaintance", 
-        "Associate", 
-        "Friend", 
-        "Family"
+        "Mote", 
+        "Observer", 
+        "Adherent", 
+        "Instrument", 
+        "Architect"
     };
     static String[][] rankSacrificeNames = {
-        {"Spinal Core Section"},
-        {"Keratinos Blades Blueprint", "Keratinos Gauntlet Blueprint", "Father Token", "Daughter Token"},
-        {"Common Avichaea Tag", "Medjay Predasite Tag", "Mother Token", "Son Token"},
-        {"Zarim Mutagen", "Arioli Mutagen", "Father Token", "Son Token"},
-        {"Seriglass Shard", "Mother Token", "Father Token"}
+        {"Intact Sentient Core", "Credit"},
+        {"Intact Sentient Core", "Credit"},
+        {"Eidolon Shard", "Credit"},
+        {"Eidolon Shard", "Credit"},
+        {"Eidolon Shard", "Credit"}
     };
     static int[][] rankSacrificeAmount= {
-        {3},
-        {1, 1, 1, 1},
-        {5, 1, 1, 1},
-        {1, 1, 1, 1},
-        {1, 1, 1}
+        {10, 30000},
+        {20, 50000},
+        {10, 100000},
+        {20, 250000},
+        {30, 500000}
     };
 
     static String[] resourceNames = {
-        "Mother Token", 
-        "Father Token", 
-        "Daughter Token", 
-        "Son Token", 
-        "Otak Token", 
-        "Grandmother Token"
+        "Intact Sentient Core", 
+        "Exceptional Sentient Core", 
+        "Flawless Sentient Core", 
+        "Narmer Isoplast"
     };
-    static int[] resourceStanding = {100, 100, 100, 500, 100, 1500};
-    static int[] resourceOwned = {0, 0, 0, 0, 0, 0};
+    static int[] resourceStanding = {250, 750, 1500, 2000};
+    static int[] resourceOwned = {0, 0, 0, 0};
 
 
     ///////////////////////
@@ -79,5 +80,5 @@ public class Entrati {
         getStanding();
         getResources();
         getAnalysis();
-    }   
+    }
 }

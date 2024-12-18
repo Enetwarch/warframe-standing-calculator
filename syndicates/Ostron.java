@@ -1,38 +1,44 @@
-public class Cavia {
-    static String syndicateName = "Cavia";
+package syndicates;
+import Main;
+
+public class Ostron {
+    static String syndicateName = "Ostron";
     static int userRank = 0;
     static int userStanding = 0;
 
     static String[] rankTitles = {
         "Neutral", 
-        "Assistant",
-        "Researcher",
-        "Colleague",
-        "Scholar",
-        "Illuminate"
+        "Offworlder",
+        "Visitor",
+        "Trusted",
+        "Surah",
+        "Kin"
     };
     static String[][] rankSacrificeNames = {
-        {"Shrill Voca", "Entrati Obols", "Rubedo", "Credit"},
-        {"Shrill Voca", "Voidgel Orb", "Necracoil", "Stela", "Credit"},
-        {"Bellow Voca", "Shrill Voca", "Necracoil", "Stela", "Credit"},
-        {"Echo Voca", "Bellow Voca", "Entrati Obol", "Entrati Lanthorn", "Credit"},
-        {"Echo Voca", "Necracoil", "Entrati Lanthorn", "Stela", "Credit"}
+        {"Nistlepod", "Iradite", "Grokdrul", "Credit"},
+        {"Tear Azurite", "Pyrol", "Fish Scale", "Credit"},
+        {"Cetus Wisp", "Maprico", "Credit"},
+        {"Maprico", "Fersteel Alloy", "Murkray Liver", "Credit"},
+        {"Nyth", "Sentirum", "Norg Brain", "Cuthol Tendril", "Credit"}
     };
     static int[][] rankSacrificeAmount= {
-        {3, 300, 11000, 10000},
-        {5, 60, 12, 8, 25000},
-        {2, 8, 15, 16, 50000}, 
-        {1, 10, 1500, 5, 100000}, 
-        {10, 25, 10, 32, 200000}
+        {25, 25, 25, 10000},
+        {10, 40, 60, 25000},
+        {1, 5, 50000},
+        {10, 40, 5, 100000},
+        {1, 1, 1, 1, 200000}
     };
 
     static String[] resourceNames = {
-        "Shrill Voca",
-        "Bellow Voca",
-        "Echo Voca"
+        "Azurite",
+        "Devar", 
+        "Veridos", 
+        "Crimzian", 
+        "Sentirum", 
+        "Nyth"
     };
-    static int[] resourceStanding = {500, 1000, 2000};
-    static int[] resourceOwned = {0, 0, 0};
+    static int[] resourceStanding = {50, 50, 75, 100, 400, 400};
+    static int[] resourceOwned = {0, 0, 0, 0, 0};
 
 
     ///////////////////////
@@ -59,6 +65,7 @@ public class Cavia {
     static void getAnalysis() {
         Main.getAnalysis(
             userRank,
+            rankTitles,
             userStanding,
             rankSacrificeNames,
             rankSacrificeAmount,
