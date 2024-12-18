@@ -246,8 +246,35 @@ public class Main {
         );
     }
 
-    public static void analyzeExcessStanding() {
+    public static void analyzeExcessStanding(int[] resourceOwned, int[] resourceStanding) {
+        int totalStanding = 0;
+        for (int i = 0; i < resourceOwned.length; i++) {
+            totalStanding += resourceOwned[i] * resourceStanding[i];
+        }
+        int days = totalStanding / standingCap;
+        System.out.printf(
+            """
+            You have %,d total standing from syndicate standing resources that can last for %d days.     
+            """
+            , totalStanding
+            , days
+        );
+    }
 
+    public static void getAnalysis(int userRank, int userStanding, String[][] rankSacrificeNames, int[][] rankSacrificeAmount, int[] resourceOwned, int[] resourceStanding) {
+        analyzeDaysToMax( 
+            userRank,
+            userStanding
+        );
+        analyzeResourcesToMax(
+            userRank,
+            rankSacrificeNames,
+            rankSacrificeAmount
+        );
+        analyzeExcessStanding(
+            resourceOwned,
+            resourceStanding
+        );
     }
 
     static void getMasteryRank() {
@@ -281,6 +308,7 @@ public class Main {
             case 6: 
                 break;
             case 7: 
+                VoxSolaris.main();
                 break;
             case 8: 
                 break;

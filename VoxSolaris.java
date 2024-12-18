@@ -1,9 +1,7 @@
-
 public class VoxSolaris {
     static String syndicateName = "Vox Solaris";
-
-    static String[] toroidNames = {"Vega Toroid", "Calda Toroid", "Sola Toroid", "Narmer Isoplast", "Crisma Toorid", "Lazulite Toroid"};
-    static int[] toroidStanding = {1000, 1000, 1000, 2000, 6000, 12000};
+    static int userRank = 0;
+    static int userStanding = 0;
     static int[] toroidOwned = {0, 0, 0, 0, 0, 0};
 
     static String[] rankTitles = {"Neutral", "Operative", "Agent", "Hand", "Instrument", "Shadow"};
@@ -16,8 +14,8 @@ public class VoxSolaris {
     };
     static int[][] rankSacrificeAmount= {{1, 1, 1, 50000}, {1, 1, 100000}, {1, 1, 250000}, {1, 1, 500000}, {1, 1000000}};
 
-    static int userRank = 0;
-    static int userStanding = 0;
+    static String[] toroidNames = {"Vega Toroid", "Calda Toroid", "Sola Toroid", "Narmer Isoplast", "Crisma Toroid", "Lazulite Toroid"};
+    static int[] toroidStanding = {1000, 1000, 1000, 2000, 6000, 12000};
 
     static void getRank() {
         userRank = Main.getRank(
@@ -38,47 +36,20 @@ public class VoxSolaris {
     }
 
     static void getAnalysis() {
-        int userInput = Main.getAnalysis();
-        switch (userInput) {
-            case 1:
-                analyzeDaysToMax();
-                break;
-            case 2:
-                analyzeResourcesToMax();
-                break;
-            case 3:
-                analyzeExcessStanding();
-                break;
-            case 0:
-        }
-    }
-
-    static void analyzeDaysToMax() {
-        Main.analyzeDaysToMax(
+        Main.getAnalysis(
             userRank,
-            userStanding
-        );
-        Main.inputBuffer();
-    }
-
-    static void analyzeResourcesToMax() {
-        Main.analyzeResourcesToMax(
-            userRank,
+            userStanding,
             rankSacrificeNames,
-            rankSacrificeAmount
+            rankSacrificeAmount,
+            toroidOwned,
+            toroidStanding
         );
     }
 
-    static void analyzeExcessStanding() {
-
-    }
-
-    public static void main(String[] args) {
+    public static void main() {
         getRank();
         getStanding();
         getToroids();
-        while (true) { 
-            getAnalysis();
-        }
+        getAnalysis();
     }
 }
