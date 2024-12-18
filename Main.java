@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
@@ -47,7 +48,31 @@ public class Main {
         }
     }
 
-    static void inputError(int min, int max) {
+    public static void pluralizeNames(int[] amount, String[] name) {
+        for (int i = 0; i < name.length; i++) {
+            if (amount[i] > 1) {
+                name[i] = name[i] + "s";
+            }
+        }
+    }
+
+    public static void printResourceArray(int[] amount, String[] name) {
+        pluralizeNames(
+            amount,
+            name    
+        );
+        for (int i = 0; i < name.length; i++) {
+            System.out.printf(
+                """
+                - %,d %s
+                """
+                , amount[i]
+                , name[i]
+            );
+        }
+    }
+
+    public static void inputError(int min, int max) {
         System.out.printf(
             """
             Invalid input. Only accepts numbers from %d to %d.
@@ -141,7 +166,7 @@ public class Main {
         return resourceOwned;
     }
 
-    static int getAnalysis() {
+    public static int getAnalysis() {
         System.out.print(
             """
             1. Days to reach max rank
@@ -186,11 +211,42 @@ public class Main {
         );
     }
 
-    static void analyzeResourcesToMax() {
-
+    public static void analyzeResourcesToMax(int userRank, String[][] rankSacrificeNames, int[][] rankSacrificeAmount) {
+        ArrayList<String> sacrificeNames = new ArrayList<>();
+        ArrayList<Integer> sacrificeAmount = new ArrayList<>();
+        if (userRank == 5) {
+            return;
+        }
+        for (int i = 0; i < rankSacrificeNames.length; i++) {
+            for (int j = 0; j < rankSacrificeNames[i].length; j++) {
+                String sacrificeNameString = rankSacrificeNames[i][j];
+                int sacrificeAmountInt = rankSacrificeAmount[i][j];
+                if (sacrificeNames.contains(sacrificeNameString)) {
+                    int index = sacrificeNames.indexOf(sacrificeNameString);
+                    sacrificeAmount.set(index, sacrificeAmount.get(index) + sacrificeAmountInt);
+                } else {
+                    sacrificeNames.add(sacrificeNameString);
+                    sacrificeAmount.add(sacrificeAmountInt);
+                }
+            }
+        }
+        int[] sacrificeAmountArray = new int[sacrificeAmount.size()];
+        for (int i = 0; i < sacrificeAmount.size(); i++) {
+            sacrificeAmountArray[i] = sacrificeAmount.get(i);
+        }
+        String[] sacrificeNamesArray = sacrificeNames.toArray(new String[0]);
+        System.out.print(
+            """
+            Here are the resources you need to sacrifice to reach max rank:     
+            """
+        );
+        printResourceArray(
+            sacrificeAmountArray,
+            sacrificeNamesArray
+        );
     }
 
-    static void analyzeExcessStanding() {
+    public static void analyzeExcessStanding() {
 
     }
 

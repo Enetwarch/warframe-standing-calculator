@@ -7,14 +7,14 @@ public class VoxSolaris {
     static int[] toroidOwned = {0, 0, 0, 0, 0, 0};
 
     static String[] rankTitles = {"Neutral", "Operative", "Agent", "Hand", "Instrument", "Shadow"};
-    static String[][] rankSacrificesNames = {
+    static String[][] rankSacrificeNames = {
         {"Calda Toroid", "Vega Toroid", "Sola Toroid", "Credit"},
         {"Gyromag System", "Vega Toroid", "Credit"},
         {"Atmo System", "Calda Toroid", "Credit"},
         {"Repeller System", "Sola Toroid", "Credit"},
         {"Crisma Toroid", "Credit"}
     };
-    static int[][] rankSacrificesAmount= {{1, 1, 1, 50000}, {1, 1, 100000}, {1, 1, 250000}, {1, 1, 500000}, {1, 1000000}};
+    static int[][] rankSacrificeAmount= {{1, 1, 1, 50000}, {1, 1, 100000}, {1, 1, 250000}, {1, 1, 500000}, {1, 1000000}};
 
     static int userRank = 0;
     static int userStanding = 0;
@@ -50,7 +50,6 @@ public class VoxSolaris {
                 analyzeExcessStanding();
                 break;
             case 0:
-                
         }
     }
 
@@ -63,7 +62,11 @@ public class VoxSolaris {
     }
 
     static void analyzeResourcesToMax() {
-
+        Main.analyzeResourcesToMax(
+            userRank,
+            rankSacrificeNames,
+            rankSacrificeAmount
+        );
     }
 
     static void analyzeExcessStanding() {
