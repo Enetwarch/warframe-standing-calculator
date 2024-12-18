@@ -1,3 +1,6 @@
+package syndicates;
+import Main;
+
 public class FactionSyndicates {
     static int 
     userFaction;
