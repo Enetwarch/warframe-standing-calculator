@@ -1,41 +1,40 @@
-public class Entrati {
-    static String syndicateName = "Entrati";
+public class TheHoldfasts {
+    static String syndicateName = "The Holdfasts";
     static int userRank = 0;
     static int userStanding = 0;
 
     static String[] rankTitles = {
         "Neutral", 
-        "Stranger", 
-        "Acquaintance", 
-        "Associate", 
-        "Friend", 
-        "Family"
+        "Fallen",
+        "Watcher",
+        "Guardian",
+        "Seraph",
+        "Angel"
     };
     static String[][] rankSacrificeNames = {
-        {"Spinal Core Section"},
-        {"Keratinos Blades Blueprint", "Keratinos Gauntlet Blueprint", "Father Token", "Daughter Token"},
-        {"Common Avichaea Tag", "Medjay Predasite Tag", "Mother Token", "Son Token"},
-        {"Zarim Mutagen", "Arioli Mutagen", "Father Token", "Son Token"},
-        {"Seriglass Shard", "Mother Token", "Father Token"}
+        {"Voidplume Down", "Ferrite", "Alloy Plate", "Credit"},
+        {"Voidplume Vane", "Voidgel Orb", "Alloy Plate", "Credit"},
+        {"Voidplume Crest", "Entrati Lanthorn", "Ferrite", "Credit"},
+        {"Voidplume Quill", "Thrax Plasm", "Voidgel Orb", "Credit"},
+        {"Voidplume Pinion", "Thrax PLasm", "Entrati Lanthorn", "Credit"}
     };
     static int[][] rankSacrificeAmount= {
-        {3},
-        {1, 1, 1, 1},
-        {5, 1, 1, 1},
-        {1, 1, 1, 1},
-        {1, 1, 1}
+        {5, 2000, 2000, 10000},
+        {10, 10, 5000, 25000}, 
+        {10, 10, 5000, 50000}, 
+        {15, 60, 40, 100000}, 
+        {5, 90, 20, 200000}
     };
 
     static String[] resourceNames = {
-        "Mother Token", 
-        "Father Token", 
-        "Daughter Token", 
-        "Son Token", 
-        "Otak Token", 
-        "Grandmother Token"
+        "Voidplume Down", 
+        "Voidplume Vane",
+        "Voidplume Crest",
+        "Voidplume Quill",
+        "Voidplume Pinion"
     };
-    static int[] resourceStanding = {100, 100, 100, 500, 100, 1500};
-    static int[] resourceOwned = {0, 0, 0, 0, 0, 0};
+    static int[] resourceStanding = {500, 1000, 2000, 2500, 5000};
+    static int[] resourceOwned = {0, 0, 0, 0, 0};
 
 
     ///////////////////////
@@ -79,5 +78,5 @@ public class Entrati {
         getStanding();
         getResources();
         getAnalysis();
-    }   
+    }
 }

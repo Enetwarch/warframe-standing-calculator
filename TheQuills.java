@@ -26,14 +26,14 @@ public class TheQuills {
         {30, 500000}
     };
 
-    static String[] sentientCoreNames = {
+    static String[] resourceNames = {
         "Intact Sentient Core", 
         "Exceptional Sentient Core", 
         "Flawless Sentient Core", 
         "Narmer Isoplast"
     };
-    static int[] sentientCoreStanding = {250, 750, 1500, 2000};
-    static int[] sentientCoreOwned = {0, 0, 0, 0};
+    static int[] resourceStanding = {250, 750, 1500, 2000};
+    static int[] resourceOwned = {0, 0, 0, 0};
 
 
     ///////////////////////
@@ -53,8 +53,8 @@ public class TheQuills {
             userRank);
     }
 
-    static void getToroids() {
-        sentientCoreOwned = Main.getResources(sentientCoreNames);
+    static void getResources() {
+        resourceOwned = Main.getResources(resourceNames);
     }
 
     static void getAnalysis() {
@@ -63,8 +63,8 @@ public class TheQuills {
             userStanding,
             rankSacrificeNames,
             rankSacrificeAmount,
-            sentientCoreOwned,
-            sentientCoreStanding
+            resourceOwned,
+            resourceStanding
         );
     }
 
@@ -75,7 +75,7 @@ public class TheQuills {
     public static void main() {
         getRank();
         getStanding();
-        getToroids();
+        getResources();
         getAnalysis();
     }
 }

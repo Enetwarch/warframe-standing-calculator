@@ -140,7 +140,7 @@ public class Main {
         int userInput = getUserInput(
             syndicateName + " rank",
             0,
-            rankTitles.length
+            rankTitles.length - 1
         );
         return userInput;
     }
@@ -165,6 +165,14 @@ public class Main {
         return resourceOwned;
     }
 
+    public static String pluralizeDays(int days) {
+        if (days > 1) {
+            return "s";
+        } else {
+            return "";
+        }
+    }
+
     public static void analyzeDaysToMax(int userRank, int userStanding) {
         int days = 0;
         if (userRank == 5) {
@@ -177,18 +185,20 @@ public class Main {
         }
         while (userRank != 5) {
             days += 1;
-            if (standingPerRank[userRank] >= userStanding + standingCap) {
+            if (standingPerRank[userRank] > userStanding + standingCap) {
                 userStanding += standingCap;
             } else {
                 userStanding = userStanding + standingCap - standingPerRank[userRank];
                 userRank += 1;
             }
         }
+        String isPlural = pluralizeDays(days);
         System.out.printf(
             """
-            It will take %d days to max out your rank with %,d leftover standing.     
+            It will take %d day%s to max out your rank with %,d leftover standing.     
             """
             , days
+            , isPlural
             , userStanding
         );
     }
@@ -269,9 +279,55 @@ public class Main {
     }
 
 
+    /////////////////////////////////////////////////////////////////////////////
+
+
+    public static int getStandingNeutral(String syndicateName, int maxStanding) {
+        int userInput = getUserInput(
+            syndicateName + " standing",
+            0,
+            maxStanding
+        );
+        return userInput;
+    }
+
+    public static void analyzeDaysToMaxNeutral(int userStanding, int maxStanding) {
+        if (userStanding == maxStanding) {
+            System.out.printf(
+                """
+                You are already at max standing. 
+                """  
+            );
+            return;
+        }
+        int days = 0;
+        while (userStanding < maxStanding) {
+            days += 1;
+            userStanding += standingCap;
+        }
+        String isPlural = pluralizeDays(days);
+        System.out.printf(
+            """
+            It will take %d day%s to max out your standing with %,d leftover standing.     
+            """
+            , days
+            , isPlural
+            , userStanding - maxStanding
+        );
+    }
+
+    public static void getAnalysisNeutral(int userStanding, int maxStanding) {
+        analyzeDaysToMaxNeutral(
+            userStanding,
+            maxStanding
+        );
+        inputBuffer();
+    }
+
+
     //////////////////////////////
-
-
+     
+     
     static void getMasteryRank() {
         masteryRank = getUserInput(
             "Enter your mastery rank",
@@ -295,6 +351,7 @@ public class Main {
             case 2: 
                 break;
             case 3: 
+                CephalonSimaris.main();
                 break;
             case 4: 
                 Ostron.main();
@@ -309,15 +366,19 @@ public class Main {
                 VoxSolaris.main();
                 break;
             case 8: 
+                Ventkids.main();
                 break;
             case 9: 
                 Entrati.main();
                 break;
             case 10: 
+                Necraloid.main();
                 break;
             case 11: 
+                TheHoldfasts.main();
                 break;
-            case 12:   
+            case 12:
+                Cavia.main();
                 break;
             case 0: 
                 terminateProgram();

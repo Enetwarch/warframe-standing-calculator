@@ -26,7 +26,7 @@ public class Ostron {
         {1, 1, 1, 1, 200000}
     };
 
-    static String[] oreNames = {
+    static String[] resourceNames = {
         "Azurite",
         "Devar", 
         "Veridos", 
@@ -34,8 +34,8 @@ public class Ostron {
         "Sentirum", 
         "Nyth"
     };
-    static int[] oreStanding = {50, 50, 75, 100, 400, 400};
-    static int[] oreOwned = {0, 0, 0, 0, 0};
+    static int[] resourceStanding = {50, 50, 75, 100, 400, 400};
+    static int[] resourceOwned = {0, 0, 0, 0, 0};
 
 
     ///////////////////////
@@ -55,8 +55,8 @@ public class Ostron {
             userRank);
     }
 
-    static void getToroids() {
-        oreOwned = Main.getResources(oreNames);
+    static void getResources() {
+        resourceOwned = Main.getResources(resourceNames);
     }
 
     static void getAnalysis() {
@@ -65,8 +65,8 @@ public class Ostron {
             userStanding,
             rankSacrificeNames,
             rankSacrificeAmount,
-            oreOwned,
-            oreStanding
+            resourceOwned,
+            resourceStanding
         );
     }
 
@@ -77,7 +77,7 @@ public class Ostron {
     public static void main() {
         getRank();
         getStanding();
-        getToroids();
+        getResources();
         getAnalysis();
     }
 }

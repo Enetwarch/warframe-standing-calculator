@@ -26,7 +26,7 @@ public class VoxSolaris {
         {1, 1000000}
     };
 
-    static String[] toroidNames = {
+    static String[] resourceNames = {
         "Vega Toroid", 
         "Calda Toroid", 
         "Sola Toroid", 
@@ -34,8 +34,8 @@ public class VoxSolaris {
         "Crisma Toroid", 
         "Lazulite Toroid"
     };
-    static int[] toroidStanding = {1000, 1000, 1000, 2000, 6000, 12000};
-    static int[] toroidOwned = {0, 0, 0, 0, 0, 0};
+    static int[] resourceStanding = {1000, 1000, 1000, 2000, 6000, 12000};
+    static int[] resourceOwned = {0, 0, 0, 0, 0, 0};
 
 
     ///////////////////////
@@ -55,8 +55,8 @@ public class VoxSolaris {
             userRank);
     }
 
-    static void getToroids() {
-        toroidOwned = Main.getResources(toroidNames);
+    static void getResources() {
+        resourceOwned = Main.getResources(resourceNames);
     }
 
     static void getAnalysis() {
@@ -65,8 +65,8 @@ public class VoxSolaris {
             userStanding,
             rankSacrificeNames,
             rankSacrificeAmount,
-            toroidOwned,
-            toroidStanding
+            resourceOwned,
+            resourceStanding
         );
     }
 
@@ -77,7 +77,7 @@ public class VoxSolaris {
     public static void main() {
         getRank();
         getStanding();
-        getToroids();
+        getResources();
         getAnalysis();
     }
 }

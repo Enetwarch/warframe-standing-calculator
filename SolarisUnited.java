@@ -26,15 +26,15 @@ public class SolarisUnited {
         {5, 5, 3, 200000}
     };
 
-    static String[] debtBondNames = {
+    static String[] resourceNames = {
         "Training Debt-Bond",
         "Shelter Debt-Bond",
         "Medical Debt-Bond",
         "Advances Debt-Bond",
         "Familial Debt-Bond"
     };
-    static int[] debtBondStanding = {100, 200, 300, 400, 500};
-    static int[] debtBondOwned = {0, 0, 0, 0, 0};
+    static int[] resourceStanding = {100, 200, 300, 400, 500};
+    static int[] resourceOwned = {0, 0, 0, 0, 0};
 
 
     ///////////////////////
@@ -54,8 +54,8 @@ public class SolarisUnited {
             userRank);
     }
 
-    static void getToroids() {
-        debtBondOwned = Main.getResources(debtBondNames);
+    static void getResources() {
+        resourceOwned = Main.getResources(resourceNames);
     }
 
     static void getAnalysis() {
@@ -64,8 +64,8 @@ public class SolarisUnited {
             userStanding,
             rankSacrificeNames,
             rankSacrificeAmount,
-            debtBondOwned,
-            debtBondStanding
+            resourceOwned,
+            resourceStanding
         );
     }
 
@@ -76,7 +76,7 @@ public class SolarisUnited {
     public static void main() {
         getRank();
         getStanding();
-        getToroids();
+        getResources();
         getAnalysis();
     }   
 }
