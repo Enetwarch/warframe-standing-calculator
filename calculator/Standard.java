@@ -14,9 +14,15 @@ public class Standard {
     private int[] resourceOwned;
     private int userRank;
     private int userStanding;
-    /////////////////////////////////////
-    private static int[] standingPerRank;
-    private static int standingCap;
+    private int rankMax;
+    private int standingMax;
+    //////////////////////////////////////////////////////////////////////////////////
+    private static int[] standingPerRank = {5000, 22000, 44000, 70000, 99000, 132000};
+    private static int standingCap = Syndicates.standingCap;
+    private static int rankMin = 0;
+    private static int standingMin = 0;
+    private static int resourceMin = 0;
+    private static int resourceMax = Integer.MAX_VALUE;
 
     public Standard(String syndicateName, String[] rankTitles, String[][] rankSacrificeNames, int[][] rankSacrificeAmount, String[] resourceNames, int[] resourceStanding) { 
         // Constructor for standard syndicates.
@@ -29,241 +35,165 @@ public class Standard {
         this.resourceOwned = new int[resourceNames.length];
         this.userRank = 0;
         this.userStanding = 0;
-        /////////////////////////////////////
-        Standard.standingPerRank = new int[]{
-            5000, 
-            22000, 
-            44000, 
-            70000, 
-            99000, 
-            132000
-        };
-        Standard.standingCap = Syndicates.standingCap;
+        this.rankMax = this.rankTitles.length;
     }
 
 
     ////////////////////////////////////////
 
 
-    private static void initializeMinMax() {
-        int rankMin = 0;
-        int rankMax = rankTitles.length;
-        int standingMin = 0;
-        int standingMax = standingPerRank[userRank];
-        int resourcesMin = 0;
-        int resourcesMax = Integer.MAX_VALUE;
+    // Input methods
+    private static int getRank(String[] rankTitles, String syndicateName, int rankMin, int rankMax) {
+        Format.printArray(rankTitles, rankMin);
+        int userInput = Format.getUserInput(syndicateName + " rank", rankMin, rankMax);
+        return userInput; // Gets the user rank.
     }
 
-
-    private static int getRank(
-        String[] rankTitles, 
-        String syndicateName
-        int rankMin,
-        int rankMax,
-        ) {
-        Format.printArray(
-            rankTitles,
-            rankMin
-        );
-        int userInput = Format.getUserInput(
-            syndicateName + " rank",
-            rankMin,
-            rankMax
-        );
-        return userInput;
+    private static int getStanding(String syndicateName, int[] standingPerRank, int userRank, int standingMin, int standingMax) {
+        int userInput = Format.getUserInput(syndicateName + " standing", standingMin, standingMax);
+        return userInput; // Gets the user standing.
     }
 
-    private static int getStanding(
-        String syndicateName, 
-        int[] standingPerRank, 
-        int userRank
-        ) {
-        int userInput = Format.getUserInput(
-            syndicateName + " standing",
-            0,
-            standingPerRank[userRank]
-        );
-        return userInput;
-    }
-
-    public static int[] getResources(String[] resourceNames) {
+    public static int[] getResources(String[] resourceNames, int resourceMin, int resourceMax) {
         if (resourceNames.length == 0) {
-            return new int[]{};
+            return new int[]{}; // Returns an empty int array if there are no resources for that particular syndicate.
         }
         int[] resourceOwned = new int[resourceNames.length];
         for (int i = 0; i < resourceNames.length; i++)
-        resourceOwned[i] = Format.getUserInput(
-            resourceNames[i] + " owned",
-            0,
-            Integer.MAX_VALUE
-        );
-        return resourceOwned;
+        resourceOwned[i] = Format.getUserInput(resourceNames[i] + " owned", resourceMin, resourceMax);
+        return resourceOwned; // Asks the user how many of each standing resources they have.
     }
 
-    private static void analyzeDaysToMax(
-        int userRank, 
-        String[] rankTitles, 
-        int userStanding
-        ) {
-        int days = 0;
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
+
+
+    // Output method #1
+    private static void analyzeDaysToMax(int userRank, String[] rankTitles, int userStanding) {
         if (userRank == rankTitles.length) {
             System.out.printf(
                 """
                 You are already max rank in this syndicate.     
                 """
             );
-            return;
+            return; // Quits rank calculation if already maxed.
         }
+        int days = 0;
         while (userRank != rankTitles.length) {
             days += 1;
+            // Increases days by 1 for each iteration.
             if (standingPerRank[userRank] > userStanding + standingCap) {
-                userStanding += standingCap;
+                userStanding += standingCap; // Daily standing cap is added to user standing if it won't reach the rank cap yet.
             } else {
                 userStanding = userStanding + standingCap - standingPerRank[userRank];
-                userRank += 1;
+                userRank += 1; // Rank increases if standing reaches the rank cap. 
             }
         }
-        String isPlural = Format.pluralizeDays(days);
+        String isPlural = Format.pluralizeDays(days); // Adds an "s" to days if it is more than 1.
         System.out.printf(
             """
             It will take %d day%s to max out your rank with %,d leftover standing.     
-            """
-            , days
-            , isPlural
-            , userStanding
+            """, days, isPlural, userStanding
         );
     }
 
-    private static void analyzeResourcesToMax(
-        int userRank, 
-        String[] rankTitles, 
-        String[][] rankSacrificeNames, 
-        int[][] rankSacrificeAmount
-        ) {
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    // Output method #2
+    private static void analyzeResourcesToMax(int userRank, String[] rankTitles, String[][] rankSacrificeNames, int[][] rankSacrificeAmount) {
         if (rankSacrificeNames.length == 0) {
-            return;
-        } else if (userRank == 5) {
-            return;
-        }
+            return; // Returns if there is no sacrifice resources required at all.
+        } else if (userRank == rankTitles.length - 1) {
+            return; // Returns if the user rank is max.
+        } 
         ArrayList<String> sacrificeNames = new ArrayList<>();
         ArrayList<Integer> sacrificeAmount = new ArrayList<>();
-        if (userRank == rankTitles.length) {
-            return;
-        }
+        // Creates dynamic arrays for adding in the sacrifice resources and their quantity.
         for (int i = userRank; i < rankSacrificeNames.length; i++) {
+            // Loops through each inner array.
             for (int j = 0; j < rankSacrificeNames[i].length; j++) {
+                // Loops through the contents of the inner array.
                 String sacrificeNameString = rankSacrificeNames[i][j];
                 int sacrificeAmountInt = rankSacrificeAmount[i][j];
+                // Contents of the inner array in the current iteration.
                 if (sacrificeNames.contains(sacrificeNameString)) {
                     int index = sacrificeNames.indexOf(sacrificeNameString);
                     sacrificeAmount.set(index, sacrificeAmount.get(index) + sacrificeAmountInt);
+                    // Triggers when the current content of the inner array is already in the dynamic array.
+                    // Only increases the integer amount of the content and does not add more elements. 
                 } else {
                     sacrificeNames.add(sacrificeNameString);
                     sacrificeAmount.add(sacrificeAmountInt);
+                    // Adds an element in each of the dynamic arrays.
                 }
             }
         }
         int[] sacrificeAmountArray = new int[sacrificeAmount.size()];
         for (int i = 0; i < sacrificeAmount.size(); i++) {
             sacrificeAmountArray[i] = sacrificeAmount.get(i);
-        }
+        } // Converts the dynamic int array into a normal int array.
         String[] sacrificeNamesArray = sacrificeNames.toArray(new String[0]);
+        // Converts the dynamic String array into a normal String array.
         System.out.print(
             """
             Here are the resources you need to sacrifice to reach max rank:     
             """
         );
-        Format.printResourceArray(
-            sacrificeAmountArray,
-            sacrificeNamesArray
-        );
+        Format.printResourceArray(sacrificeAmountArray, sacrificeNamesArray);
+        // Enumerates all the required sacrifices based on the user rank.
     }
 
-    private static void analyzeExcessStanding(
-        int[] resourceOwned, 
-        int[] resourceStanding
-        ) {
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+
+    // Output method #3
+    private static void analyzeExcessStanding(int[] resourceOwned, int[] resourceStanding) {
         if (resourceOwned.length == 0) {
-            return;
+            return; // Exits out of the method if there are no resources for that particular syndicate.
         }
         int totalStanding = 0;
         for (int i = 0; i < resourceOwned.length; i++) {
             totalStanding += resourceOwned[i] * resourceStanding[i];
-        }
+        } // Calculates the total amount of standing based on the standing gain of each resource owned.
         int days = totalStanding / standingCap;
-        String isPlural = Format.pluralizeDays(days);
+        String isPlural = Format.pluralizeDays(days); // Adds an "s" to days if it is more than 1.
         if (days != 0) {
             System.out.printf(
-                """
+                """ 
                 You have %,d total standing from syndicate standing resources that can last for %,d day%s.     
-                """
-                , totalStanding
-                , days
-                , isPlural
-            );
+                """, totalStanding, days, isPlural
+            ); // Gets printed out when
         } else {
             System.out.printf(
                 """
                 You have %,d total standing from syndicate standing resources.  
-                """
-                , totalStanding
-            );
+                """, totalStanding
+            ); // 
         }
     }
 
-    public static void getAnalysis(
-        int userRank, 
-        String[] rankTitles, 
-        int userStanding, 
-        String[][] rankSacrificeNames, 
-        int[][] rankSacrificeAmount, 
-        int[] resourceOwned, 
-        int[] resourceStanding
-        ) {
-        analyzeDaysToMax( 
-            userRank,
-            rankTitles,
-            userStanding
-        );
-        analyzeResourcesToMax(
-            userRank,
-            rankTitles,
-            rankSacrificeNames,
-            rankSacrificeAmount
-        );
-        analyzeExcessStanding(
-            resourceOwned,
-            resourceStanding
-        );
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    // Final output method
+    public static void getAnalysis(int userRank, String[] rankTitles, int userStanding, String[][] rankSacrificeNames, int[][] rankSacrificeAmount, int[] resourceOwned, int[] resourceStanding) {
+        analyzeDaysToMax(userRank, rankTitles, userStanding);
+        analyzeResourcesToMax(userRank, rankTitles, rankSacrificeNames, rankSacrificeAmount);
+        analyzeExcessStanding(resourceOwned, resourceStanding);
         Format.inputBuffer();
-    }
+    } // Combines all the output methods into one big method.
 
-
-    /////////////////////////////////
-
-
+    // Final method
     public void calculateToConsole(){
-        this.userRank = getRank(
-            this.rankTitles, 
-            this.syndicateName
-        );
-        this.userStanding = getStanding(
-            this.syndicateName,
-            standingPerRank,
-            this.userRank
-        );
-        this.resourceOwned = getResources(
-            this.resourceNames
-        );
-        getAnalysis(
-            this.userRank,
-            this.rankTitles,
-            this.userStanding,
-            this.rankSacrificeNames,
-            this.rankSacrificeAmount,
-            this.resourceOwned,
-            this.resourceStanding
-        );
-    }
+        this.userRank = getRank(this.rankTitles, this.syndicateName, rankMin, this.rankMax);
+        this.standingMax = standingPerRank[userRank]; // Initializes instance variable for the next method.
+        this.userStanding = getStanding(this.syndicateName, standingPerRank, this.userRank, standingMin, this.standingMax);
+        this.resourceOwned = getResources(this.resourceNames, resourceMin, resourceMax);
+        getAnalysis(this.userRank, this.rankTitles, this.userStanding, this.rankSacrificeNames, this.rankSacrificeAmount, this.resourceOwned, this.resourceStanding);
+    } // Combines all the methods together.
 
 }
