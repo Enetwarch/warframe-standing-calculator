@@ -41,6 +41,12 @@ public class Standard {
 
     ///////////////////////////
 
+    private static void initializeMinMax() {
+        int getRankMin = 0;
+        int getRankMax = rankTitles.length;
+        int g
+    }
+
 
     private static int getRank(
         String[] rankTitles, 
@@ -48,12 +54,12 @@ public class Standard {
         ) {
         Format.printArray(
             rankTitles,
-            0    
+            getRankMin
         );
         int userInput = Format.getUserInput(
             syndicateName + " rank",
-            0,
-            rankTitles.length - 1
+            getRankMin,
+            getRankMax
         );
         return userInput;
     }
@@ -71,7 +77,7 @@ public class Standard {
         return userInput;
     }
 
-    private static int[] getResources(String[] resourceNames) {
+    public static int[] getResources(String[] resourceNames) {
         if (resourceNames.length == 0) {
             return new int[]{};
         }
@@ -196,7 +202,7 @@ public class Standard {
         }
     }
 
-    private static void getAnalysis(
+    public static void getAnalysis(
         int userRank, 
         String[] rankTitles, 
         int userStanding, 
@@ -224,7 +230,7 @@ public class Standard {
     }
 
 
-    //////////////////////////////////////
+    /////////////////////////////////
 
 
     public void calculateToConsole(){

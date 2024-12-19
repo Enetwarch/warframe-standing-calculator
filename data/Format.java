@@ -81,7 +81,7 @@ public class Format {
     }
 
 
-    //////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
 
     
     public static void printArray(String[] list, int min) {
@@ -119,10 +119,19 @@ public class Format {
     ///////////////////////////////////////
 
 
+    public static void printSyndicateSelect() {
+        System.out.print(
+            """
+            0. Return to syndicate select.     
+            """
+        );
+    }
+
+
     public static void printExitProgram() {
         System.out.print(
             """
-            0. Exit Program     
+            0. Exit program     
             """
         );
     }

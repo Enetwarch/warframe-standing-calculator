@@ -1,3 +1,4 @@
+import calculator.Faction;
 import data.Format;
 import data.Syndicates;
 
@@ -35,7 +36,7 @@ public class Console {
         );
         switch (userInput) {
             case 1: 
-                System.out.print("Under Construction...");
+                Faction.factionSyndicates();
                 break;
             case 2: 
                 Syndicates.conclave.calculateToConsole();

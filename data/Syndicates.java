@@ -70,7 +70,7 @@ public class Syndicates {
         ); 
 
         
-        ////////////////////////////////////////////////////
+        //////////////////////////////
         
 
         cephalonSimaris = new OneRank(
@@ -79,7 +79,7 @@ public class Syndicates {
         );
 
 
-        /////////////////////////////////////////////
+        //////////////////////
 
 
         ostron = new Standard(
@@ -125,7 +125,7 @@ public class Syndicates {
         );
 
 
-        ////////////////////////////////////////////////
+        /////////////////////////
         
 
         theQuills = new Standard(
@@ -167,7 +167,7 @@ public class Syndicates {
         );
 
 
-        ////////////////////////////////////////////////////
+        /////////////////////////////
 
 
         solarisUnited = new Standard(
@@ -211,7 +211,7 @@ public class Syndicates {
         );
 
 
-        /////////////////////////////////////////////////
+        //////////////////////////
         
 
         voxSolaris = new Standard(
@@ -257,7 +257,7 @@ public class Syndicates {
         );
 
 
-        ///////////////////////////////////////////////
+        ////////////////////////
 
 
         ventkids = new Standard(
@@ -277,7 +277,7 @@ public class Syndicates {
         );
 
 
-        //////////////////////////////////////////////
+        ///////////////////////
 
 
         entrati = new Standard(
@@ -323,7 +323,7 @@ public class Syndicates {
         );
 
 
-        ////////////////////////////////////////////////
+        /////////////////////////
 
 
         necraloid = new Standard(
@@ -359,7 +359,7 @@ public class Syndicates {
         );
 
 
-        ///////////////////////////////////////////////////
+        ////////////////////////////
 
 
         theHoldfasts = new Standard(
@@ -403,7 +403,7 @@ public class Syndicates {
         );
             
 
-        ////////////////////////////////////////////
+        /////////////////////
 
 
         cavia = new Standard(
