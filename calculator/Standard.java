@@ -14,17 +14,12 @@ public class Standard {
     private int[] resourceOwned;
     private int userRank;
     private int userStanding;
+    /////////////////////////////////////
     private static int[] standingPerRank;
     private static int standingCap;
 
-    public Standard(
-        String syndicateName, 
-        String[] rankTitles, 
-        String[][] rankSacrificeNames, 
-        int[][] rankSacrificeAmount, 
-        String[] resourceNames, 
-        int[] resourceStanding
-        ) {
+    public Standard(String syndicateName, String[] rankTitles, String[][] rankSacrificeNames, int[][] rankSacrificeAmount, String[] resourceNames, int[] resourceStanding) { 
+        // Constructor for standard syndicates.
         this.syndicateName = syndicateName;
         this.rankTitles = rankTitles;
         this.rankSacrificeNames = rankSacrificeNames;
@@ -34,32 +29,46 @@ public class Standard {
         this.resourceOwned = new int[resourceNames.length];
         this.userRank = 0;
         this.userStanding = 0;
-        Standard.standingPerRank = new int[]{5000, 22000, 44000, 70000, 99000, 132000};
+        /////////////////////////////////////
+        Standard.standingPerRank = new int[]{
+            5000, 
+            22000, 
+            44000, 
+            70000, 
+            99000, 
+            132000
+        };
         Standard.standingCap = Syndicates.standingCap;
     }
 
 
-    ///////////////////////////
+    ////////////////////////////////////////
+
 
     private static void initializeMinMax() {
-        int getRankMin = 0;
-        int getRankMax = rankTitles.length;
-        int g
+        int rankMin = 0;
+        int rankMax = rankTitles.length;
+        int standingMin = 0;
+        int standingMax = standingPerRank[userRank];
+        int resourcesMin = 0;
+        int resourcesMax = Integer.MAX_VALUE;
     }
 
 
     private static int getRank(
         String[] rankTitles, 
         String syndicateName
+        int rankMin,
+        int rankMax,
         ) {
         Format.printArray(
             rankTitles,
-            getRankMin
+            rankMin
         );
         int userInput = Format.getUserInput(
             syndicateName + " rank",
-            getRankMin,
-            getRankMax
+            rankMin,
+            rankMax
         );
         return userInput;
     }
