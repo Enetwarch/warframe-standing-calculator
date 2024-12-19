@@ -46,7 +46,10 @@ public class Standard {
         String[] rankTitles, 
         String syndicateName
         ) {
-        Format.printRankArray(rankTitles);
+        Format.printArray(
+            rankTitles,
+            0    
+        );
         int userInput = Format.getUserInput(
             syndicateName + " rank",
             0,
@@ -124,6 +127,8 @@ public class Standard {
         ) {
         if (rankSacrificeNames.length == 0) {
             return;
+        } else if (userRank == 5) {
+            return;
         }
         ArrayList<String> sacrificeNames = new ArrayList<>();
         ArrayList<Integer> sacrificeAmount = new ArrayList<>();
@@ -172,14 +177,23 @@ public class Standard {
         }
         int days = totalStanding / standingCap;
         String isPlural = Format.pluralizeDays(days);
-        System.out.printf(
-            """
-            You have %,d total standing from syndicate standing resources that can last for %,d day%s.     
-            """
-            , totalStanding
-            , days
-            , isPlural
-        );
+        if (days != 0) {
+            System.out.printf(
+                """
+                You have %,d total standing from syndicate standing resources that can last for %,d day%s.     
+                """
+                , totalStanding
+                , days
+                , isPlural
+            );
+        } else {
+            System.out.printf(
+                """
+                You have %,d total standing from syndicate standing resources.  
+                """
+                , totalStanding
+            );
+        }
     }
 
     private static void getAnalysis(

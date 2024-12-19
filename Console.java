@@ -23,7 +23,10 @@ public class Console {
 
 
     static void getSyndicate() {
-        Format.printArray(syndicateOptions);
+        Format.printArray(
+            syndicateOptions,
+            1    
+        );
         Format.printExitProgram();
         int userInput = Format.getUserInput(
             "Choose a syndicate",
@@ -32,40 +35,40 @@ public class Console {
         );
         switch (userInput) {
             case 1: 
-
+                System.out.print("Under Construction...");
                 break;
             case 2: 
-                Syndicates.cephalonSimaris.calculateToConsole();
+                Syndicates.conclave.calculateToConsole();
                 break;
             case 3: 
-
+                Syndicates.cephalonSimaris.calculateToConsole();
                 break;
             case 4: 
-
+                Syndicates.ostron.calculateToConsole();
                 break;
             case 5:
-
+                Syndicates.theQuills.calculateToConsole();
                 break;
             case 6: 
-
+                Syndicates.solarisUnited.calculateToConsole();
                 break;
             case 7: 
-
+                Syndicates.voxSolaris.calculateToConsole();
                 break;
             case 8: 
-
+                Syndicates.ventkids.calculateToConsole();
                 break;
             case 9: 
-
+                Syndicates.entrati.calculateToConsole();
                 break;
             case 10: 
-
+                Syndicates.necraloid.calculateToConsole();
                 break;
             case 11: 
-
+                Syndicates.theHoldfasts.calculateToConsole();
                 break;
             case 12:
-
+                Syndicates.cavia.calculateToConsole();
                 break;
             case 0: 
                 Format.terminateProgram();
@@ -79,6 +82,7 @@ public class Console {
 
     public static void main(String[] args) {
         Syndicates.getMasteryRank();
+        Syndicates.makeSyndicates();
         while (true) { 
             getSyndicate();
         }

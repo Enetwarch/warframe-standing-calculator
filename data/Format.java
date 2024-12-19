@@ -38,17 +38,19 @@ public class Format {
                 if (userInput >= min && userInput <= max) {
                     break;
                 } else {
+                    scanner.nextLine();
                     inputError(min, max);
                 }
             } catch (Exception e) {
+                scanner.nextLine();
                 inputError(min, max);
             }
         }
+        scanner.nextLine();
         return userInput;
     }
 
     public static void inputBuffer() {
-        scanner.nextLine();
         System.out.print(
             "Press enter to proceed >> "
         );
@@ -82,25 +84,13 @@ public class Format {
     //////////////////////////////////////////////
 
     
-    public static void printArray(String[] list) {
+    public static void printArray(String[] list, int min) {
         for (int i = 0; i < list.length; i++) {
             System.out.printf(
                 """
                 %d. %s     
                 """
-                , i + 1
-                , list[i]
-            );
-        }
-    }
-
-    public static void printRankArray(String[] list) {
-        for (int i = 0; i < list.length; i++) {
-            System.out.printf(
-                """
-                %d. %s     
-                """
-                , i
+                , i + min
                 , list[i]
             );
         }
