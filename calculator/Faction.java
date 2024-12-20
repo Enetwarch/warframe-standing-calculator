@@ -51,7 +51,7 @@ public class Faction {
     private static int getFaction() {
         Format.printArray(factionSyndicateList, factionSyndicateMin);
         int userInput = Format.getUserInput("Select the syndicate you have pledged to", factionMin, factionMax);
-        return userInput; // Collects the pledged faction of the user to find the standing multipliers for each faction.
+        return userInput - 1; // Collects the pledged faction of the user to find the standing multipliers for each faction.
     }
 
     private static double calculateStandingMultiplier() {
@@ -191,7 +191,7 @@ public class Faction {
 
 
     // Final method
-    public void calculateToConsole(){
+    public void calculateToConsole() {
         this.standingMultiplier = calculateStandingMultiplier();
         this.userRank = getRank(this.rankTitles, this.syndicateName);
         this.userStanding = getStanding(this.syndicateName, standingPerRank, this.userRank);
@@ -207,13 +207,13 @@ public class Faction {
 
 
     public static void factionSyndicates() {
-        userFaction = getFaction() - 1;
-        Syndicates.makeFactions(); // Only initializes objects now in order to take into account the changes in standing multipliers.
+        userFaction = getFaction();
         while (true) {
             Format.printArray(factionSyndicateList, factionSyndicateMin);
             Format.printSyndicateSelect();
             int userInput = Format.getUserInput("Choose a faction syndicate to calculate",0, factionSyndicateList.length);
             int calculateFaction = userInput - 1;
+            Syndicates.makeFactions(); // Only initializes objects now in order to take into account the changes in standing multipliers.
             switch (userInput) {
                 case 1:
                     Syndicates.steelMeridian.calculateToConsole();

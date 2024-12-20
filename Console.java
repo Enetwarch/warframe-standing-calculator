@@ -4,7 +4,7 @@ import data.Syndicates;
 
 public class Console {
 
-    private static String[] syndicateOptions = {"Faction Syndicates", "Conclave", "Cephalon Simaris", "Ostron", "The Quills", "Solaris United", "Vox Solaris", "Ventkids", "Entrati", "Necraloid", "The Holdfasts", "Cavia"};
+    private static String[] syndicateOptions = {"Faction Syndicates", "Conclave", "Cephalon Simaris", "Ostron", "The Quills", "Solaris United", "Vox Solaris", "Ventkids", "Entrati", "Necraloid", "The Holdfasts", "Cavia", "The Hex"};
     // All the syndicates pre-1999 update.
 
 
@@ -54,6 +54,9 @@ public class Console {
             case 12:
                 Syndicates.cavia.calculateToConsole();
                 break; // Cavia syndicate uses Standard calculations.
+            case 13:
+                Syndicates.theHex.calculateToConsole();
+                break; // The Hex syndicate uses Standard calculations. 
             case 0: 
                 Format.terminateProgram(); // Terminates program.
         } // The break;s prevent the program from "falling" through the switch case structure.

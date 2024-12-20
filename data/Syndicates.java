@@ -24,6 +24,7 @@ public class Syndicates {
     public static Standard necraloid;
     public static Standard theHoldfasts;
     public static Standard cavia;
+    public static Standard theHex;
     // Initializes all calculation classes when making objects.
 
 
@@ -207,13 +208,27 @@ public class Syndicates {
 
         cavia = new Standard(
             "Cavia", // syndicateName
-            new String[]{"Neutral", "Assistant", "Researcher", "Colleague", "Scholar", "Illuminate"}, //rankTitles
+            new String[]{"Neutral", "Assistant", "Researcher", "Colleague", "Scholar", "Illuminate"}, // rankTitles
             new String[][]{{"Shrill Voca", "Entrati Obols", "Rubedo", "Credit"}, {"Shrill Voca", "Voidgel Orb", "Necracoil", "Stela", "Credit"}, {"Bellow Voca", "Shrill Voca", "Necracoil", "Stela", "Credit"}, {"Echo Voca", "Bellow Voca", "Entrati Obol", "Entrati Lanthorn", "Credit"}, {"Echo Voca", "Necracoil", "Entrati Lanthorn", "Stela", "Credit"}}, // rankSacrificeNames
             new int[][]{{3, 300, 11000, 10000}, {5, 60, 12, 8, 25000}, {2, 8, 15, 16, 50000}, {1, 10, 1500, 5, 100000}, {10, 25, 10, 32, 200000}}, // rankSacrificeAmount
             new String[]{"Shrill Voca", "Bellow Voca", "Echo Voca"}, // resourceNames
             new int[]{500, 1000, 2000} // resourceStanding
         ); // Voca will be required to rank up in this syndicate. Just like Voidplumes, there are 8 of them spread throughout every mission.
         // Bounties are the best way to gain standing. Weeklies like Netracells and Elite Deep Archimedea also give standing.
+
+
+        ///////////////////
+
+
+        theHex = new Standard(
+            "The Hex", // syndicateName
+            new String[]{"Neutral", "Leftovers", "Fresh Slice", "2-For-1", "Hot & Fresh", "Pizza Party"}, // rankTitles
+            new String[][]{{"Efervon Sample", "Hollvanian Pitchweave Fragment", "Hollar"}, {"Experimental Arc-Relay", "Entrati Obol", "Hollvanian Pitchweave Fragment", "Hollar"}, {"The Countessa Comic", "On-lyne CD", "Chuggin' Along Sixpack", "Mood Crystal", "Cheddar Crowns Cereal", "35mm Film", "Hollar"}, {"Techrot Chitin", "Necracoil", "Efervon Sample", "Hollar"}, {"Techrot Motherboard", "The Countessa Comic", "On-lyne CD", "Chuggin' Along Sixpack", "Mood Crystal", "Cheddar Crowns Cereal", "35mm Film", "Hollar"}}, // rankSacrificeName
+            new int[][]{{15, 5, 10000}, {5, 12, 25, 25000}, {1, 1, 1, 1, 1, 1, 50000}, {25, 25, 40, 100000}, {5, 1, 1, 1, 1, 1, 1, 200000}}, // rankSacrificeAmount
+            new String[]{"The Countessa Comic", "On-lyne CD", "Chuggin' Along Sixpack", "Mood Crystal", "Cheddar Crowns Cereal", "35mm Film", "Argon Burger Meal", "Big Bytes Pizza"}, // resourceNames
+            new int[]{750, 750, 750, 750, 750, 750, 1500, 2500} // resourceStanding
+        );
+
 
     }
 
