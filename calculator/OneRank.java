@@ -1,11 +1,12 @@
 package calculator;
 import data.Format;
+import data.Syndicates;
 
 public class OneRank {
     private String syndicateName;
     private int maxStanding;
     private int userStanding;
-    private static int standingCap;
+    private static int standingCap = Syndicates.standingCap;
     private static int standingMin = 0;
     // Only works around standing, no other data.
     public OneRank(String syndicateName, int maxStanding) {

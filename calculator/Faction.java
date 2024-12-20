@@ -25,7 +25,7 @@ public class Faction {
     private static int userFaction = -1;
     private static int calculateFaction = -1;
     private static int factionMin = 1;
-    private static int factionMax = factionSyndicateList.length;
+    private static int factionMax = factionSyndicateList.length - 1;
     private static int[] resourceStanding = {500, 1000, 5000}; // All faction syndicate medallions have the same standing gain, only different names.
     private static int resourceMin = 0;
     private static int resourceMax = Integer.MAX_VALUE;
@@ -65,7 +65,7 @@ public class Faction {
     // Custom printArray() function.
     private static void printArray(String[] rankNumbers, String[] list) {
         for (int i = 0; i < list.length; i++) {
-            System.out.printf("%s. %s\n", rankNumbers, list[i]);
+            System.out.printf("%s. %s\n", rankNumbers[i], list[i]);
         } // A different printArray() function from Format.java that takes in String as the numbers instead of integer.
     } // This is because faction syndicates have a Neutral rank, which isn't counted as a number.
     // Here are the rank numbers: "-2", "-1", "-" <<-- Neutral , "0", "1", "2", "3", "4", "5"
@@ -163,7 +163,7 @@ public class Faction {
             System.out.printf("It will take %d day%s to max out your rank.\n", days, isPlural);
         // Positive standing gain
         } else {
-            while ((userRank != 0) && (userStanding > standingPerRank[0][0])) {
+            while ((userRank != 0) || (userStanding > standingPerRank[0][0])) {
                 days += 1; // Days increments by 1 each iteration.
                 if (standingPerRank[userRank][0] < userStanding - standingCap) {
                     userStanding -= standingCap; // Decreases the user standing until it reaches the lowest possible standing on that specified rank.
@@ -212,8 +212,9 @@ public class Faction {
         while (true) {
             Format.printArray(factionSyndicateList, factionSyndicateMin);
             Format.printSyndicateSelect();
-            int calculateFaction = Format.getUserInput("Choose a faction syndicate",0, factionSyndicateList.length);
-            switch (calculateFaction) {
+            int userInput = Format.getUserInput("Choose a faction syndicate to calculate",0, factionSyndicateList.length);
+            int calculateFaction = userInput - 1;
+            switch (userInput) {
                 case 1:
                     Syndicates.steelMeridian.calculateToConsole();
                     break;

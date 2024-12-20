@@ -1,4 +1,5 @@
 package data;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Format {
@@ -21,30 +22,27 @@ public class Format {
         while (true) {
             try {
                 System.out.printf("%s: >> ", message); 
-                // Sends a message with this format: >> 
+                // Sends an input prompt with this format: >> 
                 userInput = scanner.nextInt(); 
+                scanner.nextLine(); // Absorbs \n.
                 if (userInput >= min && userInput <= max) {
                     break;
                 } else {
-                    scanner.nextLine(); // Absorbs the \n after the user presses enter.
                     inputError(min, max);
                 }
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 scanner.nextLine(); // Absorbs \n.
                 inputError(min, max);
-            }
+            } 
         }
-        scanner.nextLine(); // Absorbs \n.
-        System.out.print("\n"); // Prints an empty space after a successful input.
+        // Prints an empty space after a successful input.
         return userInput;
     }
 
     public static void inputBuffer() {
-        System.out.print(
-            "Press enter to proceed >> "
-        ); // Gives the user time to look at the output.
+        System.out.print("Press enter to proceed >> "); // Gives the user time to look at the output.
         scanner.nextLine(); // Pauses till enter is pressed.
-        System.out.print("\n"); // Prints an empty space after the input buffer.
+        // Prints an empty space after the input buffer.
     }
 
 

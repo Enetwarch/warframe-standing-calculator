@@ -35,9 +35,6 @@ public class Syndicates {
         masteryRank = Format.getUserInput("Enter your mastery rank", 0, 34);
         standingCap += masteryRank * 500;
     } // Asks the user their mastery rank which is important to calculate their standing cap.
-    
-
-
 
 
     /////////////////////////////////////
