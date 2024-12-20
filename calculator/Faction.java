@@ -1,10 +1,8 @@
 package calculator;
-import java.util.ArrayList;
+import data.Format;
+import data.Syndicates;
 import java.util.Arrays;
 import java.util.List;
-import calculator.Standard;
-import data.Syndicates;
-import data.Format;
 
 public class Faction {
 
@@ -22,6 +20,7 @@ public class Faction {
     private static String[] rankNumbers = {"-2", "-1", "-", "0", "1", "2", "3", "4", "5"};
     private static int standingCap = Syndicates.standingCap;
     private static String[] factionSyndicateList = {"Steel Meridian", "Arbiters of Hexis", "Cephalon Suda", "The Perrin Sequence", "Red Veil", "New Loka"};
+    private static int factionSyndicateMin = 1;
     private static double[][] alliedOpposedEnemy = {{1.00, 0, 0, -1.00, 0.50, -0.50}, {0, 1.00, 0.50, -0.50, -1.00, 0}, {0, 0.50, 1.00, 0, -0.50, -1.00}, {-1.00, -0.50, 0, 1.00, 0, 0.50}, {0.50, -1.00, -0.50, 0, 1.00, 0}, {-0.50, 0, -1.00, 0.50, 0, 1.00}};
     private static int userFaction = -1;
     private static int calculateFaction = -1;
@@ -50,7 +49,7 @@ public class Faction {
 
     // Faction and standing calculation methods.
     private static int getFaction() {
-        Format.printArray(factionSyndicateList);
+        Format.printArray(factionSyndicateList, factionSyndicateMin);
         int userInput = Format.getUserInput("Select the syndicate you have pledged to", factionMin, factionMax);
         return userInput; // Collects the pledged faction of the user to find the standing multipliers for each faction.
     }
@@ -211,7 +210,7 @@ public class Faction {
         userFaction = getFaction() - 1;
         Syndicates.makeFactions(); // Only initializes objects now in order to take into account the changes in standing multipliers.
         while (true) {
-            Format.printArray(factionSyndicateList);
+            Format.printArray(factionSyndicateList, factionSyndicateMin);
             Format.printSyndicateSelect();
             int calculateFaction = Format.getUserInput("Choose a faction syndicate",0, factionSyndicateList.length);
             switch (calculateFaction) {
