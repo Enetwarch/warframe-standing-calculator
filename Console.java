@@ -4,20 +4,8 @@ import data.Syndicates;
 
 public class Console {
 
-    private static String[] syndicateOptions = {
-        "Faction Syndicates",
-        "Conclave",
-        "Cephalon Simaris",
-        "Ostron",
-        "The Quills",
-        "Solaris United",
-        "Vox Solaris",
-        "Ventkids",
-        "Entrati",
-        "Necraloid",
-        "The Holdfasts",
-        "Cavia"
-    };
+    private static String[] syndicateOptions = {"Faction Syndicates", "Conclave", "Cephalon Simaris", "Ostron", "The Quills", "Solaris United", "Vox Solaris", "Ventkids", "Entrati", "Necraloid", "The Holdfasts", "Cavia"};
+    // All the syndicates pre-1999 update.
 
 
     ////////////////////////////////////

@@ -71,11 +71,7 @@ public class Standard {
     // Output method #1
     private static void analyzeDaysToMax(int userRank, String[] rankTitles, int userStanding) {
         if (userRank == rankTitles.length) {
-            System.out.printf(
-                """
-                You are already max rank in this syndicate.     
-                """
-            );
+            System.out.print("You are already max rank in this syndicate.\n");
             return; // Quits rank calculation if already maxed.
         }
         int days = 0;
@@ -90,11 +86,7 @@ public class Standard {
             }
         }
         String isPlural = Format.pluralizeDays(days); // Adds an "s" to days if it is more than 1.
-        System.out.printf(
-            """
-            It will take %d day%s to max out your rank with %,d leftover standing.     
-            """, days, isPlural, userStanding
-        );
+        System.out.printf("It will take %d day%s to max out your rank with %,d leftover standing.\n", days, isPlural, userStanding);
     }
 
 
@@ -136,11 +128,7 @@ public class Standard {
         } // Converts the dynamic int array into a normal int array.
         String[] sacrificeNamesArray = sacrificeNames.toArray(new String[0]);
         // Converts the dynamic String array into a normal String array.
-        System.out.print(
-            """
-            Here are the resources you need to sacrifice to reach max rank:     
-            """
-        );
+        System.out.print("Here are the resources you need to sacrifice to reach max rank:\n");
         Format.printResourceArray(sacrificeAmountArray, sacrificeNamesArray);
         // Enumerates all the required sacrifices based on the user rank.
     }
@@ -161,17 +149,9 @@ public class Standard {
         int days = totalStanding / standingCap;
         String isPlural = Format.pluralizeDays(days); // Adds an "s" to days if it is more than 1.
         if (days != 0) {
-            System.out.printf(
-                """ 
-                You have %,d total standing from syndicate standing resources that can last for %,d day%s.     
-                """, totalStanding, days, isPlural
-            ); // Gets printed out when
+            System.out.printf("You have %,d total standing from syndicate standing resources that can last for %,d day%s.\n", totalStanding, days, isPlural);
         } else {
-            System.out.printf(
-                """
-                You have %,d total standing from syndicate standing resources.  
-                """, totalStanding
-            ); // 
+            System.out.printf("You have %,d total standing from syndicate standing resources.\n", totalStanding); // 
         }
     }
 

@@ -18,22 +18,16 @@ public class Faction {
     private int userRank;
     private int userStanding;
     private double standingMultiplier;
-    private static int[][] standingPerRank;
-    private static String[] rankNumbers;
-    private static int standingCap;
-    private static String[] factionSyndicateList;
-    private static double[][] alliedOpposedEnemy;
-    private static int userFaction;
+    ///////////////////////////////////////
+    private static int[][] standingPerRank = {{-44000, 0}, {-22000, 0}, {-5000, 5000}, {0, 5000}, {0, 22000}, {0, 44000}, {0, 70000}, {0, 99000}, {0, 132000}};
+    private static String[] rankNumbers = {"-2", "-1", "-", "0", "1", "2", "3", "4", "5"};
+    private static int standingCap = Syndicates.standingCap;
+    private static String[] factionSyndicateList = {"Steel Meridian", "Arbiters of Hexis", "Cephalon Suda", "The Perrin Sequence", "Red Veil", "New Loka"};
+    private static double[][] alliedOpposedEnemy = {{1.00, 0, 0, -1.00, 0.50, -0.50}, {0, 1.00, 0.50, -0.50, -1.00, 0}, {0, 0.50, 1.00, 0, -0.50, -1.00}, {-1.00, -0.50, 0, 1.00, 0, 0.50}, {0.50, -1.00, -0.50, 0, 1.00, 0}, {-0.50, 0, -1.00, 0.50, 0, 1.00}};
+    private static int userFaction = -1;
     private static int calculateFaction;
 
-    public Faction(
-        String syndicateName, 
-        String[] rankTitles, 
-        String[][] rankSacrificeNames, 
-        int[][] rankSacrificeAmount, 
-        String[] resourceNames, 
-        int[] resourceStanding
-        ) {
+    public Faction(String syndicateName, String[] rankTitles, String[][] rankSacrificeNames, int[][] rankSacrificeAmount, String[] resourceNames, int[] resourceStanding) {
         this.syndicateName = syndicateName;
         this.rankTitles = rankTitles;
         this.rankSacrificeNames = rankSacrificeNames;
@@ -44,36 +38,6 @@ public class Faction {
         this.userRank = 2;
         this.userStanding = 0;
         this.standingMultiplier = 0;
-        Faction.standingPerRank = new int[][]{
-            {-44000, 0},
-            {-22000, 0},
-            {-5000, 5000},
-            {0, 5000},
-            {0, 22000},
-            {0, 44000},
-            {0, 70000},
-            {0, 99000},
-            {0, 132000}    
-        };
-        Faction.rankNumbers = new String[]{"-2", "-1", "-", "0", "1", "2", "3", "4", "5"};
-        Faction.standingCap = Syndicates.standingCap;
-        Faction.factionSyndicateList = new String[]{
-            "Steel Meridian",
-            "Arbiters of Hexis",
-            "Cephalon Suda",
-            "The Perrin Sequence",
-            "Red Veil",
-            "New Loka"
-        };
-        Faction.alliedOpposedEnemy = new double[][]{
-            {1.00, 0, 0, -1.00, 0.50, -0.50},
-            {0, 1.00, 0.50, -0.50, -1.00, 0},
-            {0, 0.50, 1.00, 0, -0.50, -1.00},
-            {-1.00, -0.50, 0, 1.00, 0, 0.50},
-            {0.50, -1.00, -0.50, 0, 1.00, 0},
-            {-0.50, 0, -1.00, 0.50, 0, 1.00}
-        };
-        Faction.userFaction = -1;
         Faction.calculateFaction = -1;
     }
 
@@ -191,6 +155,7 @@ public class Faction {
     }
 
 
+    
     /////////////////////////////////////
 
 
@@ -233,9 +198,6 @@ public class Faction {
     }
 
     private static void getAnalysis() {
-        analyzeDaysToMax(
-
-        );
     }
 
 

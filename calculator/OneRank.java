@@ -1,6 +1,5 @@
 package calculator;
 import data.Format;
-import data.Syndicates;
 
 public class OneRank {
     private String syndicateName;
@@ -29,11 +28,8 @@ public class OneRank {
     // Output method
     private static void analyzeDaysToMax(int userStanding, int maxStanding) {
         if (userStanding == maxStanding) {
-            System.out.printf(
-                """
-                You are already at max standing. 
-                """  
-            ); // Stops any further calculations since standing is already maxed.
+            System.out.print("You are already at max standing.\n"); 
+            // Stops any further calculations since standing is already maxed.
             return; // Stops the method.
         }
         int days = 0;
@@ -43,11 +39,8 @@ public class OneRank {
             userStanding += standingCap;
         }
         String isPlural = Format.pluralizeDays(days); // Adds "s" to day if it is more than 1.
-        System.out.printf(
-            """
-            It will take %d day%s to max out your standing with %,d leftover standing.     
-            """, days, isPlural, userStanding - maxStanding
-        ); // Outputs the days it takes to reach max standing.
+        System.out.printf("It will take %d day%s to max out your standing with %,d leftover standing.\n", days, isPlural, userStanding - maxStanding); 
+        // Outputs the days it takes to reach max standing.
     }
 
     // Combined output method

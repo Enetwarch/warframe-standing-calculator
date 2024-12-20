@@ -12,12 +12,9 @@ public class Format {
 
     // Input methods
     public static void inputError(int min, int max) {
-        System.out.printf(
-            """
-            Invalid input. Only accepts numbers from %d to %d.
-            """, min, max
-        ); // Gets called by the getUserInput() method. 
-    } // Either the input is out of bounds or it caused an error.
+        System.out.printf("Invalid input. Only accepts numbers from %d to %d.\n", min, max); 
+    }   // Gets called by the getUserInput() method. 
+    // Either the input is out of bounds or it caused an error.
     
     public static int getUserInput(String message, int min, int max) {
         int userInput = -1; // Temporary user input.
@@ -38,6 +35,7 @@ public class Format {
             }
         }
         scanner.nextLine(); // Absorbs \n.
+        System.out.print("\n"); // Prints an empty space after a successful input.
         return userInput;
     }
 
@@ -46,6 +44,7 @@ public class Format {
             "Press enter to proceed >> "
         ); // Gives the user time to look at the output.
         scanner.nextLine(); // Pauses till enter is pressed.
+        System.out.print("\n"); // Prints an empty space after the input buffer.
     }
 
 
@@ -76,22 +75,16 @@ public class Format {
     // Print methods
     public static void printArray(String[] list, int min) {
         for (int i = 0; i < list.length; i++) {
-            System.out.printf(
-                """
-                %d. %s     
-                """, i + min, list[i]
-            ); // Prints the given array with numbered bullets.
+            System.out.printf("%d. %s\n", i + min, list[i]); 
+            // Prints the given array with numbered bullets.
         } // The number starts with the minimum value given.
     }
 
     public static void printResourceArray(int[] amount, String[] name) {
         pluralizeNames(amount,name);
         for (int i = 0; i < name.length; i++) {
-            System.out.printf(
-                """
-                - %,d %s
-                """, amount[i], name[i]
-            ); // Prints the given array with dash bullets.
+            System.out.printf("- %,d %s\n", amount[i], name[i]); 
+            // Prints the given array with dash bullets.
         } // Also prints the amount of the item.
     }
 
@@ -101,27 +94,15 @@ public class Format {
 
     // Exit methods
     public static void printSyndicateSelect() {
-        System.out.print(
-            """
-            0. Return to syndicate select.     
-            """ // To exit the faction syndicate loop.
-        );
-    }
+        System.out.print("0. Return to syndicate select.\n"); 
+    } // To exit the faction syndicate loop.
 
     public static void printExitProgram() {
-        System.out.print(
-            """
-            0. Exit program     
-            """ // To exit the program.
-        );
-    }
+        System.out.print("0. Exit program\n");
+    }  // To exit the program.
 
     public static void terminateProgram() {
-        System.out.print(
-            """
-            Program terminated.
-            """ 
-        );
+        System.out.print("Program terminated.\n");
         scanner.close(); // Closes the scanner to prevent resource leakage.
         System.exit(0); // Terminates the program.
     }
