@@ -59,7 +59,7 @@ public class Console {
                 break; // The Hex syndicate uses Standard calculations. 
             case 0: 
                 Format.terminateProgram(); // Terminates program.
-        } // The break;s prevent the program from "falling" through the switch case structure.
+        } // The breaks prevent the program from "falling" through the switch case structure.
     }
 
 
