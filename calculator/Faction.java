@@ -79,12 +79,12 @@ public class Faction {
         } else {
             positiveOrNegative = "negatively";
         }
-        System.out.printf("You are pledged to %s, which %s affects your standing with %s by %d%%.\n", factionSyndicateList[userFaction], positiveOrNegative, factionSyndicateList[calculateFaction], alliedOpposedEnemy[userFaction][calculateFaction] * 100);
+        System.out.printf("Your pledge to %s %s affects your standing with %s by %.0f%%.\n", factionSyndicateList[userFaction], positiveOrNegative, factionSyndicateList[calculateFaction], alliedOpposedEnemy[userFaction][calculateFaction] * 100);
     } // Used for printing negative or positive standing as well as the percentage of standing gain. 
     // Will be used after checkMultiplier() in analyzeStanding().
 
     private static void printNeutralStandingGain(int calculateFaction) {
-        System.out.printf("You are pledged to %s, which does not affect %s standing.\n", factionSyndicateList[userFaction], factionSyndicateList[calculateFaction]);
+        System.out.printf("Your pledge to %s  does not affect %s standing.\n", factionSyndicateList[userFaction], factionSyndicateList[calculateFaction]);
     } // Called by checkMultiplier() if the standings in the syndicate will not change.
 
 
