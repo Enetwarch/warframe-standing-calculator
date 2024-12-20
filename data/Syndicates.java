@@ -217,7 +217,7 @@ public class Syndicates {
         // Bounties are the best way to gain standing. Weeklies like Netracells and Elite Deep Archimedea also give standing.
 
 
-        ///////////////////
+        //////////////////////
 
 
         theHex = new Standard(

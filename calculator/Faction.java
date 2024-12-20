@@ -16,7 +16,6 @@ public class Faction {
     private int userStanding;
     private double standingMultiplier;
     private int calculateFaction;
-
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private static int[][] standingPerRank = {{-44000, 0}, {-22000, 0}, {-5000, 5000}, {0, 5000}, {0, 22000}, {0, 44000}, {0, 70000}, {0, 99000}, {0, 132000}};
     private static String[] rankNumbers = {"-2", "-1", "-", "0", "1", "2", "3", "4", "5"};
@@ -190,7 +189,7 @@ public class Faction {
     // The analyzeExcessStanding() method from calculator.Standard works perfectly fine for faction syndicates.
 
 
-    /////////////////////////////////
+    //////////////////////////////////
 
 
     // Final method

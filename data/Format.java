@@ -79,7 +79,7 @@ public class Format {
     }
 
     public static void printResourceArray(int[] amount, String[] name) {
-        pluralizeNames(amount,name);
+        pluralizeNames(amount, name);
         for (int i = 0; i < name.length; i++) {
             System.out.printf("- %,d %s\n", amount[i], name[i]); 
             // Prints the given array with dash bullets.
