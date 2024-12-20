@@ -43,12 +43,6 @@ public class OneRank {
         // Outputs the days it takes to reach max standing.
     }
 
-    // Combined output method
-    private static void getAnalysis(int userStanding, int maxStanding) {
-        analyzeDaysToMax(userStanding, maxStanding);
-        Format.inputBuffer();
-    } // Creates an input buffer to let the user see the output first before proceeding.
-
 
     //////////////////////////////////
 
@@ -56,7 +50,8 @@ public class OneRank {
     // Final method
     public void calculateToConsole() {
         this.userStanding = getStanding(this.syndicateName, this.maxStanding);
-        getAnalysis(this.userStanding, this.maxStanding);
-    } // Combines all the methods
+        analyzeDaysToMax(this.userStanding, this.maxStanding);
+        Format.inputBuffer();
+    } // Combines all the methods into one.
 
 }

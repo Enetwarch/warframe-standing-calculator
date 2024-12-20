@@ -39,7 +39,7 @@ public class Standard {
     }
 
 
-    ////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     // Input methods
@@ -70,12 +70,12 @@ public class Standard {
 
     // Output method #1
     private static void analyzeDaysToMax(int userRank, String[] rankTitles, int userStanding) {
-        if (userRank == rankTitles.length) {
+        if (userRank == rankTitles.length - 1) {
             System.out.print("You are already max rank in this syndicate.\n");
             return; // Quits rank calculation if already maxed.
         }
         int days = 0;
-        while (userRank != rankTitles.length) {
+        while (userRank != rankTitles.length - 1) {
             days += 1;
             // Increases days by 1 for each iteration.
             if (standingPerRank[userRank] > userStanding + standingCap) {
@@ -86,7 +86,7 @@ public class Standard {
             }
         }
         String isPlural = Format.pluralizeDays(days); // Adds an "s" to days if it is more than 1.
-        System.out.printf("It will take %d day%s to max out your rank with %,d leftover standing.\n", days, isPlural, userStanding);
+        System.out.printf("It will take %d day%s to max out your rank.\n", days, isPlural);
     }
 
 
@@ -94,7 +94,7 @@ public class Standard {
 
 
     // Output method #2
-    private static void analyzeResourcesToMax(int userRank, String[] rankTitles, String[][] rankSacrificeNames, int[][] rankSacrificeAmount) {
+    public static void analyzeResourcesToMax(int userRank, String[] rankTitles, String[][] rankSacrificeNames, int[][] rankSacrificeAmount) {
         if (rankSacrificeNames.length == 0) {
             return; // Returns if there is no sacrifice resources required at all.
         } else if (userRank == rankTitles.length - 1) {
@@ -138,7 +138,7 @@ public class Standard {
 
 
     // Output method #3
-    private static void analyzeExcessStanding(int[] resourceOwned, int[] resourceStanding) {
+    public static void analyzeExcessStanding(int[] resourceOwned, int[] resourceStanding) {
         if (resourceOwned.length == 0) {
             return; // Exits out of the method if there are no resources for that particular syndicate.
         }
@@ -159,21 +159,16 @@ public class Standard {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    // Final output method
-    public static void getAnalysis(int userRank, String[] rankTitles, int userStanding, String[][] rankSacrificeNames, int[][] rankSacrificeAmount, int[] resourceOwned, int[] resourceStanding) {
-        analyzeDaysToMax(userRank, rankTitles, userStanding);
-        analyzeResourcesToMax(userRank, rankTitles, rankSacrificeNames, rankSacrificeAmount);
-        analyzeExcessStanding(resourceOwned, resourceStanding);
-        Format.inputBuffer();
-    } // Combines all the output methods into one big method.
-
     // Final method
     public void calculateToConsole(){
         this.userRank = getRank(this.rankTitles, this.syndicateName, rankMin, this.rankMax);
         this.standingMax = standingPerRank[userRank]; // Initializes instance variable for the next method.
         this.userStanding = getStanding(this.syndicateName, standingPerRank, this.userRank, standingMin, this.standingMax);
         this.resourceOwned = getResources(this.resourceNames, resourceMin, resourceMax);
-        getAnalysis(this.userRank, this.rankTitles, this.userStanding, this.rankSacrificeNames, this.rankSacrificeAmount, this.resourceOwned, this.resourceStanding);
+        analyzeDaysToMax(this.userRank, this.rankTitles, this.userStanding);
+        analyzeResourcesToMax(this.userRank, this.rankTitles, this.rankSacrificeNames, this.rankSacrificeAmount);
+        analyzeExcessStanding(this.resourceOwned, this.resourceStanding);
+        Format.inputBuffer();
     } // Combines all the methods together.
 
 }

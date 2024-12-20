@@ -20,6 +20,7 @@ public class Console {
             case 1: 
                 Faction.factionSyndicates();
                 break; // Faction Syndicates uses Faction calculations.
+                // They have a separate loop located at calculator.Faction.
             case 2: 
                 Syndicates.conclave.calculateToConsole();
                 break; // Conclave syndicate uses Standard calculations.
