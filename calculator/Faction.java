@@ -13,7 +13,6 @@ public class Faction {
     private String[][] rankSacrificeNames;
     private int[][] rankSacrificeAmount;
     private String[] resourceNames;
-    private int[] resourceStanding;
     private int[] resourceOwned;
     private int userRank;
     private int userStanding;
@@ -28,17 +27,17 @@ public class Faction {
     private static int calculateFaction = -1;
     private static int factionMin = 1;
     private static int factionMax = factionSyndicateList.length;
+    private static int[] resourceStanding = {500, 1000, 5000}; // All faction syndicate medallions have the same standing gain, only different names.
     private static int resourceMin = 0;
     private static int resourceMax = Integer.MAX_VALUE;
 
-    public Faction(String syndicateName, String[] rankTitles, String[][] rankSacrificeNames, int[][] rankSacrificeAmount, String[] resourceNames, int[] resourceStanding) {
+    public Faction(String syndicateName, String[] rankTitles, String[][] rankSacrificeNames, int[][] rankSacrificeAmount, String[] resourceNames) {
         // Constructor for faction syndicates.
         this.syndicateName = syndicateName;
         this.rankTitles = rankTitles;
         this.rankSacrificeNames = rankSacrificeNames;
         this.rankSacrificeAmount = rankSacrificeAmount;
         this.resourceNames = resourceNames;
-        this.resourceStanding = resourceStanding;
         this.resourceOwned = new int[resourceNames.length];
         this.userRank = 2;
         this.userStanding = 0;
@@ -200,7 +199,7 @@ public class Faction {
         this.resourceOwned = Standard.getResources(this.resourceNames, resourceMin, resourceMax);
         analyzeDaysToMax(this.standingMultiplier, this.userRank, this.rankTitles, this.userStanding, userFaction, calculateFaction);
         Standard.analyzeResourcesToMax(this.userRank, this.rankTitles, this.rankSacrificeNames, this.rankSacrificeAmount);
-        Standard.analyzeExcessStanding(this.resourceOwned, this.resourceStanding);
+        Standard.analyzeExcessStanding(this.resourceOwned, resourceStanding);
         Format.inputBuffer();
     } // Combines all the methods together into one big method.
 

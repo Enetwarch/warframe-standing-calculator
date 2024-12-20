@@ -1,4 +1,5 @@
 package data;
+import calculator.Faction;
 import calculator.OneRank;
 import calculator.Standard;
 
@@ -6,6 +7,12 @@ public class Syndicates {
     
     public static int masteryRank = -1;
     public static int standingCap = 16000;
+    public static Faction steelMeridian;
+    public static Faction arbitersOfHexis;
+    public static Faction cephalonSuda;
+    public static Faction thePerrinSequence;
+    public static Faction redVeil;
+    public static Faction newLoka;
     public static Standard conclave;
     public static OneRank cephalonSimaris;
     public static Standard ostron;
@@ -23,20 +30,23 @@ public class Syndicates {
     /////////////////////////////////////
 
 
-    // Important user input
+    // Important user input method
     public static void getMasteryRank() {
         masteryRank = Format.getUserInput("Enter your mastery rank", 0, 34);
         standingCap += masteryRank * 500;
     } // Asks the user their mastery rank which is important to calculate their standing cap.
     
 
+
+
+
     /////////////////////////////////////
 
 
-    // Initialization method
+    // Initialization method for Standard and OneRank syndicates.
     public static void makeSyndicates() {
         // Made to take into account the updated value of standing cap.
-        // Gets called after getMasteryRank() method.
+        // Gets called after the getMasteryRank() method.
 
         // These will be the format for each object.
 
@@ -48,14 +58,6 @@ public class Syndicates {
          *      new int[][] rankSacrificeAmount
          *      new String[] resourceNames
          *      new int[] resourceStanding
-         * );
-         */
-
-        // calculator.Faction
-        /* syndicateName = new Faction(
-         *      Placeholder
-         *      Placeholder
-         *      Placeholder
          * );
          */
 
@@ -215,6 +217,99 @@ public class Syndicates {
             new int[]{500, 1000, 2000} // resourceStanding
         ); // Voca will be required to rank up in this syndicate. Just like Voidplumes, there are 8 of them spread throughout every mission.
         // Bounties are the best way to gain standing. Weeklies like Netracells and Elite Deep Archimedea also give standing.
+
+    }
+
+
+    ///////////////////////////////////
+
+
+    // Initialization method for Faction syndicates.
+    public static void makeFactions() {
+        // Made to take into account the updated value of userFaction.
+        // Gets called after the getFaction() method.
+
+        // calculator.Faction
+        /* syndicateName = new Faction(
+         *      String syndicateName,
+         *      String[] rankTitles,
+         *      String[][] rankSacrificeNames,
+         *      int[][] rankSacrificeAmount,
+         *      String[] resourceNames,
+         * );
+         */
+
+
+        ////////////////////////////
+
+
+        steelMeridian = new Faction(
+            "Steel Meridian", // syndicateName
+            new String[]{"Enemy", "Outcast", "Neutral", "Initiation", "Brave", "Valiant", "Defender", "Protector", "General"}, // rankTitles
+            new String[][]{{"Orokin Catalyst", "Credit"}, {"Forma", "Credit"}, {"Salvage", "Credit"}, {"Morphic", "Credit"}, {"Forma", "Credit"}, {"Orokin Catalyst", "Credit"}, {"Aya", "Credit"}, {"Aya", "Credit"}}, // rankSacrificeNames
+            new int[][]{{1, 100000}, {1, 50000}, {1000, 10000}, {2, 30000}, {1, 50000}, {1, 100000}, {2, 250000}, {3, 500000}}, // rankSacrificeAmount
+            new String[]{"Insignia", "Defender Insignia", "General Insignia"} // resourceNames
+        );
+
+
+        //////////////////////////////
+
+
+        arbitersOfHexis = new Faction(
+            "Arbiters of Hexis", // syndicateName
+            new String[]{"Fraud", "Deceiver", "Neutral", "Initiation", "Principled", "Authentic", "Lawful", "Crusader", "Maxim"}, // rankTitles
+            new String[][]{{"Orokin Reactor", "Credit"}, {"Forma", "Credit"}, {"Alloy Plate", "Credit"}, {"Gallium", "Credit"}, {"Forma", "Credit"}, {"Orokin Reactor", "Credit"}, {"Aya", "Credit"}, {"Aya", "Credit"}}, // rankSacrificeNames
+            new int[][]{{1, 100000}, {1, 50000}, {500, 10000}, {2, 30000}, {1, 50000}, {1, 100000}, {2, 250000}, {3, 500000}}, // rankSacrificeAmount
+            new String[]{"Medallion", "Lawful Medallion", "Maxim Medallion"} // resourceNames
+        );
+
+
+        ///////////////////////////
+
+
+        cephalonSuda = new Faction(
+            "Cephalon Suda", // syndicateName
+            new String[]{"Waste", "Debris", "Neutral", "Initiation", "Competent", "Intriguing", "Intelligent", "Wise", "Genius"}, // rankTitles
+            new String[][]{{"Orokin Catalyst", "Credit"}, {"Forma", "Credit"}, {"Circuit", "Credit"}, {"Control Module", "Credit"}, {"Forma", "Credit"}, {"Orokin Catalyst", "Credit"}, {"Aya", "Credit"}, {"Aya", "Credit"}}, // rankSacrificeNames
+            new int[][]{{1, 100000}, {1, 50000}, {500, 10000}, {2, 30000}, {1, 50000}, {1, 100000}, {2, 250000}, {3, 500000}}, // rankSacrificeAmount
+            new String[]{"Datum", "Intriguin Datum", "Genius Datum"} // resourceNames
+        );
+
+
+        ////////////////////////////////
+
+
+        thePerrinSequence = new Faction(
+            "The Perrin Sequence", // syndicateName
+            new String[]{"Write-Off", "Liability", "Neutral", "Initiation", "Associate", "Senior Associate", "Executive", "Senior Executive", "Partner"}, // rankTitles
+            new String[][]{{"Orokin Reactor", "Credit"}, {"Forma", "Credit"}, {"Polymer Bundle", "Credit"}, {"Detonite Ampule", "Credit"}, {"Forma", "Credit"}, {"Orokin Reactor", "Credit"}, {"Aya", "Credit"}, {"Aya", "Credit"}}, // rankSacrificeNames
+            new int[][]{{1, 100000}, {1, 50000}, {100, 10000}, {2, 30000}, {1, 50000}, {1, 100000}, {2, 250000}, {3, 500000}}, // rankSacrificeAmount
+            new String[]{"Quittance", "Executive Quittance", "Partner Quittance"} // resourceNames
+        );
+        
+
+        //////////////////////
+
+
+        redVeil = new Faction(
+            "Red Veil", // syndicateName
+            new String[]{"Corrupt", "Suspect", "Neutral", "Initiation", "Respected", "Honored", "Esteemed", "Revered", "Exalted"}, // rankTitles
+            new String[][]{{"Orokin Catalyst", "Credit"}, {"Forma", "Credit"}, {"Alloy Plate", "Credit"}, {"Gallium", "Credit"}, {"Forma", "Credit"}, {"Orokin Catalyst", "Credit"}, {"Aya", "Credit"}, {"Aya", "Credit"}}, // rankSacrificeNames
+            new int[][]{{1, 100000}, {1, 50000}, {500, 10000}, {2, 30000}, {1, 50000}, {1, 100000}, {2, 250000}, {3, 500000}}, // rankSacrificeAmount
+            new String[]{"Mark", "Honored Mark", "Exalted Mark"} // resourceNames
+        );
+        
+
+        //////////////////////
+
+
+        newLoka = new Faction(
+            "New Loka", // syndicateName
+            new String[]{"Exiled", "Condemned", "Neutral", "Initiation", "Humane", "Bountiful", "Benevolent", "Pure", "Flawless"}, // rankTitles
+            new String[][]{{"Orokin Reactor", "Credit"}, {"Forma", "Credit"}, {"Ferrite", "Credit"}, {"Fieldron Sample", "Credit"}, {"Forma", "Credit"}, {"Orokin Reactor", "Credit"}, {"Aya", "Credit"}, {"Aya", "Credit"}}, // rankSacrificeNames
+            new int[][]{{1, 100000}, {1, 50000}, {1000, 10000}, {2, 30000}, {1, 50000}, {1, 100000}, {2, 250000}, {3, 500000}}, // rankSacrificeAmount
+            new String[]{"Seed", "Bountiful Seed", "Flawless Seed"} // resourceNames
+        );
 
     }
 
