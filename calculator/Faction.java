@@ -15,6 +15,8 @@ public class Faction {
     private int userRank;
     private int userStanding;
     private double standingMultiplier;
+    private int calculateFaction;
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private static int[][] standingPerRank = {{-44000, 0}, {-22000, 0}, {-5000, 5000}, {0, 5000}, {0, 22000}, {0, 44000}, {0, 70000}, {0, 99000}, {0, 132000}};
     private static String[] rankNumbers = {"-2", "-1", "-", "0", "1", "2", "3", "4", "5"};
@@ -22,13 +24,12 @@ public class Faction {
     private static String[] factionSyndicateList = {"Steel Meridian", "Arbiters of Hexis", "Cephalon Suda", "The Perrin Sequence", "Red Veil", "New Loka"};
     private static int factionSyndicateMin = 1;
     private static double[][] alliedOpposedEnemy = {{1.00, 0, 0, -1.00, 0.50, -0.50}, {0, 1.00, 0.50, -0.50, -1.00, 0}, {0, 0.50, 1.00, 0, -0.50, -1.00}, {-1.00, -0.50, 0, 1.00, 0, 0.50}, {0.50, -1.00, -0.50, 0, 1.00, 0}, {-0.50, 0, -1.00, 0.50, 0, 1.00}};
-    private static int userFaction = -1;
-    private static int calculateFaction = -1;
     private static int factionMin = 1;
     private static int factionMax = factionSyndicateList.length - 1;
     private static int[] resourceStanding = {500, 1000, 5000}; // All faction syndicate medallions have the same standing gain, only different names.
     private static int resourceMin = 0;
     private static int resourceMax = Integer.MAX_VALUE;
+    private static int userFaction = -1;
 
     public Faction(String syndicateName, String[] rankTitles, String[][] rankSacrificeNames, int[][] rankSacrificeAmount, String[] resourceNames) {
         // Constructor for faction syndicates.
@@ -41,6 +42,7 @@ public class Faction {
         this.userRank = 2;
         this.userStanding = 0;
         this.standingMultiplier = 0;
+        this.calculateFaction = Arrays.asList(factionSyndicateList).indexOf(this.syndicateName);
     }
 
 
@@ -54,7 +56,7 @@ public class Faction {
         return userInput - 1; // Collects the pledged faction of the user to find the standing multipliers for each faction.
     }
 
-    private static double calculateStandingMultiplier() {
+    private static double calculateStandingMultiplier(int calculateFaction) {
         return alliedOpposedEnemy[userFaction][calculateFaction];
     } // Selects the inner array and double that corresponds to the pledged faction and selected faction up for calculation.
 
@@ -70,18 +72,18 @@ public class Faction {
     } // This is because faction syndicates have a Neutral rank, which isn't counted as a number.
     // Here are the rank numbers: "-2", "-1", "-" <<-- Neutral , "0", "1", "2", "3", "4", "5"
 
-    private static void printStandingGain(double standingMultiplier) {
+    private static void printStandingGain(double standingMultiplier, int calculateFaction) {
         String positiveOrNegative;
         if (standingMultiplier > 0) {
             positiveOrNegative = "positively";
         } else {
             positiveOrNegative = "negatively";
         }
-        System.out.printf("You are pledged to %s, which %s affects your standing with %s by %f%.\n", factionSyndicateList[userFaction], factionSyndicateList[calculateFaction]);
+        System.out.printf("You are pledged to %s, which %s affects your standing with %s by %d%%.\n", factionSyndicateList[userFaction], positiveOrNegative, factionSyndicateList[calculateFaction], alliedOpposedEnemy[userFaction][calculateFaction] * 100);
     } // Used for printing negative or positive standing as well as the percentage of standing gain. 
     // Will be used after checkMultiplier() in analyzeStanding().
 
-    private static void printNeutralStandingGain() {
+    private static void printNeutralStandingGain(int calculateFaction) {
         System.out.printf("You are pledged to %s, which does not affect %s standing.\n", factionSyndicateList[userFaction], factionSyndicateList[calculateFaction]);
     } // Called by checkMultiplier() if the standings in the syndicate will not change.
 
@@ -94,6 +96,7 @@ public class Faction {
         printArray(rankNumbers, rankTitles);
         List<String> validRanks = Arrays.asList(rankNumbers); 
         // Makes a list of all valid ranks for input validation.
+        System.out.printf("%s rank: >> ", syndicateName);
         String userInput = Format.scanner.nextLine();
         while (true) { // Stays in the loop until the user inputs a valid input.
             if (validRanks.contains(userInput)) {
@@ -118,14 +121,14 @@ public class Faction {
     // Output method #1
     private static void analyzeDaysToMax(double standingMultiplier, int userRank, String[] rankTitles, int userStanding, int userFaction, int calculateFaction) {
         if (standingMultiplier == 0) {
-            printNeutralStandingGain();
+            printNeutralStandingGain(calculateFaction);
             return; // Neutral standing will not run analyzeDaysToMax() 
         } else if (standingMultiplier > 0) {
             if (userRank == rankTitles.length - 1) {
                 System.out.print("You are already max rank in this syndicate.\n");
                 return; // Quits rank calculation if already maxed.
             }
-            printStandingGain(standingMultiplier);
+            printStandingGain(standingMultiplier, calculateFaction);
             calculateDaysToMaxOrLow(userRank, rankTitles, userStanding, userFaction, calculateFaction, standingMultiplier, true);
             // Positive standing gain
         } else if (standingMultiplier < 0) {
@@ -137,7 +140,7 @@ public class Faction {
                 System.out.print("You are already at the lowest rank and standing in this syndicate.\n");
                 return; // Returns if the printed statement is true.
             } 
-            printStandingGain(standingMultiplier);
+            printStandingGain(standingMultiplier, calculateFaction);
             calculateDaysToMaxOrLow(userRank, rankTitles, userStanding, userFaction, calculateFaction, standingMultiplier, false);
             // Negative standing gain
         }
@@ -192,11 +195,11 @@ public class Faction {
 
     // Final method
     public void calculateToConsole() {
-        this.standingMultiplier = calculateStandingMultiplier();
+        this.standingMultiplier = calculateStandingMultiplier(this.calculateFaction);
         this.userRank = getRank(this.rankTitles, this.syndicateName);
         this.userStanding = getStanding(this.syndicateName, standingPerRank, this.userRank);
         this.resourceOwned = Standard.getResources(this.resourceNames, resourceMin, resourceMax);
-        analyzeDaysToMax(this.standingMultiplier, this.userRank, this.rankTitles, this.userStanding, userFaction, calculateFaction);
+        analyzeDaysToMax(this.standingMultiplier, this.userRank, this.rankTitles, this.userStanding, userFaction, this.calculateFaction);
         Standard.analyzeResourcesToMax(this.userRank, this.rankTitles, this.rankSacrificeNames, this.rankSacrificeAmount);
         Standard.analyzeExcessStanding(this.resourceOwned, resourceStanding);
         Format.inputBuffer();
@@ -212,7 +215,6 @@ public class Faction {
             Format.printArray(factionSyndicateList, factionSyndicateMin);
             Format.printSyndicateSelect();
             int userInput = Format.getUserInput("Choose a faction syndicate to calculate",0, factionSyndicateList.length);
-            int calculateFaction = userInput - 1;
             Syndicates.makeFactions(); // Only initializes objects now in order to take into account the changes in standing multipliers.
             switch (userInput) {
                 case 1:

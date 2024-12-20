@@ -148,9 +148,9 @@ public class Standard {
         } // Calculates the total amount of standing based on the standing gain of each resource owned.
         int days = totalStanding / standingCap;
         String isPlural = Format.pluralizeDays(days); // Adds an "s" to days if it is more than 1.
-        if (days != 0) {
+        if (days != 0) { // Prints out both total standing and days, if total stnading is high enough.
             System.out.printf("You have %,d total standing from syndicate standing resources that can last for %,d day%s.\n", totalStanding, days, isPlural);
-        } else {
+        } else { // Only prints out total standing if it cannot last for even a day.
             System.out.printf("You have %,d total standing from syndicate standing resources.\n", totalStanding); // 
         }
     }
