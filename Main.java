@@ -2,28 +2,29 @@ import data.Data;
 import util.Utility;
 public class Main {
     private static final String[] SYNDICATE_OPTIONS = {
-        Data.FACTION_SYNDICATES,
-        Data.CONCLAVE,
-        Data.CEPHALON_SIMARIS,
-        Data.OSTRON,
-        Data.THE_QUILLS,
-        Data.SOLARIS_UNITED,
-        Data.VOX_SOLARIS,
-        Data.VENTKIDS,
-        Data.ENTRATI,
-        Data.NECRALOID,
-        Data.THE_HOLDFASTS,
-        Data.CAVIA,
-        Data.THE_HEX
+        Data.Syndicates.FACTION_SYNDICATES.getSyndicate(),
+        Data.Syndicates.CONCLAVE.getSyndicate(),
+        Data.Syndicates.CEPHALON_SIMARIS.getSyndicate(),
+        Data.Syndicates.OSTRON.getSyndicate(),
+        Data.Syndicates.THE_QUILLS.getSyndicate(),
+        Data.Syndicates.SOLARIS_UNITED.getSyndicate(),
+        Data.Syndicates.VOX_SOLARIS.getSyndicate(),
+        Data.Syndicates.VENTKIDS.getSyndicate(),
+        Data.Syndicates.ENTRATI.getSyndicate(),
+        Data.Syndicates.NECRALOID.getSyndicate(),
+        Data.Syndicates.THE_HOLDFASTS.getSyndicate(),
+        Data.Syndicates.CAVIA.getSyndicate(),
+        Data.Syndicates.THE_HEX.getSyndicate()
     }; // All syndicates after the 1999 update.
     private static final String[] FACTION_OPTIONS = {
-        Data.STEEL_MERIDIAN,
-        Data.ARBITERS_OF_HEXIS,
-        Data.CEPHALON_SUDA,
-        Data.THE_PERRIN_SEQUENCE,
-        Data.RED_VEIL,
-        Data.NEW_LOKA
+        Data.Syndicates.STEEL_MERIDIAN.getSyndicate(),
+        Data.Syndicates.ARBITERS_OF_HEXIS.getSyndicate(),
+        Data.Syndicates.CEPHALON_SUDA.getSyndicate(),
+        Data.Syndicates.THE_PERRIN_SEQUENCE.getSyndicate(),
+        Data.Syndicates.RED_VEIL.getSyndicate(),
+        Data.Syndicates.NEW_LOKA.getSyndicate()
     }; // All faction syndcates.
+    // Planning to improve enum knowledge to sort these arrays out without repetition of code.
     private static final int SYNDICATE_OPTIONS_MIN = 0;
     private static final int SYNDICATE_OPTIONS_MAX = SYNDICATE_OPTIONS.length;
     private static final int FACTION_OPTIONS_MIN = 0;
