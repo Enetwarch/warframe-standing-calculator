@@ -42,4 +42,37 @@ public class Utility {
         }
     }
 
+    public static void inputBuffer() {
+        // Gives a delay to the program to give the user time to read the printed outputs. 
+        scanner.nextLine(); // Absorbs the "enter" or \n from the user's input.
+        System.out.print("Press enter to proceed. ");
+        scanner.nextLine(); // Actual user input.
+        System.out.print("\n");
+        // Leaves a total of two enter spaces (one empty line).
+    }
+
+    ///////////////////////////////////////////////////////
+    /// OUTPUT METHODS 
+
+    public static void printNumberedArray(String[] array) {
+        // Prints an entire array in ordered sequence from [1] to [array.length]
+        for (int i = 0; i < array.length; i++) {
+            // Iterates through the entire array.
+            System.out.printf("[%d] %s\n", i + 1, array[i]);
+            // Prints the array in ordered sequence and with numbers.
+        }
+    }
+
+    public static void terminateProgram() {
+        System.out.print(
+            """
+            Thank you for using Warframe Standing Calculator!
+            Code by: Enetwarch     
+            """
+        );
+        scanner.close(); // Closes scanner.
+        System.exit(0); // Exits program.
+        // Will be called when the user exits the program.
+    }
+
 }
