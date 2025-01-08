@@ -49,9 +49,11 @@ public class Utility {
         System.out.printf("Input error. Only accepts these values: "); // Error message.
         for (int i = 0; i < validInputs.length - 1; i++) {
             // Prints all the valid inputs in this format: 0, 1, 2, 3, 4, 
-            System.out.printf("%s, ", validInputs[i]); 
+            String validInput = validInputs[i];
+            System.out.printf("%s, ", validInput); 
         }
-        System.out.printf("and %s.\n", validInputs[validInputs.length - 1]);
+        String lastValidInput = validInputs[validInputs.length - 1];
+        System.out.printf("and %s.\n", lastValidInput);
         // Makes the format finish off with 0, 1, 2, 3, 4, and 5.\n
     }
 

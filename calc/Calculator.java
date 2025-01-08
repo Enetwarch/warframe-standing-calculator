@@ -108,7 +108,9 @@ public class Calculator {
         String[] validRanks = new String[rankRecord.length];
         for (int i = 0; i < rankRecord.length; i++) {
             // Simultaneously prints the ranks and stores all rankNumbers inside validRanks for input validation.
-            System.out.printf("[%s] %s\n", rankRecord[i].rankNumber(), rankRecord[i].rankTitle());
+            String rankNumber = rankRecord[i].rankNumber();
+            String rankTitle = rankRecord[i].rankTitle();
+            System.out.printf("[%s] %s\n", rankNumber, rankTitle);
             validRanks[i] = rankRecord[i].rankNumber();
         }
         String userInput = Utility.getUserInputString("Enter your rank", validRanks);
@@ -125,7 +127,7 @@ public class Calculator {
         int validStandingMax = validStandingRange[1];
         // Values for valid standing inputs.
         String rankNumber = rankRecord[userRank].rankNumber();
-        String rankTitle = rankRecord[userRank].rankNumber();
+        String rankTitle = rankRecord[userRank].rankTitle();
         // Rank title and name for printing purposes.
         System.out.printf("Rank [%s] %s: %,d to %,d standing\n", rankNumber, rankTitle, validStandingMin, validStandingMax);
         int userStanding = Utility.getUserInputInt("Enter your standing", validStandingMin, validStandingMax);
@@ -158,22 +160,34 @@ public class Calculator {
         return userResource; // Returns an array that contains all the user's input.
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////
     /// OUTPUT METHODS
 
+    private static void printOutputHeader(int masteryRank, int standingCap, String syndicateName) {
+        System.out.printf(
+            """
+            Mastery Rank: %d
+            Daily Standing Cap: %,d
+            Syndicate output for %s
+            
+            """
+            , masteryRank, standingCap, syndicateName 
+        );
+    }
+
     // calculateDaysToMax Helper method
-    private static void printDaysToMax(String syndicateName, Rank[] rankRecord, int userRank, int userStanding, int daysToMaxRank, int standingToMaxRank, int currentRankMaxStanding, int maxRank) {
+    private static void printDaysToMax(Rank[] rankRecord, int userRank, int userStanding, int currentRankMaxStanding, int daysToMaxRank, int standingToMaxRank) {
         String rankNumber = rankRecord[userRank].rankNumber();
         String rankTitle = rankRecord[userRank].rankTitle();
         String daysToMax = String.format(
             """
-            %s
             Rank: [%s] %s
             Standing: %,d out of %,d
             """
-            , syndicateName, rankNumber, rankTitle, userStanding, currentRankMaxStanding
+            , rankNumber, rankTitle, userStanding, currentRankMaxStanding
         );
         // Basic string format.
+        int maxRank = rankRecord.length - 1;
         if (!(daysToMaxRank + standingToMaxRank == 0)) {
             // Normal case
             String isDayPlural = Utility.pluralizeNoun(daysToMaxRank);
@@ -185,7 +199,6 @@ public class Calculator {
             );
         } else if (userRank == maxRank) {
             // Normal case
-            String isDayPlural = Utility.pluralizeNoun(daysToMaxRank);
             daysToMax += String.format(
                 """
                 You are already max rank.
@@ -200,10 +213,9 @@ public class Calculator {
             );
         }
         System.out.printf("%s\n", daysToMax);
-
     }
 
-    private static void calculateDaysToMax(String syndicateName, int userRank, int userStanding, Rank[] rankRecord, int[][] standingPerRank) {
+    private static void calculateDaysToMax(Rank[] rankRecord, int userRank, int userStanding, int[][] standingPerRank) {
         int maxRank = rankRecord.length - 1;
         int currentRankMaxStanding = standingPerRank[userRank][1];
         // Variable initialization for readability.
@@ -214,7 +226,7 @@ public class Calculator {
             // All they need to do is to sacrifice resources to rank up to max, making it zero days.
             int daysToMaxRank = 0;
             int standingToMaxRank = 0;
-            printDaysToMax(syndicateName, rankRecord, userRank, userStanding, daysToMaxRank, standingToMaxRank, currentRankMaxStanding, maxRank);
+            printDaysToMax(rankRecord, userRank, userStanding, currentRankMaxStanding, daysToMaxRank, standingToMaxRank);
             return;
         }
         int currentRank = userRank;
@@ -232,7 +244,7 @@ public class Calculator {
                 // Occurs when standing is over the max and requires a rank up.
                 currentRank += 1;
                 if (currentRank == maxRank) {
-                    printDaysToMax(syndicateName, rankRecord, userRank, userStanding, daysToMaxRank, standingToMaxRank, currentRankMaxStanding, maxRank);
+                    printDaysToMax(rankRecord, userRank, userStanding, currentRankMaxStanding, daysToMaxRank, standingToMaxRank);
                     return; // Immediately breaks out of the loop if max rank is reached.
                 }
                 currentRankStanding += standingCap - currentRankMaxStanding;
@@ -252,7 +264,8 @@ public class Calculator {
         this.userRank = getRank(this.rankRecord);
         this.userStanding = getStanding(this.rankRecord, this.standingPerRank, this.userRank);
         this.userResource = getResources(this.resourceRecord);
-        calculateDaysToMax(this.syndicateName, this.userRank, this.userStanding, this.rankRecord, this.standingPerRank);
+        printOutputHeader(masteryRank, standingCap, this.syndicateName);
+        calculateDaysToMax(this.rankRecord, this.userRank, this.userStanding, this.standingPerRank);
         Utility.inputBuffer();
     }
 
