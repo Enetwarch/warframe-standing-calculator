@@ -1,7 +1,9 @@
 import calc.Calculator;
 import data.Data;
 import util.Utility;
+
 public class Main {
+
     private static final String[] SYNDICATE_OPTIONS = {
         Data.Syndicates.FACTION_SYNDICATES.getSyndicate(),
         Data.Syndicates.CONCLAVE.getSyndicate(),
@@ -81,11 +83,15 @@ public class Main {
         }
     }
 
-    // Temporary method.
-    private static void underDevelopment() {
-        // Used to check if the switch case works.
-        System.out.print("Feature under development.\n");
-        Utility.inputBuffer();
+    public static void terminateProgram() {
+        System.out.print(
+            """
+            Thank you for using Warframe Standing Calculator!
+            Code by: Enetwarch     
+            """
+        );
+        Utility.scanner.close();
+        System.exit(0);
     }
 
 

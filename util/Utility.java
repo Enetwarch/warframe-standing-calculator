@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Utility {
 
-    private static final Scanner scanner = new Scanner(System.in);
+    public static final Scanner scanner = new Scanner(System.in);
 
 
     ////// INPUT METHODS
@@ -104,15 +104,9 @@ public class Utility {
         }
     }
 
-    public static void terminateProgram() {
-        System.out.print(
-            """
-            Thank you for using Warframe Standing Calculator!
-            Code by: Enetwarch     
-            """
-        );
-        scanner.close();
-        System.exit(0);
+    private static void underDevelopment() {
+        System.out.print("Feature under development.\n");
+        inputBuffer();
     }
 
 }

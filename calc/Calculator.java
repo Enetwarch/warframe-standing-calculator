@@ -79,7 +79,8 @@ public class Calculator {
 
     public static void getPledgedFaction() {
         pledgedFaction = Utility.getUserInputInt("Enter pledged faction", PLEDGED_FACTION_MIN, PLEDGED_FACTION_MAX);
-        standingMultiplier = STANDING_MULTIPLIER_LIST[pledgedFaction - 1]; // Sets standing cap based on faction syndicate interaction.
+        int pledgedFactionIndex = pledgedFaction - 1;
+        standingMultiplier = STANDING_MULTIPLIER_LIST[pledgedFactionIndex];
         System.out.print("\n"); 
     }
 
@@ -103,7 +104,7 @@ public class Calculator {
             String rankNumber = rankRecord[i].rankNumber();
             String rankTitle = rankRecord[i].rankTitle();
             System.out.printf("[%s] %s\n", rankNumber, rankTitle);
-            validRanks[i] = rankRecord[i].rankNumber();
+            validRanks[i] = rankNumber;
         }
         String userInput = Utility.getUserInputString("Enter your rank", validRanks);
         int userRank = Arrays.asList(validRanks).indexOf(userInput);
@@ -233,7 +234,7 @@ public class Calculator {
     }
 
 
-    ////// MAIN
+    ////// MAIN METHOD
 
 
     // Main instance method
