@@ -29,8 +29,10 @@ public class Utility {
             } catch (InputMismatchException e) {
                 // Occurs when user input is not an integer.
                 inputErrorInt(min, max); 
-                scanner.nextLine(); // Absorbs any stray \n from the user pressing "Enter".
                 continue; // Prompts the user to try again.
+            } finally {
+                // Occurs regardless of a valid or invalid input.
+                scanner.nextLine(); // Absorbs any stray \n from the user pressing "Enter".
             }
             if (userInput >= min && userInput <= max) {
                 return userInput; // Returns the integer input and breaks out of the method.
@@ -42,9 +44,51 @@ public class Utility {
         }
     }
 
+    // getUserInputString Helper method
+    private static void inputErrorString(String[] validInputs) {
+        System.out.printf("Input error. Only accepts these values: "); // Error message.
+        for (int i = 0; i < validInputs.length - 1; i++) {
+            // Prints all the valid inputs in this format: 0, 1, 2, 3, 4, 
+            System.out.printf("%s, ", validInputs[i]); 
+        }
+        System.out.printf("and %s.\n", validInputs[validInputs.length - 1]);
+        // Makes the format finish off with 0, 1, 2, 3, 4, and 5.\n
+    }
+
+    public static String getUserInputString(String message, String[] validInputs) {
+        // Starts a loop that can only end when the user input is within the array of valid inputs.
+        String userInput;
+        while (true) {
+            inputMessage(message);
+            userInput = scanner.nextLine(); // Actual user input.
+            for (String validInput : validInputs) {
+                // Loops through the array of valid inputs.
+                if (userInput.equals(validInput)) {
+                    // Returns the user input if it matches a valid input in the array.
+                    return userInput;
+                }
+            }
+            inputErrorString(validInputs);
+            // Gets called if the user input did not successfully break through the method with return;.
+        }
+    }
+
+    public static boolean getUserInputBoolean(String message) {
+        // Starts a loop that can only end when the user input is y or n.
+        String userInput;
+        while (true) {
+            System.out.printf("%s? (y/n) >> ", message); // Message and affordance to y/n
+            userInput = scanner.nextLine().toLowerCase(); // Actual user input.
+            switch (userInput) {
+                case "y" -> { return true; } // True if y
+                case "n" -> { return false; } // False if n
+                default -> System.out.print("Input error. Please enter y or n.\n");
+            }
+        }
+    }
+
     public static void inputBuffer() {
         // Gives a delay to the program to give the user time to read the printed outputs. 
-        scanner.nextLine(); // Absorbs the "enter" or \n from the user's input.
         System.out.print("Press enter to proceed. ");
         scanner.nextLine(); // Actual user input.
         System.out.print("\n");
@@ -64,8 +108,7 @@ public class Utility {
     }
 
     public static void terminateProgram() {
-        System.out.print(
-            """
+        System.out.print("""
             Thank you for using Warframe Standing Calculator!
             Code by: Enetwarch     
             """
