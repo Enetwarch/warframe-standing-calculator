@@ -107,8 +107,18 @@ public class Utility {
         }
     }
 
+    public static String pluralizeNoun(int amount) {
+        // A basic pluralizer method that returns an "s" or "" depending on the amount
+        if (amount != 1) {
+            return "s"; // Plural
+        } else {
+            return ""; // Singular
+        }
+    }
+
     public static void terminateProgram() {
-        System.out.print("""
+        System.out.print(
+            """
             Thank you for using Warframe Standing Calculator!
             Code by: Enetwarch     
             """
