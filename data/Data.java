@@ -1,7 +1,8 @@
 package data;
 import calc.Calculator;
+
 public class Data {
-    // Enum
+
     public enum Syndicates {
         FACTION_SYNDICATES("Faction Syndicates"),
         STEEL_MERIDIAN("Steel Meridian"),
@@ -22,26 +23,22 @@ public class Data {
         THE_HOLDFASTS("The Holdfasts"),
         CAVIA("Cavia"),
         THE_HEX("The Hex");
-        // All syndicate names set to constant for type safety reasons.
-        private final String syndicateName; // Initializes all these enum variables as syndicateName variable.
+        private final String syndicateName;
         private Syndicates(String syndicateName) {
-            // Constructor for this enum.
             this.syndicateName = syndicateName;
         }
         public String getSyndicate() {
-            // Returner method to return the syndicate
             return syndicateName;
         }
     }
-    // Records
-    public record Rank(String rankNumber, String rankTitle) {} // Refers to the ranks and standing required to reach the next rank.
-    public record Sacrifice(String[] sacrificeName, int[] sacrificeAmount) {} // Refers to the sacrifice resources needed to reach the next rank.
-    public record Resource(String resourceName, int resourceStanding) {} // Refers to the resources that give standing when turned in.
+    public record Rank(String rankNumber, String rankTitle) {} // Ranks
+    public record Sacrifice(String[] sacrificeName, int[] sacrificeAmount) {} // Sacrifice resources
+    public record Resource(String resourceName, int resourceStanding) {} // Standing resources
 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    /// SYNDICATE DATA
 
-    ///////////////////////////////////////////////////////////////////////////////////////
+    ////// SYNDICATE DATA
+
+
     // Steel Meridian
     private static final Syndicates steelMeridianSyndicateName = Syndicates.STEEL_MERIDIAN;
     private static final Rank[] steelMeridianRankRecord = {
@@ -71,7 +68,9 @@ public class Data {
         new Resource("General Insignia", 5000)
     };
     public static final Calculator steelMeridian = new Calculator(steelMeridianSyndicateName, steelMeridianRankRecord, steelMeridianSacrificeRecord, steelMeridianResourceRecord);
-    ////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
     // Arbiters of Hexis
     private static final Syndicates arbitersOfHexisSyndicateName = Syndicates.ARBITERS_OF_HEXIS;
     private static final Rank[] arbitersOfHexisRankRecord = {
@@ -101,7 +100,9 @@ public class Data {
         new Resource("Maxim Medallion", 5000)
     };
     public static final Calculator arbitersOfHexis = new Calculator(arbitersOfHexisSyndicateName, arbitersOfHexisRankRecord, arbitersOfHexisSacrificeRecord, arbitersOfHexisResourceRecord);
-    /////////////////////////////////////////////////////////////////////////////////////
+
+
+
     // Cephalon Suda
     private static final Syndicates cephalonSudaSyndicateName = Syndicates.CEPHALON_SUDA;
     private static final Rank[] cephalonSudaRankRecord = {
@@ -131,7 +132,9 @@ public class Data {
         new Resource("Genius Datum", 5000)
     };
     public static final Calculator cephalonSuda = new Calculator(cephalonSudaSyndicateName, cephalonSudaRankRecord, cephalonSudaSacrificeRecord, cephalonSudaResourceRecord);
-    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
     // The Perrin Sequence
     private static final Syndicates thePerrinSequenceSyndicateName = Syndicates.THE_PERRIN_SEQUENCE;
     private static final Rank[] thePerrinSequenceRankRecord = {
@@ -161,7 +164,9 @@ public class Data {
         new Resource("Partner Quittance", 5000)
     };
     public static final Calculator thePerrinSequence = new Calculator(thePerrinSequenceSyndicateName, thePerrinSequenceRankRecord, thePerrinSequenceSacrificeRecord, thePerrinSequenceResourceRecord);
-    ///////////////////////////////////////////////////////////////////////////
+
+
+
     // Red Veil
     private static final Syndicates redVeilSyndicateName = Syndicates.RED_VEIL;
     private static final Rank[] redVeilRankRecord = {
@@ -191,7 +196,9 @@ public class Data {
         new Resource("Exalted Mark", 5000)
     };
     public static final Calculator redVeil = new Calculator(redVeilSyndicateName, redVeilRankRecord, redVeilSacrificeRecord, redVeilResourceRecord);
-    ///////////////////////////////////////////////////////////////////////////
+
+
+
     // New Loka
     private static final Syndicates newLokaSyndicateName = Syndicates.NEW_LOKA;
     private static final Rank[] newLokaRankRecord = {
@@ -221,7 +228,9 @@ public class Data {
         new Resource("Flawless Seed", 5000)
     };
     public static final Calculator newLoka = new Calculator(newLokaSyndicateName, newLokaRankRecord, newLokaSacrificeRecord, newLokaResourceRecord);
-    ////////////////////////////////////////////////////////////////////////////
+
+
+
     // Conclave
     private static final Syndicates conclaveSyndicateName = Syndicates.CONCLAVE;
     private static final Rank[] conclaveRankRecord = {
@@ -241,7 +250,9 @@ public class Data {
     };
     private static final Resource[] conclaveResourceRecord = {}; // No resources for Conclave
     public static final Calculator conclave = new Calculator(conclaveSyndicateName, conclaveRankRecord, conclaveSacrificeRecord, conclaveResourceRecord);
-    ///////////////////////////////////////////////////////////////////////////////////
+
+
+
     // Cephalon Simaris
     private static final Syndicates cephalonSimarisSyndicateName = Syndicates.CEPHALON_SIMARIS;
     private static final Rank[] cephalonSimarisRankRecord = {
@@ -250,7 +261,9 @@ public class Data {
     private static final Sacrifice[] cephalonSimarisSacrificeRecord = {}; // No sacrifices for Cephalon Simaris
     private static final Resource[] cephalonSimarisResourceRecord = {}; // No resources for Cephalon Simaris 
     public static final Calculator cephalonSimaris = new Calculator(cephalonSimarisSyndicateName, cephalonSimarisRankRecord, cephalonSimarisSacrificeRecord, cephalonSimarisResourceRecord);
-    ////////////////////////////////////////////////////////////////////////
+
+
+
     // Ostron
     private static final Syndicates ostronSyndicateName = Syndicates.OSTRON;
     private static final Rank[] ostronRankRecord = {
@@ -277,7 +290,9 @@ public class Data {
         new Resource("Nyth", 400)
     };
     public static final Calculator ostron = new Calculator(ostronSyndicateName, ostronRankRecord, ostronSacrificeRecord, ostronResourceRecord);
-    ///////////////////////////////////////////////////////////////////////////////
+
+
+
     // The Quills
     private static final Syndicates theQuillsSyndicateName = Syndicates.THE_QUILLS;
     private static final Rank[] theQuillsRankRecord = {
@@ -302,7 +317,9 @@ public class Data {
         new Resource("Narmer Isoplast", 2000)
     };
     public static final Calculator theQuills = new Calculator(theQuillsSyndicateName, theQuillsRankRecord, theQuillsSacrificeRecord, theQuillsResourceRecord);
-    ///////////////////////////////////////////////////////////////////////////////////////
+
+
+
     // Solaris United
     private static final Syndicates solarisUnitedSyndicateName = Syndicates.SOLARIS_UNITED;
     private static final Rank[] solarisUnitedRankRecord = {
@@ -328,7 +345,9 @@ public class Data {
         new Resource("Familial Debt-Bond", 500)
     };
     public static final Calculator solarisunited = new Calculator(solarisUnitedSyndicateName, solarisUnitedRankRecord, solarisUnitedSacrificeRecord, solarisUnitedResourceRecord);
-    /////////////////////////////////////////////////////////////////////////////////
+
+
+
     // Vox Solaris
     private static final Syndicates voxSolarisSyndicateName = Syndicates.VOX_SOLARIS;
     private static final Rank[] voxSolarisRankRecord = {
@@ -355,7 +374,9 @@ public class Data {
         new Resource("Lazulite Toroid", 12000)
     };
     public static final Calculator voxSolaris = new Calculator(voxSolarisSyndicateName, voxSolarisRankRecord, voxSolarisSacrificeRecord, voxSolarisResourceRecord);
-    ////////////////////////////////////////////////////////////////////////////
+
+
+
     // Ventkids
     private static final Syndicates ventkidsSyndicateName = Syndicates.VENTKIDS;
     private static final Rank[] ventkidsRankRecord = {
@@ -369,7 +390,9 @@ public class Data {
     private static final Sacrifice[] ventkidsSacrificeRecord = {}; // No sacrifices for Ventkids
     private static final Resource[] ventkidsResourceRecord = {}; // No resources for Ventkids
     public static final Calculator ventkids = new Calculator(ventkidsSyndicateName, ventkidsRankRecord, ventkidsSacrificeRecord, ventkidsResourceRecord);
-    //////////////////////////////////////////////////////////////////////////
+
+
+
     // Entrati
     private static final Syndicates entratiSyndicateName = Syndicates.ENTRATI;
     private static final Rank[] entratiRankRecord = {
@@ -396,7 +419,9 @@ public class Data {
         new Resource("Grandmother Token", 1500)
     };
     public static final Calculator entrati = new Calculator(entratiSyndicateName, entratiRankRecord, entratiSacrificeRecord, entratiResourceRecord);
-    //////////////////////////////////////////////////////////////////////////////
+
+
+
     // Necraloid
     private static final Syndicates necraloidSyndicateName = Syndicates.NECRALOID;
     private static final Rank[] necraloidRankRecord = {
@@ -416,7 +441,9 @@ public class Data {
         new Resource("Orokin Animus Matrix", 5000)
     };
     public static final Calculator necraloid = new Calculator(necraloidSyndicateName, necraloidRankRecord, necraloidSacrificeRecord, necraloidResourceRecord);
-    /////////////////////////////////////////////////////////////////////////////////////
+
+
+
     // The Holdfasts
     private static final Syndicates theHoldfastsSyndicateName = Syndicates.THE_HOLDFASTS;
     private static final Rank[] theHoldfastsRankRecord = {
@@ -442,7 +469,9 @@ public class Data {
         new Resource("Voidplume Pinion", 5000)
     };
     public static final Calculator theHoldfasts = new Calculator(theHoldfastsSyndicateName, theHoldfastsRankRecord, theHoldfastsSacrificeRecord, theHoldfastsResourceRecord);
-    //////////////////////////////////////////////////////////////////////
+
+
+
     // Cavia
     private static final Syndicates caviaSyndicateName = Syndicates.CAVIA;
     private static final Rank[] caviaRankRecord = {
@@ -466,7 +495,9 @@ public class Data {
         new Resource("Echo Voca", 2000)
     };
     public static final Calculator cavia = new Calculator(caviaSyndicateName, caviaRankRecord, caviaSacrificeRecord, caviaResourceRecord);
-    /////////////////////////////////////////////////////////////////////////
+
+
+
     // The Hex
     private static final Syndicates theHexSyndicateName = Syndicates.THE_HEX;
     private static final Rank[] theHexRankRecord = {

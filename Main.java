@@ -16,7 +16,7 @@ public class Main {
         Data.Syndicates.THE_HOLDFASTS.getSyndicate(),
         Data.Syndicates.CAVIA.getSyndicate(),
         Data.Syndicates.THE_HEX.getSyndicate()
-    }; // All syndicates after the 1999 update.
+    }; // All syndicates post-1999 update.
     private static final String[] FACTION_OPTIONS = {
         Data.Syndicates.STEEL_MERIDIAN.getSyndicate(),
         Data.Syndicates.ARBITERS_OF_HEXIS.getSyndicate(),
@@ -24,16 +24,15 @@ public class Main {
         Data.Syndicates.THE_PERRIN_SEQUENCE.getSyndicate(),
         Data.Syndicates.RED_VEIL.getSyndicate(),
         Data.Syndicates.NEW_LOKA.getSyndicate()
-    }; // All faction syndcates.
-    // Planning to improve enum knowledge to sort these arrays out without repetition of code.
+    };
     private static final int SYNDICATE_OPTIONS_MIN = 0;
     private static final int SYNDICATE_OPTIONS_MAX = SYNDICATE_OPTIONS.length;
     private static final int FACTION_OPTIONS_MIN = 0;
     private static final int FACTION_OPTIONS_MAX = FACTION_OPTIONS.length;
-    // Constant min and max values for typesafety and maintainability for integer inputs.
 
-    //////////////////////////////////////////
-    /// MENU METHODS
+
+    ////// MENU METHODS
+
 
     // Syndicate menu
     private static void getSyndicateOption() {
@@ -89,8 +88,9 @@ public class Main {
         Utility.inputBuffer();
     }
 
-    ////////////////////////////////////////
-    /// MAIN
+
+    ////// MAIN
+
 
     public static void main(String[] args) {
         Calculator.getMasteryRank();
