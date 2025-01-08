@@ -139,7 +139,7 @@ public class Calculator {
         for (int i = 0; i < resourceRecord.length; i++) {
             String resourceName = resourceRecord[i].resourceName();
             int resourceStanding = resourceRecord[i].resourceStanding();
-            String message = String.format("%s owned (%,d)", resourceName, resourceStanding);
+            String message = String.format("%s owned (%,d standing)", resourceName, resourceStanding);
             userResource[i] = Utility.getUserInputInt(message, resourceMin, resourceMax);
         }
         System.out.print("\n");
@@ -151,15 +151,12 @@ public class Calculator {
 
 
     private static void printOutputHeader(int masteryRank, int standingCap, String syndicateName) {
-        System.out.printf(
-            """
-            Mastery Rank: %d
-            Daily Standing Cap: %,d
-            Syndicate output for %s
-
-            """
-            , masteryRank, standingCap, syndicateName 
-        );
+        StringBuilder outputHeader = new StringBuilder();
+        outputHeader.append(String.format("Mastery Rank: %d\n", masteryRank));
+        outputHeader.append(String.format("Daily Standing Cap: %,d\n", standingCap));
+        outputHeader.append(String.format("Syndicate output for %s\n", syndicateName));
+        outputHeader.append("\n");
+        System.out.print(outputHeader);
     }
 
     // printDaysToMax Helper record
@@ -173,38 +170,22 @@ public class Calculator {
         int currentRankMaxStanding = daysToMaxRecord.currentRankMaxStanding;
         int daysToMaxRank = daysToMaxRecord.daysToMaxRank;
         int standingToMaxRank = daysToMaxRecord.standingToMaxRank;
-        String daysToMax = String.format(
-            """
-            Rank: [%s] %s
-            Standing: %,d out of %,d
-            """
-            , rankNumber, rankTitle, userStanding, currentRankMaxStanding
-        );
+        StringBuilder daysToMax = new StringBuilder();
+        daysToMax.append(String.format("Rank: [%s] %s\n", rankNumber, rankTitle));
+        daysToMax.append(String.format("Standing: %,d out of %,d\n", userStanding, currentRankMaxStanding));
         if (!(daysToMaxRank + standingToMaxRank == 0)) {
             // Normal case
-            String isDayPlural = Utility.pluralizeNoun(daysToMaxRank);
-            daysToMax += String.format(
-                """
-                It will take %d day%s with %,d standing to reach max rank.     
-                """
-                , daysToMaxRank, isDayPlural, standingToMaxRank
-            );
+            String pluralizedDay = Utility.pluralizeNoun(daysToMaxRank);
+            daysToMax.append(String.format("It will take %d day%s with %,d standing to reach max rank\n", daysToMaxRank, pluralizedDay, standingToMaxRank));
         } else if (userRank == maxRank) {
             // Normal case
-            daysToMax += String.format(
-                """
-                You are already max rank.
-                """
-            );
+            daysToMax.append("You are already max rank.\n");
         } else {
             // Edge case
-            daysToMax += String.format(
-                """
-                You are already eligible for max rank.     
-                """
-            );
+            daysToMax.append("You are already eligible for max rank.\n");
         }
-        System.out.printf("%s\n", daysToMax);
+        daysToMax.append("\n");
+        System.out.print(daysToMax);
     }
 
     private static void calculateDaysToMax(Rank[] rankRecord, int userRank, int userStanding, int[][] standingPerRank) {

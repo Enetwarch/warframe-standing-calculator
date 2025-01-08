@@ -42,13 +42,16 @@ public class Utility {
 
     // getUserInputString Helper method
     private static void inputErrorString(String[] validInputs) {
-        System.out.printf("Input error. Only accepts these values: ");
-        for (int i = 0; i < validInputs.length - 1; i++) {
+        StringBuilder inputErrorString = new StringBuilder();
+        inputErrorString.append("Input error. Only accepts these values: ");
+        int validInputsBeforeLast = validInputs.length - 1;
+        for (int i = 0; i < validInputsBeforeLast; i++) {
             String validInput = validInputs[i];
-            System.out.printf("%s, ", validInput); 
+            inputErrorString.append(String.format("%s, ", validInput));
         }
         String lastValidInput = validInputs[validInputs.length - 1];
-        System.out.printf("and %s.\n", lastValidInput);
+        inputErrorString.append(String.format("and %s.\n", lastValidInput));
+        System.out.print(inputErrorString);
     }
 
     public static String getUserInputString(String message, String[] validInputs) {
@@ -91,9 +94,11 @@ public class Utility {
 
 
     public static void printNumberedArray(String[] array) {
+        StringBuilder numberedArray = new StringBuilder();
         for (int i = 0; i < array.length; i++) {
-            System.out.printf("[%d] %s\n", i + 1, array[i]);
+            numberedArray.append(String.format("[%d] %s\n", i + 1, array[i]));
         }
+        System.out.print(numberedArray);
     }
 
     public static String pluralizeNoun(int amount) {

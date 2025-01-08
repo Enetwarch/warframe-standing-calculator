@@ -84,12 +84,10 @@ public class Main {
     }
 
     public static void terminateProgram() {
-        System.out.print(
-            """
-            Thank you for using Warframe Standing Calculator!
-            Code by: Enetwarch     
-            """
-        );
+        StringBuilder terminateProgram = new StringBuilder();
+        terminateProgram.append("Thank you for using Warframe Standing Calculator!\n");
+        terminateProgram.append("Code by: Enetwarch\n");
+        System.out.print(terminateProgram);
         Utility.scanner.close();
         System.exit(0);
     }
