@@ -162,10 +162,17 @@ public class Calculator {
         );
     }
 
+    // printDaysToMax Helper record
+    private record DaysToMax(int maxRank, int currentRankMaxStanding, int daysToMaxRank, int standingToMaxRank) {}
+
     // calculateDaysToMax Helper method
-    private static void printDaysToMax(Rank[] rankRecord, int userRank, int userStanding, int currentRankMaxStanding, int daysToMaxRank, int standingToMaxRank) {
+    private static void printDaysToMax(DaysToMax daysToMaxRecord, Rank[] rankRecord, int userRank, int userStanding) {
         String rankNumber = rankRecord[userRank].rankNumber();
         String rankTitle = rankRecord[userRank].rankTitle();
+        int maxRank = daysToMaxRecord.maxRank;
+        int currentRankMaxStanding = daysToMaxRecord.currentRankMaxStanding;
+        int daysToMaxRank = daysToMaxRecord.daysToMaxRank;
+        int standingToMaxRank = daysToMaxRecord.standingToMaxRank;
         String daysToMax = String.format(
             """
             Rank: [%s] %s
@@ -173,7 +180,6 @@ public class Calculator {
             """
             , rankNumber, rankTitle, userStanding, currentRankMaxStanding
         );
-        int maxRank = rankRecord.length - 1;
         if (!(daysToMaxRank + standingToMaxRank == 0)) {
             // Normal case
             String isDayPlural = Utility.pluralizeNoun(daysToMaxRank);
@@ -209,7 +215,8 @@ public class Calculator {
         if (isAlreadyMax || edgeCase) {
             int daysToMaxRank = 0;
             int standingToMaxRank = 0;
-            printDaysToMax(rankRecord, userRank, userStanding, currentRankMaxStanding, daysToMaxRank, standingToMaxRank);
+            DaysToMax daysToMaxRecord = new DaysToMax(maxRank, currentRankMaxStanding, daysToMaxRank, standingToMaxRank);
+            printDaysToMax(daysToMaxRecord, rankRecord, userRank,userStanding);
             return;
         }
         int currentRank = userRank;
@@ -223,7 +230,8 @@ public class Calculator {
             } else {
                 currentRank += 1;
                 if (currentRank == maxRank) {
-                    printDaysToMax(rankRecord, userRank, userStanding, currentRankMaxStanding, daysToMaxRank, standingToMaxRank);
+                    DaysToMax daysToMaxRecord = new DaysToMax(maxRank, currentRankMaxStanding, daysToMaxRank, standingToMaxRank);
+                    printDaysToMax(daysToMaxRecord, rankRecord, userRank,userStanding);
                     return;
                 }
                 currentRankStanding += standingCap - currentRankMaxStanding;

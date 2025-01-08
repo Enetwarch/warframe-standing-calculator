@@ -57,7 +57,7 @@ public class Main {
                 case 11 -> Data.theHoldfasts.calculateToConsole(); // The Holdfasts
                 case 12 -> Data.cavia.calculateToConsole(); // Cavia
                 case 13 -> Data.theHex.calculateToConsole(); // The Hex
-                case 0 -> Utility.terminateProgram(); // Terminate Program
+                case 0 -> terminateProgram(); // Terminate Program
             }
         }
     }
