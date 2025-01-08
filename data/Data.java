@@ -243,7 +243,7 @@ public class Data {
     public static final Calculator conclave = new Calculator(conclaveSyndicateName, conclaveRankRecord, conclaveSacrificeRecord, conclaveResourceRecord);
     ///////////////////////////////////////////////////////////////////////////////////
     // Cephalon Simaris
-    private static final Syndicates cephalonSimarisSyndicateName = Syndicates.CONCLAVE;
+    private static final Syndicates cephalonSimarisSyndicateName = Syndicates.CEPHALON_SIMARIS;
     private static final Rank[] cephalonSimarisRankRecord = {
         new Rank("0", "Neutral")
     };
