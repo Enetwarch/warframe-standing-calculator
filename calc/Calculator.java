@@ -159,45 +159,24 @@ public class Calculator {
         System.out.print(outputHeader);
     }
 
-    // printDaysToMax Helper record
-    private record DaysToMax(int maxRank, int userRankMaxStanding, int daysToMaxRank, int standingToMaxRank) {}
-
-    // calculateDaysToMax Helper method
-    private static void printDaysToMax(DaysToMax daysToMaxRecord, Rank[] rankRecord, int userRank, int userStanding) {
+    private static void calculateDaysToMax(Rank[] rankRecord, int userRank, int userStanding, int[][] standingPerRank) {
         String rankNumber = rankRecord[userRank].rankNumber();
         String rankTitle = rankRecord[userRank].rankTitle();
-        int maxRank = daysToMaxRecord.maxRank;
-        int userRankMaxStanding = daysToMaxRecord.userRankMaxStanding;
-        int daysToMaxRank = daysToMaxRecord.daysToMaxRank;
-        int standingToMaxRank = daysToMaxRecord.standingToMaxRank;
+        int userRankMaxStanding = standingPerRank[userRank][1];
         StringBuilder daysToMax = new StringBuilder();
         daysToMax.append(String.format("Rank: [%s] %s\n", rankNumber, rankTitle));
         daysToMax.append(String.format("Standing: %,d out of %,d\n", userStanding, userRankMaxStanding));
-        if (!(daysToMaxRank + standingToMaxRank == 0)) {
-            // Normal case
-            String pluralizedDay = Utility.pluralizeNoun(daysToMaxRank);
-            daysToMax.append(String.format("It will take %d day%s with %,d standing to reach max rank\n", daysToMaxRank, pluralizedDay, standingToMaxRank));
-        } else if (userRank == maxRank) {
-            // Normal case
-            daysToMax.append("You are already max rank.\n");
-        } else {
-            // Edge case
-            daysToMax.append("You are already eligible for max rank.\n");
-        }
-        daysToMax.append("\n");
-        System.out.print(daysToMax);
-    }
-
-    private static void calculateDaysToMax(Rank[] rankRecord, int userRank, int userStanding, int[][] standingPerRank) {
         int maxRank = rankRecord.length - 1;
-        int userRankMaxStanding = standingPerRank[userRank][1];
         boolean isAlreadyMax = userRank == maxRank;
         boolean edgeCase = userRank == maxRank - 1 && userStanding == userRankMaxStanding;
         if (isAlreadyMax || edgeCase) {
-            int daysToMaxRank = 0;
-            int standingToMaxRank = 0;
-            DaysToMax daysToMaxRecord = new DaysToMax(maxRank, userRankMaxStanding, daysToMaxRank, standingToMaxRank);
-            printDaysToMax(daysToMaxRecord, rankRecord, userRank, userStanding);
+            if (isAlreadyMax) {
+                daysToMax.append("You are already max rank.\n");
+            } else {
+                daysToMax.append("You are already eligible for max rank.\n");
+            }
+            daysToMax.append("\n");
+            System.out.print(daysToMax);
             return;
         }
         int currentRank = userRank;
@@ -212,8 +191,10 @@ public class Calculator {
             } else {
                 currentRank += 1;
                 if (currentRank == maxRank) {
-                    DaysToMax daysToMaxRecord = new DaysToMax(maxRank, userRankMaxStanding, daysToMaxRank, standingToMaxRank);
-                    printDaysToMax(daysToMaxRecord, rankRecord, userRank, userStanding);
+                    String pluralizedDay = Utility.pluralizeNoun(daysToMaxRank);
+                    daysToMax.append(String.format("It will take %d day%s with %,d standing to reach max rank\n", daysToMaxRank, pluralizedDay, standingToMaxRank));
+                    daysToMax.append("\n");
+                    System.out.print(daysToMax);
                     return;
                 }
                 currentRankStanding += standingCap - currentRankMaxStanding;
