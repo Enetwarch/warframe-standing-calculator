@@ -85,7 +85,7 @@ public class Main {
 
     public static void terminateProgram() {
         StringBuilder terminateProgram = new StringBuilder();
-        terminateProgram.append("Thank you for using Warframe Standing Calculator!\n");
+        terminateProgram.append("Warframe Standing Calculator\n");
         terminateProgram.append("Code by: Enetwarch\n");
         System.out.print(terminateProgram);
         Utility.scanner.close();

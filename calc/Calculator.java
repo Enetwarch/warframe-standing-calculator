@@ -158,8 +158,8 @@ public class Calculator {
         StringBuilder outputHeader = new StringBuilder();
         outputHeader.append(String.format("Mastery Rank: %d\n", masteryRank));
         outputHeader.append(String.format("Daily Standing Cap: %,d\n", standingCap));
-        outputHeader.append(String.format("Syndicate output for %s\n", syndicateName));
         outputHeader.append("\n");
+        outputHeader.append(String.format("%s\n".toUpperCase(), syndicateName));
         System.out.print(outputHeader);
     }
 
@@ -175,9 +175,9 @@ public class Calculator {
         boolean edgeCase = userRank == maxRank - 1 && userStanding == userRankMaxStanding;
         if (isAlreadyMax || edgeCase) {
             if (isAlreadyMax) {
-                daysToMax.append("You are already max rank.\n");
+                daysToMax.append("Already max rank.\n");
             } else {
-                daysToMax.append("You are already eligible for max rank.\n");
+                daysToMax.append("Eligible for max rank.\n");
             }
             daysToMax.append("\n");
             System.out.print(daysToMax);
@@ -196,7 +196,7 @@ public class Calculator {
                 currentRank += 1;
                 if (currentRank == maxRank) {
                     String pluralizedDay = Utility.pluralizeNoun(daysToMaxRank);
-                    daysToMax.append(String.format("It will take %d day%s with %,d standing to reach max rank\n", daysToMaxRank, pluralizedDay, standingToMaxRank));
+                    daysToMax.append(String.format("%,d day%s with %,d standing to max.\n", daysToMaxRank, pluralizedDay, standingToMaxRank));
                     daysToMax.append("\n");
                     System.out.print(daysToMax);
                     return;
@@ -235,12 +235,12 @@ public class Calculator {
         sacrificesList.sort((entry1, entry2) -> Integer.compare(entry1.getValue(), entry2.getValue()));
         StringBuilder sacrificesToMax = new StringBuilder();
         String pluralizedSacrifice = Utility.pluralizeNoun(sacrificesList.size());
-        sacrificesToMax.append(String.format("The sacrifice%s you need to reach max rank:\n", pluralizedSacrifice));
+        sacrificesToMax.append(String.format("Required sacrifice%s\n".toUpperCase(), pluralizedSacrifice));
         for (Map.Entry<String, Integer> sacrificesMapEntry : sacrificesList) {
             int sacrificeAmount = sacrificesMapEntry.getValue();
             String sacrificeName = sacrificesMapEntry.getKey();
             String pluralizedSacrificeName = Utility.pluralizeNoun(sacrificeAmount);
-            sacrificesToMax.append(String.format("-> %,d %s%s\n", sacrificeAmount, sacrificeName, pluralizedSacrificeName));
+            sacrificesToMax.append(String.format("=> %,d %s%s\n", sacrificeAmount, sacrificeName, pluralizedSacrificeName));
         }
         sacrificesToMax.append("\n");
         System.out.print(sacrificesToMax);
@@ -254,7 +254,7 @@ public class Calculator {
         }
         int[] resourceStandingTotal = new int[resourceRecord.length];
         StringBuilder resourcesDays = new StringBuilder();
-        resourcesDays.append("Standing resources\n");
+        resourcesDays.append("Standing resources\n".toUpperCase());
         for (int i = 0; i < resourceRecord.length; i++) {
             String resourceName = resourceRecord[i].resourceName();
             int resourceOwned = userResource[i];
@@ -266,7 +266,7 @@ public class Calculator {
         int days = resourceStandingTotalSum / standingCap;
         if (days > 1) {
             String pluralizedDay = Utility.pluralizeNoun(days);
-            resourcesDays.append(String.format("Total: %,d standing (%d day%s)\n", resourceStandingTotalSum, days, pluralizedDay));
+            resourcesDays.append(String.format("Total: %,d standing (%,d day%s)\n", resourceStandingTotalSum, days, pluralizedDay));
         } else {
             resourcesDays.append(String.format("Total: %,d standing\n", resourceStandingTotalSum));
         }

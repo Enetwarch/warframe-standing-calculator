@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Utility {
 
     public static final Scanner scanner = new Scanner(System.in);
+    private static final String INPUT_ERROR = "INPUT ERROR";
 
 
     ////// INPUT METHODS
@@ -17,7 +18,7 @@ public class Utility {
 
     // getUserInputInt Helper method
     private static void inputErrorInt(int min, int max) {
-        System.out.printf("Input error. Only accepts integers from %d to %d.\n", min, max);
+        System.out.printf("%s. Only accepts integers %d to %d.\n", INPUT_ERROR, min, max);
     }
 
     public static int getUserInputInt(String message, int min, int max) {
@@ -43,14 +44,14 @@ public class Utility {
     // getUserInputString Helper method
     private static void inputErrorString(String[] validInputs) {
         StringBuilder inputErrorString = new StringBuilder();
-        inputErrorString.append("Input error. Only accepts these values: ");
+        inputErrorString.append(String.format("%s. Only accepts: ", INPUT_ERROR));
         int validInputsBeforeLast = validInputs.length - 1;
         for (int i = 0; i < validInputsBeforeLast; i++) {
             String validInput = validInputs[i];
             inputErrorString.append(String.format("%s, ", validInput));
         }
         String lastValidInput = validInputs[validInputs.length - 1];
-        inputErrorString.append(String.format("and %s.\n", lastValidInput));
+        inputErrorString.append(String.format("or %s.\n", lastValidInput));
         System.out.print(inputErrorString);
     }
 
@@ -76,7 +77,7 @@ public class Utility {
             switch (userInput) {
                 case "y" -> { return true; }
                 case "n" -> { return false; }
-                default -> System.out.print("Input error. Please enter y or n.\n");
+                default -> System.out.printf("%s. Enter y or n.\n", INPUT_ERROR);
             }
         }
     }
