@@ -100,6 +100,14 @@ public class Utility {
         System.out.print(numberedArray);
     }
 
+    public static int arraySumInt(int[] array) {
+        int arraySum = 0;
+        for (int number : array) {
+            arraySum += number;
+        }
+        return arraySum;
+    }
+
     public static String pluralizeNoun(int amount) {
         if (amount != 1) {
             return "s";

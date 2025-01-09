@@ -246,6 +246,34 @@ public class Calculator {
         System.out.print(sacrificesToMax);
     }
 
+    private static void calculateResourcesDays(Resource[] resourceRecord, int[] userResource) {
+        boolean noResource = resourceRecord.length == 0;
+        boolean noUserResource = Utility.arraySumInt(userResource) == 0;
+        if (noResource || noUserResource) {
+            return;
+        }
+        int[] resourceStandingTotal = new int[resourceRecord.length];
+        StringBuilder resourcesDays = new StringBuilder();
+        resourcesDays.append("Standing resources\n");
+        for (int i = 0; i < resourceRecord.length; i++) {
+            String resourceName = resourceRecord[i].resourceName();
+            int resourceOwned = userResource[i];
+            int resourceStanding = resourceRecord[i].resourceStanding() * resourceOwned;
+            resourceStandingTotal[i] = resourceStanding;
+            resourcesDays.append(String.format("%s: %,d owned (%,d standing)\n", resourceName, resourceOwned, resourceStanding));
+        }
+        int resourceStandingTotalSum = Utility.arraySumInt(resourceStandingTotal);
+        int days = resourceStandingTotalSum / standingCap;
+        if (days > 1) {
+            String pluralizedDay = Utility.pluralizeNoun(days);
+            resourcesDays.append(String.format("Total: %,d standing (%d day%s)\n", resourceStandingTotalSum, days, pluralizedDay));
+        } else {
+            resourcesDays.append(String.format("Total: %,d standing\n", resourceStandingTotalSum));
+        }
+        resourcesDays.append("\n");
+        System.out.print(resourcesDays);
+    }
+
 
     ////// MAIN METHOD
 
@@ -259,6 +287,7 @@ public class Calculator {
         printOutputHeader(masteryRank, standingCap, this.syndicateName);
         calculateDaysToMax(this.rankRecord, this.userRank, this.userStanding, this.standingPerRank);
         calculateSacrificesToMax(this.sacrificeRecord, this.userRank);
+        calculateResourcesDays(this.resourceRecord, this.userResource);
         Utility.inputBuffer();
     }
 
