@@ -3,7 +3,11 @@ import data.Data.Rank;
 import data.Data.Resource;
 import data.Data.Sacrifice;
 import data.Data.Syndicates;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import util.Utility;
 
 public class Calculator {
@@ -203,6 +207,44 @@ public class Calculator {
             }
         }
     }
+    
+    private static void calculateSacrificesToMax(Sacrifice[] sacrificeRecord, int userRank) {
+        boolean noSacrifices = sacrificeRecord.length == 0;
+        boolean isAlreadyMax = userRank == sacrificeRecord.length; 
+        if (noSacrifices || isAlreadyMax) {
+            return;
+        }
+        Map<String, Integer> sacrificesMap = new HashMap<>();
+        while(userRank < sacrificeRecord.length) {
+            // This whole loop gets all the sacrifice resources based from the user rank and stores it all in a map.
+            int[] sacrificeAmountArray = sacrificeRecord[userRank].sacrificeAmount();
+            String[] sacrificeNameArray = sacrificeRecord[userRank].sacrificeName();
+            for (int i = 0; i < sacrificeNameArray.length; i++) {
+                int sacrificeAmount = sacrificeAmountArray[i];
+                String sacrificeName = sacrificeNameArray[i];
+                if (sacrificesMap.containsKey(sacrificeName)) {
+                    // Only adds the value instead of completely replacing it.
+                    sacrificeAmount = sacrificesMap.get(sacrificeName) + sacrificeAmount;
+                }
+                sacrificesMap.put(sacrificeName, sacrificeAmount);
+            }
+            userRank++;
+        }
+        List<Map.Entry<String, Integer>> sacrificesList = new ArrayList<>(sacrificesMap.entrySet());
+        // Sorts the list in ascending order based on the integer value.
+        sacrificesList.sort((entry1, entry2) -> Integer.compare(entry1.getValue(), entry2.getValue()));
+        StringBuilder sacrificesToMax = new StringBuilder();
+        String pluralizedSacrifice = Utility.pluralizeNoun(sacrificesList.size());
+        sacrificesToMax.append(String.format("The sacrifice%s you need to reach max rank:\n", pluralizedSacrifice));
+        for (Map.Entry<String, Integer> sacrificesMapEntry : sacrificesList) {
+            int sacrificeAmount = sacrificesMapEntry.getValue();
+            String sacrificeName = sacrificesMapEntry.getKey();
+            String pluralizedSacrificeName = Utility.pluralizeNoun(sacrificeAmount);
+            sacrificesToMax.append(String.format("-> %,d %s%s\n", sacrificeAmount, sacrificeName, pluralizedSacrificeName));
+        }
+        sacrificesToMax.append("\n");
+        System.out.print(sacrificesToMax);
+    }
 
 
     ////// MAIN METHOD
@@ -216,6 +258,7 @@ public class Calculator {
         this.userResource = getResources(this.resourceRecord);
         printOutputHeader(masteryRank, standingCap, this.syndicateName);
         calculateDaysToMax(this.rankRecord, this.userRank, this.userStanding, this.standingPerRank);
+        calculateSacrificesToMax(this.sacrificeRecord, this.userRank);
         Utility.inputBuffer();
     }
 
