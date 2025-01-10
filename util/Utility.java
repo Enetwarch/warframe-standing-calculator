@@ -89,9 +89,4 @@ public class Utility {
         }
     }
 
-    private static void underDevelopment() {
-        System.out.print("Feature under development.\n");
-        inputBuffer();
-    }
-
 }
