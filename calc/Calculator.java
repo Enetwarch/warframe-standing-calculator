@@ -50,7 +50,7 @@ public class Calculator {
         System.out.print("\n");
     }
 
-    private static int getRank(Rank[] rankRecord) {
+    private void getRank() {
         StringBuilder getRank = new StringBuilder();
         for (Rank rank : rankRecord) {
             int rankNumber = rank.rankNumber();
@@ -60,31 +60,29 @@ public class Calculator {
         System.out.print(getRank);
         int rankMin = rankRecord[0].rankNumber();
         int rankMax = rankRecord[rankRecord.length - 1].rankNumber();
-        int userRank = Utility.getUserInputInt("Enter your rank", rankMin, rankMax);
+        userRank = Utility.getUserInputInt("Enter your rank", rankMin, rankMax);
         System.out.print("\n");
-        return userRank;
     }
 
-    private static int getStanding(Rank[] rankRecord, int[][] standingPerRank, int userRank) {
-        int[] validStandingRange = standingPerRank[userRank];
+    private void getStanding() {
+        int[] validStandingRange = STANDING_PER_RANK[userRank];
         int validStandingMin = validStandingRange[0];
         int validStandingMax = validStandingRange[1];
         String rankTitle = rankRecord[userRank].rankTitle();
         System.out.printf("Rank %d %s: %,d to %,d standing\n", userRank, rankTitle, validStandingMin, validStandingMax);
-        int userStanding = Utility.getUserInputInt("Enter your standing", validStandingMin, validStandingMax);
+        userStanding = Utility.getUserInputInt("Enter your standing", validStandingMin, validStandingMax);
         System.out.print("\n");
-        return userStanding;
     }
 
-    private static int[] getResources(Resource[] resourceRecord) {
-        if (resourceRecord.length == 0) {
-            return new int[] {}; 
+    private void getResources() {
+        userResource = new int[resourceRecord.length]; 
+        if (userResource.length == 0) {
+            return;
         }
-        int[] userResource = new int[resourceRecord.length]; 
         boolean proceedOrNot = Utility.getUserInputBoolean("Would you like to enter your standing resources");
         if (!proceedOrNot) {
             System.out.print("\n");
-            return userResource;
+            return;
         }
         int resourceMin = 0;
         int resourceMax = Integer.MAX_VALUE;
@@ -95,24 +93,22 @@ public class Calculator {
             userResource[i] = Utility.getUserInputInt(message, resourceMin, resourceMax);
         }
         System.out.print("\n");
-        return userResource; 
     }
 
 
     ////// OUTPUT METHODS
 
 
-    private static StringBuilder printOutputHeader(int masteryRank, int standingCap) {
-        StringBuilder calculatorOutput = new StringBuilder();
+    private void buildOutputHeader() {
+        calculatorOutput = new StringBuilder();
         calculatorOutput.append(String.format("Mastery Rank: %d\n", masteryRank));
         calculatorOutput.append(String.format("Daily Standing Cap: %,d\n", standingCap));
         calculatorOutput.append("\n");
-        return calculatorOutput;
     }
 
-    private static StringBuilder calculateDaysToMax(StringBuilder calculatorOutput, Rank[] rankRecord, String syndicateName, int userRank, int userStanding, int[][] standingPerRank) {
+    private void calculateDaysToMax() {
         String rankTitle = rankRecord[userRank].rankTitle();
-        int userRankMaxStanding = standingPerRank[userRank][1];
+        int userRankMaxStanding = STANDING_PER_RANK[userRank][1];
         calculatorOutput.append(String.format("%s\n".toUpperCase(), syndicateName));
         calculatorOutput.append(String.format("Rank: %d %s\n", userRank, rankTitle));
         calculatorOutput.append(String.format("Standing: %,d out of %,d\n", userStanding, userRankMaxStanding));
@@ -126,7 +122,7 @@ public class Calculator {
                 calculatorOutput.append("Eligible for max rank.\n");
             }
             calculatorOutput.append("\n");
-            return calculatorOutput;
+            return;
         }
         int currentRank = userRank;
         int currentRankStanding = userStanding;
@@ -143,20 +139,20 @@ public class Calculator {
                     String pluralizedDay = Utility.pluralizeNoun(daysToMaxRank);
                     calculatorOutput.append(String.format("%,d day%s with %,d standing to max.\n", daysToMaxRank, pluralizedDay, standingToMaxRank));
                     calculatorOutput.append("\n");
-                    return calculatorOutput;
+                    return;
                 }
                 currentRankStanding += standingCap - currentRankMaxStanding;
-                currentRankMaxStanding = standingPerRank[currentRank][1];
+                currentRankMaxStanding = STANDING_PER_RANK[currentRank][1];
                 standingToMaxRank += currentRankMaxStanding;
             }
         }
     }
     
-    private static StringBuilder calculateSacrificesToMax(StringBuilder calculatorOutput, Sacrifice[] sacrificeRecord, int userRank) {
+    private void calculateSacrificesToMax() {
         boolean noSacrifices = sacrificeRecord.length == 0;
         boolean isAlreadyMax = userRank == sacrificeRecord.length; 
         if (noSacrifices || isAlreadyMax) {
-            return calculatorOutput;
+            return;
         }
         Map<String, Integer> sacrificesMap = new HashMap<>();
         while(userRank < sacrificeRecord.length) {
@@ -186,14 +182,13 @@ public class Calculator {
             calculatorOutput.append(String.format("%,d %s%s\n", sacrificeAmount, sacrificeName, pluralizedSacrificeName));
         }
         calculatorOutput.append("\n");
-        return calculatorOutput;
     }
 
-    private static StringBuilder calculateResourcesDays(StringBuilder calculatorOutput, Resource[] resourceRecord, int[] userResource) {
-        boolean noResource = resourceRecord.length == 0;
+    private void calculateResourcesDays() {
+        boolean noResource = userResource.length == 0;
         boolean noUserResource = Utility.arraySumInt(userResource) == 0;
         if (noResource || noUserResource) {
-            return calculatorOutput;
+            return;
         }
         int[] resourceStandingTotal = new int[resourceRecord.length];
         calculatorOutput.append("STANDING RESOURCES\n");
@@ -213,7 +208,6 @@ public class Calculator {
             calculatorOutput.append(String.format("Total: %,d standing\n", resourceStandingTotalSum));
         }
         calculatorOutput.append("\n");
-        return calculatorOutput;
     }
 
 
@@ -222,14 +216,14 @@ public class Calculator {
 
     // Main instance method
     public void calculateToConsole() {
-        this.userRank = getRank(this.rankRecord);
-        this.userStanding = getStanding(this.rankRecord, STANDING_PER_RANK, this.userRank);
-        this.userResource = getResources(this.resourceRecord);
-        this.calculatorOutput = printOutputHeader(masteryRank, standingCap);
-        this.calculatorOutput = calculateDaysToMax(this.calculatorOutput, this.rankRecord, this.syndicateName, this.userRank, this.userStanding, STANDING_PER_RANK);
-        this.calculatorOutput = calculateSacrificesToMax(this.calculatorOutput, this.sacrificeRecord, this.userRank);
-        this.calculatorOutput = calculateResourcesDays(this.calculatorOutput, this.resourceRecord, this.userResource);
-        System.out.print(this.calculatorOutput);
+        getRank();
+        getStanding();
+        getResources();
+        buildOutputHeader();
+        calculateDaysToMax();
+        calculateSacrificesToMax();
+        calculateResourcesDays();
+        System.out.print(calculatorOutput);
         Utility.inputBuffer();
     }
 
