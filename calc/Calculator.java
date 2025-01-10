@@ -155,7 +155,7 @@ public class Calculator {
                 }
                 currentRankStanding += standingCap - currentRankMaxStanding;
                 currentRankMaxStanding = standingPerRank[currentRank][1];
-                standingToMaxRank += currentRankStanding;
+                standingToMaxRank += currentRankMaxStanding;
             }
         }
     }
