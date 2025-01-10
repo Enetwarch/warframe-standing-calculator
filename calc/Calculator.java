@@ -69,7 +69,7 @@ public class Calculator {
         int validStandingMin = validStandingRange[0];
         int validStandingMax = validStandingRange[1];
         String rankTitle = rankRecord[userRank].rankTitle();
-        System.out.printf("Rank [%d] %s: %,d to %,d standing\n", userRank, rankTitle, validStandingMin, validStandingMax);
+        System.out.printf("Rank %d %s: %,d to %,d standing\n", userRank, rankTitle, validStandingMin, validStandingMax);
         int userStanding = Utility.getUserInputInt("Enter your standing", validStandingMin, validStandingMax);
         System.out.print("\n");
         return userStanding;
