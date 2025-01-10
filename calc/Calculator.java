@@ -53,6 +53,7 @@ public class Calculator {
     private void getRank() {
         StringBuilder getRank = new StringBuilder();
         for (Rank rank : rankRecord) {
+            // Creates a list of all ranks in the syndicate.
             int rankNumber = rank.rankNumber();
             String rankTitle = rank.rankTitle();
             getRank.append(String.format("%d %s\n", rankNumber, rankTitle));
@@ -87,6 +88,7 @@ public class Calculator {
         int resourceMin = 0;
         int resourceMax = Integer.MAX_VALUE;
         for (int i = 0; i < resourceRecord.length; i++) {
+            // Collects resource owned by the user for each resource in the syndicate.
             String resourceName = resourceRecord[i].resourceName();
             int resourceStanding = resourceRecord[i].resourceStanding();
             String message = String.format("%s owned (%,d standing)", resourceName, resourceStanding);
@@ -119,6 +121,7 @@ public class Calculator {
             if (isAlreadyMax) {
                 calculatorOutput.append("Already max rank.\n");
             } else {
+                // Edge case where the user is 1 rank away from max, but already has max standing.
                 calculatorOutput.append("Eligible for max rank.\n");
             }
             calculatorOutput.append("\n");
@@ -134,6 +137,7 @@ public class Calculator {
             if (currentRankStanding < currentRankMaxStanding) {
                 currentRankStanding += standingCap;
             } else {
+                // Increases rank, resets standing while still adding daily standing gains, and sets new max standing.
                 currentRank += 1;
                 if (currentRank == maxRank) {
                     String pluralizedDay = Utility.pluralizeNoun(daysToMaxRank);
@@ -143,7 +147,8 @@ public class Calculator {
                 }
                 currentRankStanding += standingCap - currentRankMaxStanding;
                 currentRankMaxStanding = STANDING_PER_RANK[currentRank][1];
-                standingToMaxRank += currentRankMaxStanding;
+                // Tallies total standing from starting user rank to max rank.
+                standingToMaxRank += currentRankMaxStanding; 
             }
         }
     }
@@ -163,7 +168,7 @@ public class Calculator {
                 int sacrificeAmount = sacrificeAmountArray[i];
                 String sacrificeName = sacrificeNameArray[i];
                 if (sacrificesMap.containsKey(sacrificeName)) {
-                    // Only adds the value instead of completely replacing it.
+                    // Only adds the value on the map instead of completely replacing it.
                     sacrificeAmount = sacrificesMap.get(sacrificeName) + sacrificeAmount;
                 }
                 sacrificesMap.put(sacrificeName, sacrificeAmount);
@@ -176,6 +181,7 @@ public class Calculator {
         String pluralizedSacrifice = Utility.pluralizeNoun(sacrificesList.size()).toUpperCase();
         calculatorOutput.append(String.format("REQUIRED SACRIFICE%s\n", pluralizedSacrifice));
         for (Map.Entry<String, Integer> sacrificesMapEntry : sacrificesList) {
+            // Creates a list of sacrifices and amount needed.
             int sacrificeAmount = sacrificesMapEntry.getValue();
             String sacrificeName = sacrificesMapEntry.getKey();
             String pluralizedSacrificeName = Utility.pluralizeNoun(sacrificeAmount);
@@ -190,22 +196,23 @@ public class Calculator {
         if (noResource || noUserResource) {
             return;
         }
-        int[] resourceStandingTotal = new int[resourceRecord.length];
+        int resourceStandingTotal = 0;
         calculatorOutput.append("STANDING RESOURCES\n");
         for (int i = 0; i < resourceRecord.length; i++) {
+            // Creates a list of resources, amount owned, and total standing it gives.
             String resourceName = resourceRecord[i].resourceName();
             int resourceOwned = userResource[i];
             int resourceStanding = resourceRecord[i].resourceStanding() * resourceOwned;
-            resourceStandingTotal[i] = resourceStanding;
+            resourceStandingTotal += resourceStanding; // Adds all standings to determine days.
             calculatorOutput.append(String.format("%s: %,d owned (%,d standing)\n", resourceName, resourceOwned, resourceStanding));
         }
-        int resourceStandingTotalSum = Utility.arraySumInt(resourceStandingTotal);
-        int days = resourceStandingTotalSum / standingCap;
+        int days = resourceStandingTotal / standingCap;
         if (days > 1) {
             String pluralizedDay = Utility.pluralizeNoun(days);
-            calculatorOutput.append(String.format("Total: %,d standing (%,d day%s)\n", resourceStandingTotalSum, days, pluralizedDay));
+            calculatorOutput.append(String.format("Total: %,d standing (%,d day%s)\n", resourceStandingTotal, days, pluralizedDay));
         } else {
-            calculatorOutput.append(String.format("Total: %,d standing\n", resourceStandingTotalSum));
+            // Too little total standing to determine days.
+            calculatorOutput.append(String.format("Total: %,d standing\n", resourceStandingTotal));
         }
         calculatorOutput.append("\n");
     }
