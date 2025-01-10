@@ -17,38 +17,8 @@ public class Calculator {
     private static int standingCap = 16000;
     private static final int MASTERY_RANK_MIN = 0;
     private static final int MASTERY_RANK_MAX = 34;
-
-    // Faction Syndicates
-    private static int pledgedFaction = -1;
-    private static double[] standingMultiplier = {0, 0, 0, 0, 0, 0};
-    private static final double[][] STANDING_MULTIPLIER_LIST = {
-        {1.00, 0, 0, -1.00, 0.50, -0.50}, // Steel Meridian
-        {0, 1.00, 0.50, -0.50, -1.00, 0}, // Arbiters of Hexis
-        {0, 0.50, 1.00, 0, -0.50, -1.00}, // Cephalon Suda
-        {-1.00, -0.50, 0, 1.00, 0, 0.50}, // The Perrin Sequence
-        {0.50, -1.00, -0.50, 0, 1.00, 0}, // Red Veil
-        {-0.50, 0, -1.00, 0.50, 0, 1.00} // New Loka
-    };
-    private static final int PLEDGED_FACTION_MIN = 1;
-    private static final int PLEDGED_FACTION_MAX = STANDING_MULTIPLIER_LIST.length;
-
-    // Standing per ranks
-    private static final int[][] ONE_RANK_SYNDICATE_STANDING_PER_RANK = {
-        {0, 125000} // Neutral
-    };
-    private static final int[][] STANDARD_SYNDICATE_STANDING_PER_RANK = {
+    private static final int[][] STANDING_PER_RANK = {
         {0, 5000}, // Neutral
-        {0, 22000}, // Rank 1
-        {0, 44000}, // Rank 2
-        {0, 70000}, // Rank 3
-        {0, 99000}, // Rank 4
-        {0, 132000} // Rank 5
-    };
-    private static final int[][] FACTION_SYNDICATE_STANDING_PER_RANK = {
-        {-44000, 0}, // Rank -2
-        {-22000, 0}, // Rank -1
-        {-5000, 5000}, // Neutral
-        {0, 5000}, // Rank 0
         {0, 22000}, // Rank 1
         {0, 44000}, // Rank 2
         {0, 70000}, // Rank 3
@@ -79,24 +49,6 @@ public class Calculator {
         masteryRank = Utility.getUserInputInt("Enter your mastery rank", MASTERY_RANK_MIN, MASTERY_RANK_MAX);
         standingCap += masteryRank * 500; // Standing cap starts at 16000 and increases by 500 for each mastery rank.
         System.out.print("\n");
-    }
-
-    public static void getPledgedFaction() {
-        pledgedFaction = Utility.getUserInputInt("Enter pledged faction", PLEDGED_FACTION_MIN, PLEDGED_FACTION_MAX);
-        int pledgedFactionIndex = pledgedFaction - 1;
-        standingMultiplier = STANDING_MULTIPLIER_LIST[pledgedFactionIndex];
-        System.out.print("\n"); 
-    }
-
-    private static int[][] getStandingPerRank(Rank[] rankRecord) {
-        int totalRanks = rankRecord.length;
-        if (totalRanks >= 2 && totalRanks <= 6) {
-            return STANDARD_SYNDICATE_STANDING_PER_RANK;
-        } else if (totalRanks == 9) {
-            return FACTION_SYNDICATE_STANDING_PER_RANK;
-        } else {
-            return ONE_RANK_SYNDICATE_STANDING_PER_RANK;
-        }
     }
 
     private static int getRank(Rank[] rankRecord) {
@@ -280,12 +232,11 @@ public class Calculator {
 
     // Main instance method
     public void calculateToConsole() {
-        this.standingPerRank = getStandingPerRank(this.rankRecord);
         this.userRank = getRank(this.rankRecord);
-        this.userStanding = getStanding(this.rankRecord, this.standingPerRank, this.userRank);
+        this.userStanding = getStanding(this.rankRecord, STANDING_PER_RANK, this.userRank);
         this.userResource = getResources(this.resourceRecord);
         printOutputHeader(masteryRank, standingCap, this.syndicateName);
-        calculateDaysToMax(this.rankRecord, this.userRank, this.userStanding, this.standingPerRank);
+        calculateDaysToMax(this.rankRecord, this.userRank, this.userStanding, STANDING_PER_RANK);
         calculateSacrificesToMax(this.sacrificeRecord, this.userRank);
         calculateResourcesDays(this.resourceRecord, this.userResource);
         Utility.inputBuffer();
