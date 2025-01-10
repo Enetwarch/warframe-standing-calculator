@@ -28,7 +28,7 @@ public class Main {
     private static void getSyndicateOption() {
         while (true) {
             Utility.printNumberedArray(SYNDICATE_OPTIONS);
-            System.out.print("[0] Exit Program\n");
+            System.out.print("0 Exit Program\n");
             int userInput = Utility.getUserInputInt("Choose a syndicate to calculate", SYNDICATE_OPTIONS_MIN, SYNDICATE_OPTIONS_MAX);
             System.out.print("\n");
             switch (userInput) {

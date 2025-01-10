@@ -13,12 +13,12 @@ public class Utility {
 
     // Input helper method
     private static void inputMessage(String message) {
-        System.out.printf("%s: >> ", message);
+        System.out.printf("%s: ", message);
     }
 
     // getUserInputInt Helper method
     private static void inputErrorInt(int min, int max) {
-        System.out.printf("%s. Only accepts integers %d to %d.\n", INPUT_ERROR, min, max);
+        System.out.printf("%s. Accepts integers %d to %d.\n", INPUT_ERROR, min, max);
     }
 
     public static int getUserInputInt(String message, int min, int max) {
@@ -41,43 +41,15 @@ public class Utility {
         }
     }
 
-    // getUserInputString Helper method
-    private static void inputErrorString(String[] validInputs) {
-        StringBuilder inputErrorString = new StringBuilder();
-        inputErrorString.append(String.format("%s. Only accepts: ", INPUT_ERROR));
-        int validInputsBeforeLast = validInputs.length - 1;
-        for (int i = 0; i < validInputsBeforeLast; i++) {
-            String validInput = validInputs[i];
-            inputErrorString.append(String.format("%s, ", validInput));
-        }
-        String lastValidInput = validInputs[validInputs.length - 1];
-        inputErrorString.append(String.format("or %s.\n", lastValidInput));
-        System.out.print(inputErrorString);
-    }
-
-    public static String getUserInputString(String message, String[] validInputs) {
-        String userInput;
-        while (true) {
-            inputMessage(message);
-            userInput = scanner.nextLine();
-            for (String validInput : validInputs) {
-                if (userInput.equals(validInput)) {
-                    return userInput;
-                }
-            }
-            inputErrorString(validInputs);
-        }
-    }
-
     public static boolean getUserInputBoolean(String message) {
         String userInput;
         while (true) {
-            System.out.printf("%s? (y/n) >> ", message);
+            System.out.printf("%s? (y/n): ", message);
             userInput = scanner.nextLine().toLowerCase();
             switch (userInput) {
                 case "y" -> { return true; }
                 case "n" -> { return false; }
-                default -> System.out.printf("%s. Enter y or n.\n", INPUT_ERROR);
+                default -> System.out.printf("%s. Accepts y or n.\n", INPUT_ERROR);
             }
         }
     }
@@ -96,7 +68,7 @@ public class Utility {
     public static void printNumberedArray(String[] array) {
         StringBuilder numberedArray = new StringBuilder();
         for (int i = 0; i < array.length; i++) {
-            numberedArray.append(String.format("[%d] %s\n", i + 1, array[i]));
+            numberedArray.append(String.format("%d %s\n", i + 1, array[i]));
         }
         System.out.print(numberedArray);
     }

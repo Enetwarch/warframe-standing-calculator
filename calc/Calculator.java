@@ -4,7 +4,6 @@ import data.Data.Resource;
 import data.Data.Sacrifice;
 import data.Data.Syndicates;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,6 @@ public class Calculator {
     private final Rank[] rankRecord;
     private final Sacrifice[] sacrificeRecord;
     private final Resource[] resourceRecord;
-    private int[][] standingPerRank;
     private int userRank;
     private int userStanding;
     private int[] userResource;
@@ -52,18 +50,16 @@ public class Calculator {
     }
 
     private static int getRank(Rank[] rankRecord) {
-        if (rankRecord.length == 1) {
-            return 0;
+        StringBuilder getRank = new StringBuilder();
+        for (Rank rank : rankRecord) {
+            int rankNumber = rank.rankNumber();
+            String rankTitle = rank.rankTitle();
+            getRank.append(String.format("%d %s\n", rankNumber, rankTitle));
         }
-        String[] validRanks = new String[rankRecord.length];
-        for (int i = 0; i < rankRecord.length; i++) {
-            String rankNumber = rankRecord[i].rankNumber();
-            String rankTitle = rankRecord[i].rankTitle();
-            System.out.printf("[%s] %s\n", rankNumber, rankTitle);
-            validRanks[i] = rankNumber;
-        }
-        String userInput = Utility.getUserInputString("Enter your rank", validRanks);
-        int userRank = Arrays.asList(validRanks).indexOf(userInput);
+        System.out.print(getRank);
+        int rankMin = rankRecord[0].rankNumber();
+        int rankMax = rankRecord[rankRecord.length - 1].rankNumber();
+        int userRank = Utility.getUserInputInt("Enter your rank", rankMin, rankMax);
         System.out.print("\n");
         return userRank;
     }
@@ -72,9 +68,8 @@ public class Calculator {
         int[] validStandingRange = standingPerRank[userRank];
         int validStandingMin = validStandingRange[0];
         int validStandingMax = validStandingRange[1];
-        String rankNumber = rankRecord[userRank].rankNumber();
         String rankTitle = rankRecord[userRank].rankTitle();
-        System.out.printf("Rank [%s] %s: %,d to %,d standing\n", rankNumber, rankTitle, validStandingMin, validStandingMax);
+        System.out.printf("Rank [%d] %s: %,d to %,d standing\n", userRank, rankTitle, validStandingMin, validStandingMax);
         int userStanding = Utility.getUserInputInt("Enter your standing", validStandingMin, validStandingMax);
         System.out.print("\n");
         return userStanding;
@@ -106,21 +101,20 @@ public class Calculator {
     ////// OUTPUT METHODS
 
 
-    private static void printOutputHeader(int masteryRank, int standingCap, String syndicateName) {
+    private static void printOutputHeader(int masteryRank, int standingCap) {
         StringBuilder outputHeader = new StringBuilder();
         outputHeader.append(String.format("Mastery Rank: %d\n", masteryRank));
         outputHeader.append(String.format("Daily Standing Cap: %,d\n", standingCap));
         outputHeader.append("\n");
-        outputHeader.append(String.format("%s\n".toUpperCase(), syndicateName));
         System.out.print(outputHeader);
     }
 
-    private static void calculateDaysToMax(Rank[] rankRecord, int userRank, int userStanding, int[][] standingPerRank) {
-        String rankNumber = rankRecord[userRank].rankNumber();
+    private static void calculateDaysToMax(Rank[] rankRecord, String syndicateName, int userRank, int userStanding, int[][] standingPerRank) {
         String rankTitle = rankRecord[userRank].rankTitle();
         int userRankMaxStanding = standingPerRank[userRank][1];
         StringBuilder daysToMax = new StringBuilder();
-        daysToMax.append(String.format("Rank: [%s] %s\n", rankNumber, rankTitle));
+        daysToMax.append(String.format("%s\n".toUpperCase(), syndicateName));
+        daysToMax.append(String.format("Rank: %d %s\n", userRank, rankTitle));
         daysToMax.append(String.format("Standing: %,d out of %,d\n", userStanding, userRankMaxStanding));
         int maxRank = rankRecord.length - 1;
         boolean isAlreadyMax = userRank == maxRank;
@@ -186,13 +180,13 @@ public class Calculator {
         // Sorts the list in ascending order based on the integer value.
         sacrificesList.sort((entry1, entry2) -> Integer.compare(entry1.getValue(), entry2.getValue()));
         StringBuilder sacrificesToMax = new StringBuilder();
-        String pluralizedSacrifice = Utility.pluralizeNoun(sacrificesList.size());
-        sacrificesToMax.append(String.format("Required sacrifice%s\n".toUpperCase(), pluralizedSacrifice));
+        String pluralizedSacrifice = Utility.pluralizeNoun(sacrificesList.size()).toUpperCase();
+        sacrificesToMax.append(String.format("REQUIRED SACRIFICE%s\n", pluralizedSacrifice));
         for (Map.Entry<String, Integer> sacrificesMapEntry : sacrificesList) {
             int sacrificeAmount = sacrificesMapEntry.getValue();
             String sacrificeName = sacrificesMapEntry.getKey();
             String pluralizedSacrificeName = Utility.pluralizeNoun(sacrificeAmount);
-            sacrificesToMax.append(String.format("=> %,d %s%s\n", sacrificeAmount, sacrificeName, pluralizedSacrificeName));
+            sacrificesToMax.append(String.format("%,d %s%s\n", sacrificeAmount, sacrificeName, pluralizedSacrificeName));
         }
         sacrificesToMax.append("\n");
         System.out.print(sacrificesToMax);
@@ -206,7 +200,7 @@ public class Calculator {
         }
         int[] resourceStandingTotal = new int[resourceRecord.length];
         StringBuilder resourcesDays = new StringBuilder();
-        resourcesDays.append("Standing resources\n".toUpperCase());
+        resourcesDays.append("STANDING RESOURCES\n");
         for (int i = 0; i < resourceRecord.length; i++) {
             String resourceName = resourceRecord[i].resourceName();
             int resourceOwned = userResource[i];
@@ -235,8 +229,8 @@ public class Calculator {
         this.userRank = getRank(this.rankRecord);
         this.userStanding = getStanding(this.rankRecord, STANDING_PER_RANK, this.userRank);
         this.userResource = getResources(this.resourceRecord);
-        printOutputHeader(masteryRank, standingCap, this.syndicateName);
-        calculateDaysToMax(this.rankRecord, this.userRank, this.userStanding, STANDING_PER_RANK);
+        printOutputHeader(masteryRank, standingCap);
+        calculateDaysToMax(this.rankRecord, this.syndicateName, this.userRank, this.userStanding, STANDING_PER_RANK);
         calculateSacrificesToMax(this.sacrificeRecord, this.userRank);
         calculateResourcesDays(this.resourceRecord, this.userResource);
         Utility.inputBuffer();

@@ -4,15 +4,7 @@ import calc.Calculator;
 public class Data {
 
     public enum Syndicates {
-        FACTION_SYNDICATES("Faction Syndicates"),
-        STEEL_MERIDIAN("Steel Meridian"),
-        ARBITERS_OF_HEXIS("Arbiters of Hexis"),
-        CEPHALON_SUDA("Cephalon Suda"),
-        THE_PERRIN_SEQUENCE("The Perrin Sequence"),
-        RED_VEIL("Red Veil"),
-        NEW_LOKA("New Loka"),
         CONCLAVE("Conclave"),
-        CEPHALON_SIMARIS("Cephalon Simaris"),
         OSTRON("Ostron"),
         THE_QUILLS("The Quills"),
         SOLARIS_UNITED("Solaris United"),
@@ -31,7 +23,8 @@ public class Data {
             return syndicateName;
         }
     }
-    public record Rank(String rankNumber, String rankTitle) {} // Ranks
+
+    public record Rank(int rankNumber, String rankTitle) {} // Ranks
     public record Sacrifice(String[] sacrificeName, int[] sacrificeAmount) {} // Sacrifice resources
     public record Resource(String resourceName, int resourceStanding) {} // Standing resources
 
@@ -39,207 +32,15 @@ public class Data {
     ////// SYNDICATE DATA
 
 
-    // Steel Meridian
-    private static final Syndicates steelMeridianSyndicateName = Syndicates.STEEL_MERIDIAN;
-    private static final Rank[] steelMeridianRankRecord = {
-        new Rank("-2", "Enemy"),
-        new Rank("-1", "Outcast"),
-        new Rank("-", "Neutral"),
-        new Rank("0", "Initiation"),
-        new Rank("1", "Brave"),
-        new Rank("2", "Valiant"),
-        new Rank("3", "Defender"),
-        new Rank("4", "Protector"),
-        new Rank("5", "General")
-    };
-    private static final Sacrifice[] steelMeridianSacrificeRecord = {
-        new Sacrifice(new String[] {"Orokin Catalyst", "Credit"}, new int[] {1, 100000}),
-        new Sacrifice(new String[] {"Forma", "Credit"}, new int[] {1, 50000}),
-        new Sacrifice(new String[] {"Salvage", "Credit"}, new int[] {1000, 10000}),
-        new Sacrifice(new String[] {"Morphic", "Credit"}, new int[] {2, 30000}),
-        new Sacrifice(new String[] {"Forma", "Credit"}, new int[] {1, 50000}),
-        new Sacrifice(new String[] {"Orokin Catalyst", "Credit"}, new int[] {1, 100000}),
-        new Sacrifice(new String[] {"Aya", "Credit"}, new int[] {2, 250000}),
-        new Sacrifice(new String[] {"Aya", "Credit"}, new int[] {3, 500000})
-    };
-    private static final Resource[] steelMeridianResourceRecord = {
-        new Resource("Insignia", 500),
-        new Resource("Defender Insignia", 1000),
-        new Resource("General Insignia", 5000)
-    };
-    public static final Calculator steelMeridian = new Calculator(steelMeridianSyndicateName, steelMeridianRankRecord, steelMeridianSacrificeRecord, steelMeridianResourceRecord);
-
-
-
-    // Arbiters of Hexis
-    private static final Syndicates arbitersOfHexisSyndicateName = Syndicates.ARBITERS_OF_HEXIS;
-    private static final Rank[] arbitersOfHexisRankRecord = {
-        new Rank("-2", "Fraud"),
-        new Rank("-1", "Deceiver"),
-        new Rank("-", "Neutral"),
-        new Rank("0", "Initiation"),
-        new Rank("1", "Principled"),
-        new Rank("2", "Authentic"),
-        new Rank("3", "Lawful"),
-        new Rank("4", "Crusader"),
-        new Rank("5", "Maxim")
-    };
-    private static final Sacrifice[] arbitersOfHexisSacrificeRecord = {
-        new Sacrifice(new String[] {"Orokin Reactor", "Credit"}, new int[] {1, 100000}),
-        new Sacrifice(new String[] {"Forma", "Credit"}, new int[] {1, 50000}),
-        new Sacrifice(new String[] {"Alloy Plate", "Credit"}, new int[] {500, 10000}),
-        new Sacrifice(new String[] {"Gallium", "Credit"}, new int[] {2, 30000}),
-        new Sacrifice(new String[] {"Forma", "Credit"}, new int[] {1, 50000}),
-        new Sacrifice(new String[] {"Orokin Reactor", "Credit"}, new int[] {1, 100000}),
-        new Sacrifice(new String[] {"Aya", "Credit"}, new int[] {2, 250000}),
-        new Sacrifice(new String[] {"Aya", "Credit"}, new int[] {3, 500000})
-    };
-    private static final Resource[] arbitersOfHexisResourceRecord = {
-        new Resource("Medallion", 500),
-        new Resource("Lawful Medallion", 1000),
-        new Resource("Maxim Medallion", 5000)
-    };
-    public static final Calculator arbitersOfHexis = new Calculator(arbitersOfHexisSyndicateName, arbitersOfHexisRankRecord, arbitersOfHexisSacrificeRecord, arbitersOfHexisResourceRecord);
-
-
-
-    // Cephalon Suda
-    private static final Syndicates cephalonSudaSyndicateName = Syndicates.CEPHALON_SUDA;
-    private static final Rank[] cephalonSudaRankRecord = {
-        new Rank("-2", "Waste"),
-        new Rank("-1", "Debris"),
-        new Rank("-", "Neutral"),
-        new Rank("0", "Initiation"),
-        new Rank("1", "Competent"),
-        new Rank("2", "Intriguing"),
-        new Rank("3", "Intelligent"),
-        new Rank("4", "Wise"),
-        new Rank("5", "Genius")
-    };
-    private static final Sacrifice[] cephalonSudaSacrificeRecord = {
-        new Sacrifice(new String[] {"Orokin Catalyst", "Credit"}, new int[] {1, 100000}),
-        new Sacrifice(new String[] {"Forma", "Credit"}, new int[] {1, 50000}),
-        new Sacrifice(new String[] {"Circuit", "Credit"}, new int[] {500, 10000}),
-        new Sacrifice(new String[] {"Control Module", "Credit"}, new int[] {2, 30000}),
-        new Sacrifice(new String[] {"Forma", "Credit"}, new int[] {1, 50000}),
-        new Sacrifice(new String[] {"Orokin Catalyst", "Credit"}, new int[] {1, 100000}),
-        new Sacrifice(new String[] {"Aya", "Credit"}, new int[] {2, 250000}),
-        new Sacrifice(new String[] {"Aya", "Credit"}, new int[] {3, 500000})
-    };
-    private static final Resource[] cephalonSudaResourceRecord = {
-        new Resource("Datum", 500),
-        new Resource("Intriguin Datum", 1000),
-        new Resource("Genius Datum", 5000)
-    };
-    public static final Calculator cephalonSuda = new Calculator(cephalonSudaSyndicateName, cephalonSudaRankRecord, cephalonSudaSacrificeRecord, cephalonSudaResourceRecord);
-
-
-
-    // The Perrin Sequence
-    private static final Syndicates thePerrinSequenceSyndicateName = Syndicates.THE_PERRIN_SEQUENCE;
-    private static final Rank[] thePerrinSequenceRankRecord = {
-        new Rank("-2", "Write-Off"),
-        new Rank("-1", "Liability"),
-        new Rank("-", "Neutral"),
-        new Rank("0", "Initiation"),
-        new Rank("1", "Associate"),
-        new Rank("2", "Senior Associate"),
-        new Rank("3", "Executive"),
-        new Rank("4", "Senior Executive"),
-        new Rank("5", "Partner")
-    };
-    private static final Sacrifice[] thePerrinSequenceSacrificeRecord = {
-        new Sacrifice(new String[] {"Orokin Reactor", "Credit"}, new int[] {1, 100000}),
-        new Sacrifice(new String[] {"Forma", "Credit"}, new int[] {1, 50000}),
-        new Sacrifice(new String[] {"Polymer Bundle", "Credit"}, new int[] {100, 10000}),
-        new Sacrifice(new String[] {"Detonite Ampule", "Credit"}, new int[] {2, 30000}),
-        new Sacrifice(new String[] {"Forma", "Credit"}, new int[] {1, 50000}),
-        new Sacrifice(new String[] {"Orokin Reactor", "Credit"}, new int[] {1, 100000}),
-        new Sacrifice(new String[] {"Aya", "Credit"}, new int[] {2, 250000}),
-        new Sacrifice(new String[] {"Aya", "Credit"}, new int[] {3, 500000})
-    };
-    private static final Resource[] thePerrinSequenceResourceRecord = {
-        new Resource("Quittance", 500),
-        new Resource("Executive Quittance", 1000),
-        new Resource("Partner Quittance", 5000)
-    };
-    public static final Calculator thePerrinSequence = new Calculator(thePerrinSequenceSyndicateName, thePerrinSequenceRankRecord, thePerrinSequenceSacrificeRecord, thePerrinSequenceResourceRecord);
-
-
-
-    // Red Veil
-    private static final Syndicates redVeilSyndicateName = Syndicates.RED_VEIL;
-    private static final Rank[] redVeilRankRecord = {
-        new Rank("-2", "Corrupt"),
-        new Rank("-1", "Suspect"),
-        new Rank("-", "Neutral"),
-        new Rank("0", "Initiation"),
-        new Rank("1", "Respected"),
-        new Rank("2", "Honored"),
-        new Rank("3", "Esteemed"),
-        new Rank("4", "Revered"),
-        new Rank("5", "Exalted")
-    };
-    private static final Sacrifice[] redVeilSacrificeRecord = {
-        new Sacrifice(new String[] {"Orokin Catalyst", "Credit"}, new int[] {1, 100000}),
-        new Sacrifice(new String[] {"Forma", "Credit"}, new int[] {1, 50000}),
-        new Sacrifice(new String[] {"Alloy Plate", "Credit"}, new int[] {500, 10000}),
-        new Sacrifice(new String[] {"Gallium", "Credit"}, new int[] {2, 30000}),
-        new Sacrifice(new String[] {"Forma", "Credit"}, new int[] {1, 50000}),
-        new Sacrifice(new String[] {"Orokin Catalyst", "Credit"}, new int[] {1, 100000}),
-        new Sacrifice(new String[] {"Aya", "Credit"}, new int[] {2, 250000}),
-        new Sacrifice(new String[] {"Aya", "Credit"}, new int[] {3, 500000})
-    };
-    private static final Resource[] redVeilResourceRecord = {
-        new Resource("Mark", 500),
-        new Resource("Honored Mark", 1000),
-        new Resource("Exalted Mark", 5000)
-    };
-    public static final Calculator redVeil = new Calculator(redVeilSyndicateName, redVeilRankRecord, redVeilSacrificeRecord, redVeilResourceRecord);
-
-
-
-    // New Loka
-    private static final Syndicates newLokaSyndicateName = Syndicates.NEW_LOKA;
-    private static final Rank[] newLokaRankRecord = {
-        new Rank("-2", "Exiled"),
-        new Rank("-1", "Condemned"),
-        new Rank("-", "Neutral"),
-        new Rank("0", "Initiation"),
-        new Rank("1", "Humane"),
-        new Rank("2", "Bountiful"),
-        new Rank("3", "Benevolent"),
-        new Rank("4", "Pure"),
-        new Rank("5", "Flawless")
-    };
-    private static final Sacrifice[] newLokaSacrificeRecord = {
-        new Sacrifice(new String[] {"Orokin Reactor", "Credit"}, new int[] {1, 100000}),
-        new Sacrifice(new String[] {"Forma", "Credit"}, new int[] {1, 50000}),
-        new Sacrifice(new String[] {"Ferrite", "Credit"}, new int[] {1000, 10000}),
-        new Sacrifice(new String[] {"Fieldron Sample", "Credit"}, new int[] {2, 30000}),
-        new Sacrifice(new String[] {"Forma", "Credit"}, new int[] {1, 50000}),
-        new Sacrifice(new String[] {"Orokin Reactor", "Credit"}, new int[] {1, 100000}),
-        new Sacrifice(new String[] {"Aya", "Credit"}, new int[] {2, 250000}),
-        new Sacrifice(new String[] {"Aya", "Credit"}, new int[] {3, 500000})
-    };
-    private static final Resource[] newLokaResourceRecord = {
-        new Resource("Seed", 500),
-        new Resource("Bountiful Seed", 1000),
-        new Resource("Flawless Seed", 5000)
-    };
-    public static final Calculator newLoka = new Calculator(newLokaSyndicateName, newLokaRankRecord, newLokaSacrificeRecord, newLokaResourceRecord);
-
-
-
     // Conclave
     private static final Syndicates conclaveSyndicateName = Syndicates.CONCLAVE;
     private static final Rank[] conclaveRankRecord = {
-        new Rank("0", "Neutral"),
-        new Rank("1", "Mistral"),
-        new Rank("2", "Whirlwind"),
-        new Rank("3", "Tempest"),
-        new Rank("4", "Hurricane"),
-        new Rank("5", "Typhoon")
+        new Rank(0, "Neutral"),
+        new Rank(1, "Mistral"),
+        new Rank(2, "Whirlwind"),
+        new Rank(3, "Tempest"),
+        new Rank(4, "Hurricane"),
+        new Rank(5, "Typhoon")
     };
     private static final Sacrifice[] conclaveSacrificeRecord = {
         new Sacrifice(new String[] {"Neurode", "Credit"}, new int[] {2, 30000}),
@@ -253,26 +54,15 @@ public class Data {
 
 
 
-    // Cephalon Simaris
-    private static final Syndicates cephalonSimarisSyndicateName = Syndicates.CEPHALON_SIMARIS;
-    private static final Rank[] cephalonSimarisRankRecord = {
-        new Rank("0", "Neutral")
-    };
-    private static final Sacrifice[] cephalonSimarisSacrificeRecord = {}; // No sacrifices for Cephalon Simaris
-    private static final Resource[] cephalonSimarisResourceRecord = {}; // No resources for Cephalon Simaris 
-    public static final Calculator cephalonSimaris = new Calculator(cephalonSimarisSyndicateName, cephalonSimarisRankRecord, cephalonSimarisSacrificeRecord, cephalonSimarisResourceRecord);
-
-
-
     // Ostron
     private static final Syndicates ostronSyndicateName = Syndicates.OSTRON;
     private static final Rank[] ostronRankRecord = {
-        new Rank("0", "Neutral"),
-        new Rank("1", "Offworlder"),
-        new Rank("2", "Visitor"),
-        new Rank("3", "Trusted"),
-        new Rank("4", "Surah"),
-        new Rank("5", "Kin")
+        new Rank(0, "Neutral"),
+        new Rank(1, "Offworlder"),
+        new Rank(2, "Visitor"),
+        new Rank(3, "Trusted"),
+        new Rank(4, "Surah"),
+        new Rank(5, "Kin")        
     };
     private static final Sacrifice[] ostronSacrificeRecord = {
         new Sacrifice(new String[] {"Nistlepod", "Iradite", "Grokdrul", "Credit"}, new int[] {25, 25, 25, 10000}),
@@ -296,12 +86,12 @@ public class Data {
     // The Quills
     private static final Syndicates theQuillsSyndicateName = Syndicates.THE_QUILLS;
     private static final Rank[] theQuillsRankRecord = {
-        new Rank("0", "Neutral"),
-        new Rank("1", "Mote"),
-        new Rank("2", "Observer"),
-        new Rank("3", "Adherent"),
-        new Rank("4", "Instrument"),
-        new Rank("5", "Architect")
+        new Rank(0, "Neutral"),
+        new Rank(1, "Offworlder"),
+        new Rank(2, "Visitor"),
+        new Rank(3, "Trusted"),
+        new Rank(4, "Surah"),
+        new Rank(5, "Kin")
     };
     private static final Sacrifice[] theQuillsSacrificeRecord = {
         new Sacrifice(new String[] {"Intact Sentient Core", "Credit"}, new int[] {10, 30000}),
@@ -323,12 +113,12 @@ public class Data {
     // Solaris United
     private static final Syndicates solarisUnitedSyndicateName = Syndicates.SOLARIS_UNITED;
     private static final Rank[] solarisUnitedRankRecord = {
-        new Rank("0", "Neutral"),
-        new Rank("1", "Outworlder"),
-        new Rank("2", "Rapscallion"),
-        new Rank("3", "Doer"),
-        new Rank("4", "Cove"),
-        new Rank("5", "Old Mate")
+        new Rank(0, "Neutral"),
+        new Rank(1, "Outworlder"),
+        new Rank(2, "Rapscallion"),
+        new Rank(3, "Doer"),
+        new Rank(4, "Cove"),
+        new Rank(5, "Old Mate")        
     };
     private static Sacrifice[] solarisUnitedSacrificeRecord = {
         new Sacrifice(new String[] {"Training Debt-Bond", "Credit"}, new int[] {2, 10000}),
@@ -351,12 +141,12 @@ public class Data {
     // Vox Solaris
     private static final Syndicates voxSolarisSyndicateName = Syndicates.VOX_SOLARIS;
     private static final Rank[] voxSolarisRankRecord = {
-        new Rank("0", "Neutral"),
-        new Rank("1", "Operative"),
-        new Rank("2", "Agent"),
-        new Rank("3", "Hand"),
-        new Rank("4", "Instrument"),
-        new Rank("5", "Shadow")
+        new Rank(0, "Neutral"),
+        new Rank(1, "Operative"),
+        new Rank(2, "Agent"),
+        new Rank(3, "Hand"),
+        new Rank(4, "Instrument"),
+        new Rank(5, "Shadow")        
     };
     private static final Sacrifice[] voxSolarisSacrificeRecord = {
         new Sacrifice(new String[] {"Calda Toroid", "Vega Toroid", "Sola Toroid", "Credit"}, new int[] {1, 1, 1, 50000}),
@@ -380,12 +170,12 @@ public class Data {
     // Ventkids
     private static final Syndicates ventkidsSyndicateName = Syndicates.VENTKIDS;
     private static final Rank[] ventkidsRankRecord = {
-        new Rank("0", "Neutral"),
-        new Rank("1", "Operative"),
-        new Rank("2", "Agent"),
-        new Rank("3", "Hand"),
-        new Rank("4", "Instrument"),
-        new Rank("5", "Shadow")
+        new Rank(0, "Neutral"),
+        new Rank(1, "Operative"),
+        new Rank(2, "Agent"),
+        new Rank(3, "Hand"),
+        new Rank(4, "Instrument"),
+        new Rank(5, "Shadow")        
     };
     private static final Sacrifice[] ventkidsSacrificeRecord = {}; // No sacrifices for Ventkids
     private static final Resource[] ventkidsResourceRecord = {}; // No resources for Ventkids
@@ -396,12 +186,12 @@ public class Data {
     // Entrati
     private static final Syndicates entratiSyndicateName = Syndicates.ENTRATI;
     private static final Rank[] entratiRankRecord = {
-        new Rank("0", "Neutral"),
-        new Rank("1", "Stranger"),
-        new Rank("2", "Acquaintance"),
-        new Rank("3", "Associate"),
-        new Rank("4", "Friend"),
-        new Rank("5", "Family")
+        new Rank(0, "Neutral"),
+        new Rank(1, "Stranger"),
+        new Rank(2, "Acquaintance"),
+        new Rank(3, "Associate"),
+        new Rank(4, "Friend"),
+        new Rank(5, "Family")        
     };
     private static final Sacrifice[] entratiSacrificeRecord = {
         new Sacrifice(new String[] {"Spinal Core Section"}, new int[] {3}),
@@ -425,10 +215,10 @@ public class Data {
     // Necraloid
     private static final Syndicates necraloidSyndicateName = Syndicates.NECRALOID;
     private static final Rank[] necraloidRankRecord = {
-        new Rank("0", "Neutral"),
-        new Rank("1", "Clearance: Agnesis"),
-        new Rank("2", "Clearance: Modus"),
-        new Rank("3", "Clearance: Odima")
+        new Rank(0, "Neutral"),
+        new Rank(1, "Clearance: Agnesis"),
+        new Rank(2, "Clearance: Modus"),
+        new Rank(3, "Clearance: Odima")        
     };
     private static final Sacrifice[] necraloidSacrificeRecord = {
         new Sacrifice(new String[] {"Orokin Orientation Matrix", "Void Trace", "Zymos Barrel Blueprint", "Father Token"}, new int[] {10, 150, 1, 20}),
@@ -447,12 +237,12 @@ public class Data {
     // The Holdfasts
     private static final Syndicates theHoldfastsSyndicateName = Syndicates.THE_HOLDFASTS;
     private static final Rank[] theHoldfastsRankRecord = {
-        new Rank("0", "Neutral"),
-        new Rank("1", "Fallen"),
-        new Rank("2", "Watcher"),
-        new Rank("3", "Guardian"),
-        new Rank("4", "Seraph"),
-        new Rank("5", "Angel")
+        new Rank(0, "Neutral"),
+        new Rank(1, "Fallen"),
+        new Rank(2, "Watcher"),
+        new Rank(3, "Guardian"),
+        new Rank(4, "Seraph"),
+        new Rank(5, "Angel")        
     };
     private static final Sacrifice[] theHoldfastsSacrificeRecord = {
         new Sacrifice(new String[] {"Voidplume Down", "Ferrite", "Alloy Plate", "Credit"}, new int[] {5, 2000, 2000, 10000}),
@@ -475,12 +265,12 @@ public class Data {
     // Cavia
     private static final Syndicates caviaSyndicateName = Syndicates.CAVIA;
     private static final Rank[] caviaRankRecord = {
-        new Rank("0", "Neutral"),
-        new Rank("1", "Assistant"),
-        new Rank("2", "Researcher"),
-        new Rank("3", "Colleague"),
-        new Rank("4", "Scholar"),
-        new Rank("5", "Illuminate")
+        new Rank(0, "Neutral"),
+        new Rank(1, "Assistant"),
+        new Rank(2, "Researcher"),
+        new Rank(3, "Colleague"),
+        new Rank(4, "Scholar"),
+        new Rank(5, "Illuminate")        
     };
     private static final Sacrifice[] caviaSacrificeRecord = {
         new Sacrifice(new String[] {"Shrill Voca", "Entrati Obols", "Rubedo", "Credit"}, new int[] {3, 300, 11000, 10000}),
@@ -501,12 +291,12 @@ public class Data {
     // The Hex
     private static final Syndicates theHexSyndicateName = Syndicates.THE_HEX;
     private static final Rank[] theHexRankRecord = {
-        new Rank("0", "Neutral"),
-        new Rank("1", "Leftovers"),
-        new Rank("2", "Fresh Slice"),
-        new Rank("3", "2-For-1"),
-        new Rank("4", "Hot & Fresh"),
-        new Rank("5", "Pizza Party")
+        new Rank(0, "Neutral"),
+        new Rank(1, "Leftovers"),
+        new Rank(2, "Fresh Slice"),
+        new Rank(3, "2-For-1"),
+        new Rank(4, "Hot & Fresh"),
+        new Rank(5, "Pizza Party")        
     };
     private static final Sacrifice[] theHexSacrificeRecord = {
         new Sacrifice(new String[] {"Efervon Sample", "Hollvanian Pitchweave Fragment", "Hollar"}, new int[] {15, 5, 10000}),
