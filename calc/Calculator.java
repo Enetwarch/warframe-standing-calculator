@@ -133,7 +133,6 @@ public class Calculator {
         int daysToMaxRank = 0;
         int standingToMaxRank = currentRankMaxStanding - currentRankStanding;
         while(true) {
-            daysToMaxRank += 1; 
             if (currentRankStanding < currentRankMaxStanding) {
                 currentRankStanding += standingCap;
             } else {
@@ -150,6 +149,7 @@ public class Calculator {
                 // Tallies total standing from starting user rank to max rank.
                 standingToMaxRank += currentRankMaxStanding; 
             }
+            daysToMaxRank += 1;
         }
     }
     
