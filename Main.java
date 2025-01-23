@@ -48,7 +48,7 @@ public class Main {
         }
     }
 
-    public static void terminateProgram() {
+    private static void terminateProgram() {
         StringBuilder terminateProgram = new StringBuilder();
         terminateProgram.append("Warframe Standing Calculator\n");
         terminateProgram.append("Code by: Enetwarch\n");
