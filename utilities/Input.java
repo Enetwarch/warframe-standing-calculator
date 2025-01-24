@@ -25,7 +25,7 @@ public class Input {
                 inputErrorInt(min, max); 
                 continue;
             } finally {
-                scanner.nextLine(); // Absorbs \n
+                scanner.nextLine();
             }
             if (userInput >= min && userInput <= max) {
                 return userInput; 
@@ -49,7 +49,6 @@ public class Input {
     }
 
     public static void inputBuffer() {
-        // Gives users time to read printed output.
         System.out.print("Press enter to proceed. ");
         scanner.nextLine();
         System.out.print("\n");
