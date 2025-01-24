@@ -1,8 +1,8 @@
 package calc;
-import data.Data.Rank;
-import data.Data.Resource;
-import data.Data.Sacrifice;
-import data.Data.Syndicates;
+import data.Rank;
+import data.Resource;
+import data.Sacrifice;
+import data.Syndicate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +34,7 @@ public class Calculator {
     private int userStanding;
     private int[] userResource;
     private StringBuilder calculatorOutput;
-    public Calculator(Syndicates syndicateName, Rank[] rankRecord, Sacrifice[] sacrificeRecord, Resource[] resourceRecord) {
+    public Calculator(Syndicate syndicateName, Rank[] rankRecord, Sacrifice[] sacrificeRecord, Resource[] resourceRecord) {
         this.syndicateName = syndicateName.getSyndicate();
         this.rankRecord = rankRecord;
         this.sacrificeRecord = sacrificeRecord;

@@ -3,37 +3,9 @@ import calc.Calculator;
 
 public class Data {
 
-    public enum Syndicates {
-        CONCLAVE("Conclave"),
-        OSTRON("Ostron"),
-        THE_QUILLS("The Quills"),
-        SOLARIS_UNITED("Solaris United"),
-        VOX_SOLARIS("Vox Solaris"),
-        VENTKIDS("Ventkids"),
-        ENTRATI("Entrati"),
-        NECRALOID("Necraloid"),
-        THE_HOLDFASTS("The Holdfasts"),
-        CAVIA("Cavia"),
-        THE_HEX("The Hex");
-        private final String syndicateName;
-        private Syndicates(String syndicateName) {
-            this.syndicateName = syndicateName;
-        }
-        public String getSyndicate() {
-            return syndicateName;
-        }
-    }
-
-    public record Rank(int rankNumber, String rankTitle) {} // Ranks
-    public record Sacrifice(String[] sacrificeName, int[] sacrificeAmount) {} // Sacrifice resources
-    public record Resource(String resourceName, int resourceStanding) {} // Standing resources
-
-
-    ////// SYNDICATE DATA
-
 
     // Conclave
-    private static final Syndicates CONCLAVE_SYNDICATE_NAME = Syndicates.CONCLAVE;
+    private static final Syndicate CONCLAVE_SYNDICATE_NAME = Syndicate.CONCLAVE;
     private static final Rank[] CONCLAVE_RANK_RECORD = {
         new Rank(0, "Neutral"),
         new Rank(1, "Mistral"),
@@ -55,7 +27,7 @@ public class Data {
 
 
     // Ostron
-    private static final Syndicates OSTRON_SYNDICATE_NAME = Syndicates.OSTRON;
+    private static final Syndicate OSTRON_SYNDICATE_NAME = Syndicate.OSTRON;
     private static final Rank[] OSTRON_RANK_RECORD= {
         new Rank(0, "Neutral"),
         new Rank(1, "Offworlder"),
@@ -84,7 +56,7 @@ public class Data {
 
 
     // The Quills
-    private static final Syndicates THE_QUILLS_SYNDICATE_NAME = Syndicates.THE_QUILLS;
+    private static final Syndicate THE_QUILLS_SYNDICATE_NAME = Syndicate.THE_QUILLS;
     private static final Rank[] THE_QUILLS_RANK_RECORD = {
         new Rank(0, "Neutral"),
         new Rank(1, "Offworlder"),
@@ -111,7 +83,7 @@ public class Data {
 
 
     // Solaris United
-    private static final Syndicates SOLARIS_UNITED_SYNDICATE_NAME = Syndicates.SOLARIS_UNITED;
+    private static final Syndicate SOLARIS_UNITED_SYNDICATE_NAME = Syndicate.SOLARIS_UNITED;
     private static final Rank[] SOLARIS_UNITED_RANK_RECORD = {
         new Rank(0, "Neutral"),
         new Rank(1, "Outworlder"),
@@ -139,7 +111,7 @@ public class Data {
 
 
     // Vox Solaris
-    private static final Syndicates VOX_SOLARIS_SYNDICATE_NAME = Syndicates.VOX_SOLARIS;
+    private static final Syndicate VOX_SOLARIS_SYNDICATE_NAME = Syndicate.VOX_SOLARIS;
     private static final Rank[] VOX_SOLARIS_RANK_RECORD = {
         new Rank(0, "Neutral"),
         new Rank(1, "Operative"),
@@ -168,7 +140,7 @@ public class Data {
 
 
     // Ventkids
-    private static final Syndicates VENTKIDS_SYNDICATE_NAME = Syndicates.VENTKIDS;
+    private static final Syndicate VENTKIDS_SYNDICATE_NAME = Syndicate.VENTKIDS;
     private static final Rank[] VENTKIDS_RANK_RECORD = {
         new Rank(0, "Neutral"),
         new Rank(1, "Operative"),
@@ -184,7 +156,7 @@ public class Data {
 
 
     // Entrati
-    private static final Syndicates ENTRATI_SYNDICATE_NAME = Syndicates.ENTRATI;
+    private static final Syndicate ENTRATI_SYNDICATE_NAME = Syndicate.ENTRATI;
     private static final Rank[] ENTRATI_RANK_RECORD = {
         new Rank(0, "Neutral"),
         new Rank(1, "Stranger"),
@@ -213,7 +185,7 @@ public class Data {
 
 
     // Necraloid
-    private static final Syndicates NECRALOID_SYNDICATE_NAME = Syndicates.NECRALOID;
+    private static final Syndicate NECRALOID_SYNDICATE_NAME = Syndicate.NECRALOID;
     private static final Rank[] NECRALOID_RANK_RECORD = {
         new Rank(0, "Neutral"),
         new Rank(1, "Clearance: Agnesis"),
@@ -235,7 +207,7 @@ public class Data {
 
 
     // The Holdfasts
-    private static final Syndicates THE_HOLDFASTS_SYNDICATE_NAME = Syndicates.THE_HOLDFASTS;
+    private static final Syndicate THE_HOLDFASTS_SYNDICATE_NAME = Syndicate.THE_HOLDFASTS;
     private static final Rank[] THE_HOLDFASTS_RANK_RECORD = {
         new Rank(0, "Neutral"),
         new Rank(1, "Fallen"),
@@ -263,7 +235,7 @@ public class Data {
 
 
     // Cavia
-    private static final Syndicates CAVIA_SYNDICATE_NAME = Syndicates.CAVIA;
+    private static final Syndicate CAVIA_SYNDICATE_NAME = Syndicate.CAVIA;
     private static final Rank[] CAVIA_RANK_RECORD = {
         new Rank(0, "Neutral"),
         new Rank(1, "Assistant"),
@@ -289,7 +261,7 @@ public class Data {
 
 
     // The Hex
-    private static final Syndicates THE_HEX_SYNDICATE_NAME = Syndicates.THE_HEX;
+    private static final Syndicate THE_HEX_SYNDICATE_NAME = Syndicate.THE_HEX;
     private static final Rank[] THE_HEX_RANK_RECORD = {
         new Rank(0, "Neutral"),
         new Rank(1, "Leftovers"),
