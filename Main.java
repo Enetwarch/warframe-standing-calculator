@@ -1,6 +1,7 @@
 import calc.Calculator;
 import data.Data;
-import util.Utility;
+import utilities.Output;
+import utilities.Input;
 
 public class Main {
 
@@ -27,9 +28,9 @@ public class Main {
     // Syndicate menu
     private static void getSyndicateOption() {
         while (true) {
-            Utility.printNumberedArray(SYNDICATE_OPTIONS);
+            Output.printNumberedArray(SYNDICATE_OPTIONS);
             System.out.print("0 Exit Program\n");
-            int userInput = Utility.getUserInputInt("Choose a syndicate to calculate", SYNDICATE_OPTIONS_MIN, SYNDICATE_OPTIONS_MAX);
+            int userInput = Input.getUserInputInt("Choose a syndicate to calculate", SYNDICATE_OPTIONS_MIN, SYNDICATE_OPTIONS_MAX);
             System.out.print("\n");
             switch (userInput) {
                 case 1 -> Data.conclave.calculateToConsole(); // Conclave
@@ -53,7 +54,7 @@ public class Main {
         terminateProgram.append("Warframe Standing Calculator\n");
         terminateProgram.append("Code by: Enetwarch\n");
         System.out.print(terminateProgram);
-        Utility.scanner.close();
+        Input.scanner.close();
         System.exit(0);
     }
 

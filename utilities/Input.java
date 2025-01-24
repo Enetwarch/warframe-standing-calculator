@@ -1,22 +1,16 @@
-package util;
+package utilities;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Utility {
+public class Input {
 
     public static final Scanner scanner = new Scanner(System.in);
     private static final String INPUT_ERROR = "INPUT ERROR";
 
-
-    ////// INPUT METHODS
-
-
-    // Input helper method
     private static void inputMessage(String message) {
         System.out.printf("%s: ", message);
     }
 
-    // getUserInputInt Helper method
     private static void inputErrorInt(int min, int max) {
         System.out.printf("%s. Accepts integers %d to %d.\n", INPUT_ERROR, min, max);
     }
@@ -59,34 +53,6 @@ public class Utility {
         System.out.print("Press enter to proceed. ");
         scanner.nextLine();
         System.out.print("\n");
-    }
-
-
-    ////// OUTPUT METHODS 
-
-
-    public static void printNumberedArray(String[] array) {
-        StringBuilder numberedArray = new StringBuilder();
-        for (int i = 0; i < array.length; i++) {
-            numberedArray.append(String.format("%d %s\n", i + 1, array[i]));
-        }
-        System.out.print(numberedArray);
-    }
-
-    public static int arraySumInt(int[] array) {
-        int arraySum = 0;
-        for (int number : array) {
-            arraySum += number;
-        }
-        return arraySum;
-    }
-
-    public static String pluralizeNoun(int amount) {
-        if (amount != 1) {
-            return "s";
-        } else {
-            return "";
-        }
     }
 
 }

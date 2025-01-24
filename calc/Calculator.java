@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import util.Utility;
+import utilities.Input;
+import utilities.Output;
 
 public class Calculator {
 
@@ -45,7 +46,7 @@ public class Calculator {
 
 
     public static void getMasteryRank() {
-        masteryRank = Utility.getUserInputInt("Enter your mastery rank", MASTERY_RANK_MIN, MASTERY_RANK_MAX);
+        masteryRank = Input.getUserInputInt("Enter your mastery rank", MASTERY_RANK_MIN, MASTERY_RANK_MAX);
         standingCap += masteryRank * 500; // Standing cap starts at 16000 and increases by 500 for each mastery rank.
         System.out.print("\n");
     }
@@ -61,7 +62,7 @@ public class Calculator {
         System.out.print(getRank);
         int rankMin = rankRecord[0].rankNumber();
         int rankMax = rankRecord[rankRecord.length - 1].rankNumber();
-        userRank = Utility.getUserInputInt("Enter your rank", rankMin, rankMax);
+        userRank = Input.getUserInputInt("Enter your rank", rankMin, rankMax);
         System.out.print("\n");
     }
 
@@ -71,7 +72,7 @@ public class Calculator {
         int validStandingMax = validStandingRange[1];
         String rankTitle = rankRecord[userRank].rankTitle();
         System.out.printf("Rank %d %s: %,d to %,d standing\n", userRank, rankTitle, validStandingMin, validStandingMax);
-        userStanding = Utility.getUserInputInt("Enter your standing", validStandingMin, validStandingMax);
+        userStanding = Input.getUserInputInt("Enter your standing", validStandingMin, validStandingMax);
         System.out.print("\n");
     }
 
@@ -80,7 +81,7 @@ public class Calculator {
         if (userResource.length == 0) {
             return;
         }
-        boolean proceedOrNot = Utility.getUserInputBoolean("Would you like to enter your standing resources");
+        boolean proceedOrNot = Input.getUserInputBoolean("Would you like to enter your standing resources");
         if (!proceedOrNot) {
             System.out.print("\n");
             return;
@@ -92,7 +93,7 @@ public class Calculator {
             String resourceName = resourceRecord[i].resourceName();
             int resourceStanding = resourceRecord[i].resourceStanding();
             String message = String.format("%s owned (%,d standing)", resourceName, resourceStanding);
-            userResource[i] = Utility.getUserInputInt(message, resourceMin, resourceMax);
+            userResource[i] = Input.getUserInputInt(message, resourceMin, resourceMax);
         }
         System.out.print("\n");
     }
@@ -139,7 +140,7 @@ public class Calculator {
                 // Increases rank, resets standing while still adding daily standing gains, and sets new max standing.
                 currentRank += 1;
                 if (currentRank == maxRank) {
-                    String pluralizedDay = Utility.pluralizeNoun(daysToMaxRank);
+                    String pluralizedDay = Output.pluralizeNoun(daysToMaxRank);
                     calculatorOutput.append(String.format("%,d day%s with %,d standing to max.\n", daysToMaxRank, pluralizedDay, standingToMaxRank));
                     calculatorOutput.append("\n");
                     return;
@@ -178,13 +179,13 @@ public class Calculator {
         List<Map.Entry<String, Integer>> sacrificesList = new ArrayList<>(sacrificesMap.entrySet());
         // Sorts the list in ascending order based on the integer value.
         sacrificesList.sort((entry1, entry2) -> Integer.compare(entry1.getValue(), entry2.getValue()));
-        String pluralizedSacrifice = Utility.pluralizeNoun(sacrificesList.size()).toUpperCase();
+        String pluralizedSacrifice = Output.pluralizeNoun(sacrificesList.size()).toUpperCase();
         calculatorOutput.append(String.format("REQUIRED SACRIFICE%s\n", pluralizedSacrifice));
         for (Map.Entry<String, Integer> sacrificesMapEntry : sacrificesList) {
             // Creates a list of sacrifices and amount needed.
             int sacrificeAmount = sacrificesMapEntry.getValue();
             String sacrificeName = sacrificesMapEntry.getKey();
-            String pluralizedSacrificeName = Utility.pluralizeNoun(sacrificeAmount);
+            String pluralizedSacrificeName = Output.pluralizeNoun(sacrificeAmount);
             calculatorOutput.append(String.format("%,d %s%s\n", sacrificeAmount, sacrificeName, pluralizedSacrificeName));
         }
         calculatorOutput.append("\n");
@@ -192,7 +193,7 @@ public class Calculator {
 
     private void calculateResourcesDays() {
         boolean noResource = userResource.length == 0;
-        boolean noUserResource = Utility.arraySumInt(userResource) == 0;
+        boolean noUserResource = Output.arraySumInt(userResource) == 0;
         if (noResource || noUserResource) {
             return;
         }
@@ -208,7 +209,7 @@ public class Calculator {
         }
         int days = resourceStandingTotal / standingCap;
         if (days > 1) {
-            String pluralizedDay = Utility.pluralizeNoun(days);
+            String pluralizedDay = Output.pluralizeNoun(days);
             calculatorOutput.append(String.format("Total: %,d standing (%,d day%s)\n", resourceStandingTotal, days, pluralizedDay));
         } else {
             // Too little total standing to determine days.
@@ -231,7 +232,7 @@ public class Calculator {
         calculateSacrificesToMax();
         calculateResourcesDays();
         System.out.print(calculatorOutput);
-        Utility.inputBuffer();
+        Input.inputBuffer();
     }
 
 }
