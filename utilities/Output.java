@@ -2,6 +2,8 @@ package utilities;
 
 public class Output {
 
+    public static String EXIT_PROGRAM = "Exit Program";
+
     public static String pluralizeNoun(int amount) {
         if (amount != 1) {
             return "s";
@@ -13,7 +15,7 @@ public class Output {
     public static void printNumberedArray(String[] array) {
         StringBuilder numberedArray = new StringBuilder();
         for (int i = 0; i < array.length; i++) {
-            numberedArray.append(String.format("%d %s\n", i + 1, array[i]));
+            numberedArray.append(String.format("%d %s%n", i + 1, array[i]));
         }
         System.out.print(numberedArray);
     }
@@ -24,6 +26,15 @@ public class Output {
             arraySum += number;
         }
         return arraySum;
+    }
+
+    public static void terminateProgram() {
+        StringBuilder terminateProgram = new StringBuilder();
+        terminateProgram.append(String.format("Warframe Standing Calculator%n"));
+        terminateProgram.append(String.format("Code by: Enetwarch%n"));
+        System.out.print(terminateProgram);
+        Input.scanner.close();
+        System.exit(0);
     }
 
 }

@@ -11,6 +11,7 @@ import data.TheHoldfasts;
 import data.Cavia;
 import data.TheHex;
 import data.Syndicate;
+import utilities.Interface;
 import utilities.Output;
 import utilities.Input;
 
@@ -28,58 +29,32 @@ public class Main {
     private static final Calculator cavia = new Calculator(Cavia.SYNDICATE_NAME, Cavia.RANK_RECORD, Cavia.SACRIFICE_RECORD, Cavia.RESOURCE_RECORD);
     private static final Calculator theHex = new Calculator(TheHex.SYNDICATE_NAME, TheHex.RANK_RECORD, TheHex.SACRIFICE_RECORD, TheHex.RESOURCE_RECORD);
 
-    private static final String[] SYNDICATE_OPTIONS = {
-        Syndicate.CONCLAVE.getSyndicate(),
-        Syndicate.OSTRON.getSyndicate(),
-        Syndicate.THE_QUILLS.getSyndicate(),
-        Syndicate.SOLARIS_UNITED.getSyndicate(),
-        Syndicate.VOX_SOLARIS.getSyndicate(),
-        Syndicate.VENTKIDS.getSyndicate(),
-        Syndicate.ENTRATI.getSyndicate(),
-        Syndicate.NECRALOID.getSyndicate(),
-        Syndicate.THE_HOLDFASTS.getSyndicate(),
-        Syndicate.CAVIA.getSyndicate(),
-        Syndicate.THE_HEX.getSyndicate()
+    private static final Interface[] INTERFACE_ARRAY = new Interface[] {
+        new Interface(1, Syndicate.CONCLAVE.getSyndicate(), () -> conclave.calculateToConsole()),
+        new Interface(2, Syndicate.OSTRON.getSyndicate(), () -> ostron.calculateToConsole()),
+        new Interface(3, Syndicate.THE_QUILLS.getSyndicate(), () -> theQuills.calculateToConsole()),
+        new Interface(4, Syndicate.SOLARIS_UNITED.getSyndicate(), () -> solarisUnited.calculateToConsole()),
+        new Interface(5, Syndicate.VOX_SOLARIS.getSyndicate(), () -> voxSolaris.calculateToConsole()),
+        new Interface(6, Syndicate.VENTKIDS.getSyndicate(), () -> ventkids.calculateToConsole()),
+        new Interface(7, Syndicate.ENTRATI.getSyndicate(), () -> entrati.calculateToConsole()),
+        new Interface(8, Syndicate.NECRALOID.getSyndicate(), () -> necraloid.calculateToConsole()),
+        new Interface(9, Syndicate.THE_HOLDFASTS.getSyndicate(), () -> theHoldfasts.calculateToConsole()),
+        new Interface(10, Syndicate.CAVIA.getSyndicate(), () -> cavia.calculateToConsole()),
+        new Interface(11, Syndicate.THE_HEX.getSyndicate(), () -> theHex.calculateToConsole()),
+        new Interface(0, Output.EXIT_PROGRAM, () -> Output.terminateProgram())
     };
     
     private static final int SYNDICATE_OPTIONS_MIN = 0;
-    private static final int SYNDICATE_OPTIONS_MAX = SYNDICATE_OPTIONS.length;
-
-    private static void getSyndicateOption() {
-        while (true) {
-            Output.printNumberedArray(SYNDICATE_OPTIONS);
-            System.out.print("0 Exit Program\n");
-            int userInput = Input.getUserInputInt("Choose a syndicate to calculate", SYNDICATE_OPTIONS_MIN, SYNDICATE_OPTIONS_MAX);
-            System.out.print("\n");
-            switch (userInput) {
-                case 1 -> conclave.calculateToConsole(); // Conclave
-                case 2 -> ostron.calculateToConsole(); // Ostron
-                case 3 -> theQuills.calculateToConsole(); // The Quills
-                case 4-> solarisUnited.calculateToConsole(); // Solaris United
-                case 5 -> voxSolaris.calculateToConsole(); // Vox Solaris
-                case 6 -> ventkids.calculateToConsole(); // Ventkids
-                case 7 -> entrati.calculateToConsole(); // Entrati
-                case 8 -> necraloid.calculateToConsole(); // Necraloid
-                case 9 -> theHoldfasts.calculateToConsole(); // The Holdfasts
-                case 10 -> cavia.calculateToConsole(); // Cavia
-                case 11 -> theHex.calculateToConsole(); // The Hex
-                case 0 -> terminateProgram(); // Terminate Program
-            }
-        }
-    }
-
-    private static void terminateProgram() {
-        StringBuilder terminateProgram = new StringBuilder();
-        terminateProgram.append("Warframe Standing Calculator\n");
-        terminateProgram.append("Code by: Enetwarch\n");
-        System.out.print(terminateProgram);
-        Input.scanner.close();
-        System.exit(0);
-    }
+    private static final int SYNDICATE_OPTIONS_MAX = INTERFACE_ARRAY.length - 1;
 
     public static void main(String[] args) {
         Calculator.getMasteryRank();
-        getSyndicateOption();
+        while (true) {
+            Interface.printInterface(INTERFACE_ARRAY);
+            int userInput = Input.getUserInputInt("Choose a syndicate", SYNDICATE_OPTIONS_MIN, SYNDICATE_OPTIONS_MAX);
+            System.out.printf("%n");
+            Interface.inputRunnable(INTERFACE_ARRAY, userInput);
+        }
     }
 
 }
