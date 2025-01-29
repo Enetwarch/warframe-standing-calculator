@@ -1,19 +1,20 @@
-import calc.Calculator;
-import data.Conclave;
-import data.Ostron;
-import data.TheQuills;
-import data.SolarisUnited;
-import data.VoxSolaris;
-import data.Ventkids;
-import data.Entrati;
-import data.Necraloid;
-import data.TheHoldfasts;
-import data.Cavia;
-import data.TheHex;
-import data.Syndicate;
-import utilities.Interface;
-import utilities.Output;
-import utilities.Input;
+package com.github.enetwarch.warframestandingcalculator;
+import com.github.enetwarch.warframestandingcalculator.calc.Calculator;
+import com.github.enetwarch.warframestandingcalculator.data.Conclave;
+import com.github.enetwarch.warframestandingcalculator.data.Ostron;
+import com.github.enetwarch.warframestandingcalculator.data.TheQuills;
+import com.github.enetwarch.warframestandingcalculator.data.SolarisUnited;
+import com.github.enetwarch.warframestandingcalculator.data.VoxSolaris;
+import com.github.enetwarch.warframestandingcalculator.data.Ventkids;
+import com.github.enetwarch.warframestandingcalculator.data.Entrati;
+import com.github.enetwarch.warframestandingcalculator.data.Necraloid;
+import com.github.enetwarch.warframestandingcalculator.data.TheHoldfasts;
+import com.github.enetwarch.warframestandingcalculator.data.Cavia;
+import com.github.enetwarch.warframestandingcalculator.data.TheHex;
+import com.github.enetwarch.warframestandingcalculator.data.Syndicate;
+import com.github.enetwarch.warframestandingcalculator.util.Interface;
+import com.github.enetwarch.warframestandingcalculator.util.Output;
+import com.github.enetwarch.warframestandingcalculator.util.Input;
 
 public class Main {
 

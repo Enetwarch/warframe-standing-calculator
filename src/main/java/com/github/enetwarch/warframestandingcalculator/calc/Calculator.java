@@ -1,14 +1,14 @@
-package calc;
-import data.Rank;
-import data.Resource;
-import data.Sacrifice;
-import data.Syndicate;
+package com.github.enetwarch.warframestandingcalculator.calc;
+import com.github.enetwarch.warframestandingcalculator.data.Rank;
+import com.github.enetwarch.warframestandingcalculator.data.Resource;
+import com.github.enetwarch.warframestandingcalculator.data.Sacrifice;
+import com.github.enetwarch.warframestandingcalculator.data.Syndicate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import utilities.Input;
-import utilities.Output;
+import com.github.enetwarch.warframestandingcalculator.util.Input;
+import com.github.enetwarch.warframestandingcalculator.util.Output;
 
 public class Calculator {
 
@@ -222,7 +222,7 @@ public class Calculator {
     ////// MAIN METHOD
 
 
-    // Main instance method
+    // com.github.enetwarch.warframestandingcalculator.Main instance method
     public void calculateToConsole() {
         getRank();
         getStanding();

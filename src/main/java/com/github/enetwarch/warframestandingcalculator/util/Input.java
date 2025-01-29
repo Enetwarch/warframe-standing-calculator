@@ -1,4 +1,4 @@
-package utilities;
+package com.github.enetwarch.warframestandingcalculator.util;
 import java.util.Scanner;
 
 public class Input {

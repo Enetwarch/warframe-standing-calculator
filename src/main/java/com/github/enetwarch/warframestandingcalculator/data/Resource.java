@@ -1,4 +1,4 @@
-package data;
+package com.github.enetwarch.warframestandingcalculator.data;
 
 public record Resource(String resourceName, int resourceStanding) {
 

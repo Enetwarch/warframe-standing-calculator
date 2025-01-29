@@ -1,4 +1,4 @@
-package utilities;
+package com.github.enetwarch.warframestandingcalculator.util;
 
 public class Output {
 

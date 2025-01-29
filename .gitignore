@@ -1,2 +1,7 @@
-*.class
-# Ignores compiled files.
+.idea/
+*.iml
+# IntelliJ files.
+
+target/
+dependency-reduced-pom.xml
+# Maven files.

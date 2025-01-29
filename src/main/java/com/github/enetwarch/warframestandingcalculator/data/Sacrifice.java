@@ -1,4 +1,4 @@
-package data;
+package com.github.enetwarch.warframestandingcalculator.data;
 import java.util.stream.IntStream;
 
 public record Sacrifice(String[] sacrificeName, int[] sacrificeAmount) {
