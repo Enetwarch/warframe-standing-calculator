@@ -35,7 +35,7 @@ public class Calculator {
         {0, 99000}, // Rank 4
         {0, 132000} // Rank 5
     };
-    
+
     private static int standingCap = 16000;
     private static int masteryRank = -1;
 

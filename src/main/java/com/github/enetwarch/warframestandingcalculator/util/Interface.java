@@ -1,7 +1,7 @@
 package com.github.enetwarch.warframestandingcalculator.util;
 import com.github.enetwarch.warframestandingcalculator.data.*;
 
-public record Interface(int input, String output, Data data) {
+public record Interface(int input, String output, Runnable runnable) {
 
     public Interface {
         if (input < 0) {
@@ -16,21 +16,16 @@ public record Interface(int input, String output, Data data) {
             String output = interfaceElement.output;
             printInterface.append(String.format("%d %s%n", input, output));
         }
-        printInterface.append(String.format("0 Exit Program%n"));
         System.out.print(printInterface);
     }
 
-    public static Data getData(Interface[] interfaceArray, int userInput) {
+    public static void inputRunnable(Interface[] interfaceArray, int userInput) {
         for (Interface interfaceElement : interfaceArray) {
             int input = interfaceElement.input;
             if (input == userInput) {
-                return interfaceElement.data;
+                interfaceElement.runnable.run();
             }
         }
-        if (userInput == 0) {
-            Output.terminateProgram();
-        }
-        return interfaceArray[userInput].data;
     }
 
 }
