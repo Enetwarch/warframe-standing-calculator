@@ -1,8 +1,9 @@
 package com.github.enetwarch.warframestandingcalculator.calc;
+import com.github.enetwarch.warframestandingcalculator.data.Syndicate;
 import com.github.enetwarch.warframestandingcalculator.data.Rank;
 import com.github.enetwarch.warframestandingcalculator.data.Resource;
 import com.github.enetwarch.warframestandingcalculator.data.Sacrifice;
-import com.github.enetwarch.warframestandingcalculator.data.Syndicate;
+import com.github.enetwarch.warframestandingcalculator.data.Data;
 import com.github.enetwarch.warframestandingcalculator.input.InputRank;
 import com.github.enetwarch.warframestandingcalculator.input.InputStanding;
 import com.github.enetwarch.warframestandingcalculator.input.InputResources;
@@ -18,11 +19,11 @@ public class Calculator {
     private final Sacrifice[] sacrificeRecords;
     private final Resource[] resourceRecords;
 
-    public Calculator(Syndicate syndicateName, Rank[] rankRecords, Sacrifice[] sacrificeRecords, Resource[] resourceRecords) {
-        this.syndicateName = syndicateName.getSyndicate();
-        this.rankRecords = rankRecords;
-        this.sacrificeRecords = sacrificeRecords;
-        this.resourceRecords = resourceRecords;
+    public Calculator(Data syndicateData) {
+        this.syndicateName = syndicateData.getSyndicateName();
+        this.rankRecords = syndicateData.getRankRecord();
+        this.sacrificeRecords = syndicateData.getSacrificeRecord();
+        this.resourceRecords = syndicateData.getResourceRecord();
     }
 
     public static StringBuilder calculatorOutput = new StringBuilder();
