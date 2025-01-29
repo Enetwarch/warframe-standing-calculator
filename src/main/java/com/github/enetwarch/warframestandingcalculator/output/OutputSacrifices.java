@@ -1,8 +1,6 @@
 package com.github.enetwarch.warframestandingcalculator.output;
 import com.github.enetwarch.warframestandingcalculator.data.Sacrifice;
-import java.util.Map;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Comparator;
 import com.github.enetwarch.warframestandingcalculator.util.Output;
@@ -24,8 +22,8 @@ public class OutputSacrifices {
         return !(noSacrifices || isAlreadyMax);
     }
 
-    private List<Map.Entry<String, Integer>> listSacrifices() {
-        Map<String, Integer> sacrificesMap = new HashMap<>();
+    private ArrayList<HashMap.Entry<String, Integer>> listSacrifices() {
+        HashMap<String, Integer> sacrificesMap = new HashMap<>();
         while(userRank < sacrificeRecords.length) {
             final int[] sacrificeAmountArray = sacrificeRecords[userRank].sacrificeAmount();
             final String[] sacrificeNameArray = sacrificeRecords[userRank].sacrificeName();
@@ -39,19 +37,19 @@ public class OutputSacrifices {
             }
             userRank++;
         }
-        List<Map.Entry<String, Integer>> sacrificesList = new ArrayList<>(sacrificesMap.entrySet());
-        sacrificesList.sort(Comparator.comparingInt(Map.Entry::getValue));
+        ArrayList<HashMap.Entry<String, Integer>> sacrificesList = new ArrayList<>(sacrificesMap.entrySet());
+        sacrificesList.sort(Comparator.comparingInt(HashMap.Entry::getValue));
         return sacrificesList;
     }
 
-    private void buildHeader(List<Map.Entry<String, Integer>> sacrificesList) {
+    private void buildHeader(ArrayList<HashMap.Entry<String, Integer>> sacrificesList) {
         final String pluralizedSacrifice = Output.pluralizeNoun(sacrificesList.size()).toUpperCase();
         Calculator.calculatorOutput.append(String.format("REQUIRED SACRIFICE%s%n", pluralizedSacrifice));
 
     }
 
-    private void buildBody(List<Map.Entry<String, Integer>> sacrificesList) {
-        for (Map.Entry<String, Integer> sacrificesMapEntry : sacrificesList) {
+    private void buildBody(ArrayList<HashMap.Entry<String, Integer>> sacrificesList) {
+        for (HashMap.Entry<String, Integer> sacrificesMapEntry : sacrificesList) {
             final int sacrificeAmount = sacrificesMapEntry.getValue();
             final String sacrificeName = sacrificesMapEntry.getKey();
             final String pluralizedSacrificeName = Output.pluralizeNoun(sacrificeAmount);
@@ -63,7 +61,7 @@ public class OutputSacrifices {
         if (!proceedOrNot()) {
             return;
         }
-        final List<Map.Entry<String, Integer>> sacrificesList = listSacrifices();
+        final ArrayList<HashMap.Entry<String, Integer>> sacrificesList = listSacrifices();
         buildHeader(sacrificesList);
         buildBody(sacrificesList);
         Calculator.calculatorOutput.append(String.format("%n"));

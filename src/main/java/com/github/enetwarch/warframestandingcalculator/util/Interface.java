@@ -20,8 +20,6 @@ public record Interface(int input, String output, Data data) {
         System.out.print(printInterface);
     }
 
-
-
     public static Data getData(Interface[] interfaceArray, int userInput) {
         for (Interface interfaceElement : interfaceArray) {
             int input = interfaceElement.input;
@@ -32,7 +30,7 @@ public record Interface(int input, String output, Data data) {
         if (userInput == 0) {
             Output.terminateProgram();
         }
-        return null;
+        return interfaceArray[userInput].data;
     }
 
 }

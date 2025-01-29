@@ -1,5 +1,4 @@
 package com.github.enetwarch.warframestandingcalculator.calc;
-import com.github.enetwarch.warframestandingcalculator.data.Syndicate;
 import com.github.enetwarch.warframestandingcalculator.data.Rank;
 import com.github.enetwarch.warframestandingcalculator.data.Resource;
 import com.github.enetwarch.warframestandingcalculator.data.Sacrifice;
@@ -29,13 +28,14 @@ public class Calculator {
     public static StringBuilder calculatorOutput = new StringBuilder();
 
     private static final int[][] standingPerRank = {
-            {0, 5000}, // Neutral
-            {0, 22000}, // Rank 1
-            {0, 44000}, // Rank 2
-            {0, 70000}, // Rank 3
-            {0, 99000}, // Rank 4
-            {0, 132000} // Rank 5
+        {0, 5000}, // Neutral
+        {0, 22000}, // Rank 1
+        {0, 44000}, // Rank 2
+        {0, 70000}, // Rank 3
+        {0, 99000}, // Rank 4
+        {0, 132000} // Rank 5
     };
+    
     private static int standingCap = 16000;
     private static int masteryRank = -1;
 

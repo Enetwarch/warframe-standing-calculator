@@ -44,7 +44,7 @@ public class Main {
             int userInput = Input.getUserInputInt("Choose a syndicate", SYNDICATE_OPTIONS_MIN, SYNDICATE_OPTIONS_MAX);
             Output.printSpace();
             Data data = Interface.getData(INTERFACE_ARRAY, userInput);
-            assert data != null;
+
             new Calculator(data).calculateToConsole();
             Input.inputBuffer();
         }
