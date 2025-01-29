@@ -15,6 +15,7 @@ import com.github.enetwarch.warframestandingcalculator.data.Syndicate;
 import com.github.enetwarch.warframestandingcalculator.util.Interface;
 import com.github.enetwarch.warframestandingcalculator.util.Output;
 import com.github.enetwarch.warframestandingcalculator.util.Input;
+import com.github.enetwarch.warframestandingcalculator.input.InputUser;
 
 public class Main {
 
@@ -42,19 +43,20 @@ public class Main {
         new Interface(9, Syndicate.THE_HOLDFASTS.getSyndicate(), () -> theHoldfasts.calculateToConsole()),
         new Interface(10, Syndicate.CAVIA.getSyndicate(), () -> cavia.calculateToConsole()),
         new Interface(11, Syndicate.THE_HEX.getSyndicate(), () -> theHex.calculateToConsole()),
-        new Interface(0, Output.EXIT_PROGRAM, () -> Output.terminateProgram())
+        new Interface(0, "Exit Program", () -> Output.terminateProgram())
     };
     
     private static final int SYNDICATE_OPTIONS_MIN = 0;
     private static final int SYNDICATE_OPTIONS_MAX = INTERFACE_ARRAY.length - 1;
 
     public static void main(String[] args) {
-        Calculator.getMasteryRank();
+        Calculator.setMasteryRank(InputUser.getMasteryRank());
         while (true) {
             Interface.printInterface(INTERFACE_ARRAY);
             int userInput = Input.getUserInputInt("Choose a syndicate", SYNDICATE_OPTIONS_MIN, SYNDICATE_OPTIONS_MAX);
-            System.out.printf("%n");
+            Output.printSpace();
             Interface.inputRunnable(INTERFACE_ARRAY, userInput);
+            Input.inputBuffer();
         }
     }
 
