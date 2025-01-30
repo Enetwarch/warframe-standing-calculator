@@ -12,6 +12,7 @@ public class OutputHeader {
     }
 
     public void buildOutputHeader() {
+        Calculator.calculatorOutput.append(String.format("USER INFO%n"));
         Calculator.calculatorOutput.append(String.format("Mastery Rank: %d%n", masteryRank));
         Calculator.calculatorOutput.append(String.format("Daily Standing Cap: %,d%n", standingCap));
         Calculator.calculatorOutput.append(String.format("%n"));
