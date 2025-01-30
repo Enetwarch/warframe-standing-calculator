@@ -1,4 +1,4 @@
-package com.github.enetwarch.warframestandingcalculator.output;
+package com.github.enetwarch.warframestandingcalculator.calc.output;
 import com.github.enetwarch.warframestandingcalculator.data.Rank;
 import com.github.enetwarch.warframestandingcalculator.calc.Calculator;
 import com.github.enetwarch.warframestandingcalculator.util.Output;

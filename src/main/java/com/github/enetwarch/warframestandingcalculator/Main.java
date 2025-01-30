@@ -15,7 +15,7 @@ import com.github.enetwarch.warframestandingcalculator.data.Syndicate;
 import com.github.enetwarch.warframestandingcalculator.util.Interface;
 import com.github.enetwarch.warframestandingcalculator.util.Output;
 import com.github.enetwarch.warframestandingcalculator.util.Input;
-import com.github.enetwarch.warframestandingcalculator.input.InputUser;
+import com.github.enetwarch.warframestandingcalculator.calc.input.InputUser;
 
 public class Main {
 

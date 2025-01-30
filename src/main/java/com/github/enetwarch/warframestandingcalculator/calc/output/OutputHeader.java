@@ -1,4 +1,4 @@
-package com.github.enetwarch.warframestandingcalculator.output;
+package com.github.enetwarch.warframestandingcalculator.calc.output;
 import com.github.enetwarch.warframestandingcalculator.calc.Calculator;
 
 public class OutputHeader {

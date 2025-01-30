@@ -3,13 +3,13 @@ import com.github.enetwarch.warframestandingcalculator.data.Rank;
 import com.github.enetwarch.warframestandingcalculator.data.Resource;
 import com.github.enetwarch.warframestandingcalculator.data.Sacrifice;
 import com.github.enetwarch.warframestandingcalculator.data.Data;
-import com.github.enetwarch.warframestandingcalculator.input.InputRank;
-import com.github.enetwarch.warframestandingcalculator.input.InputStanding;
-import com.github.enetwarch.warframestandingcalculator.input.InputResources;
-import com.github.enetwarch.warframestandingcalculator.output.OutputHeader;
-import com.github.enetwarch.warframestandingcalculator.output.OutputRank;
-import com.github.enetwarch.warframestandingcalculator.output.OutputSacrifices;
-import com.github.enetwarch.warframestandingcalculator.output.OutputResources;
+import com.github.enetwarch.warframestandingcalculator.calc.input.InputRank;
+import com.github.enetwarch.warframestandingcalculator.calc.input.InputStanding;
+import com.github.enetwarch.warframestandingcalculator.calc.input.InputResources;
+import com.github.enetwarch.warframestandingcalculator.calc.output.OutputHeader;
+import com.github.enetwarch.warframestandingcalculator.calc.output.OutputRank;
+import com.github.enetwarch.warframestandingcalculator.calc.output.OutputSacrifices;
+import com.github.enetwarch.warframestandingcalculator.calc.output.OutputResources;
 
 public class Calculator {
 

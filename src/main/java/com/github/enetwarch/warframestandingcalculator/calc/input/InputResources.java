@@ -1,4 +1,4 @@
-package com.github.enetwarch.warframestandingcalculator.input;
+package com.github.enetwarch.warframestandingcalculator.calc.input;
 import com.github.enetwarch.warframestandingcalculator.data.Resource;
 import com.github.enetwarch.warframestandingcalculator.util.Input;
 import com.github.enetwarch.warframestandingcalculator.util.Output;
