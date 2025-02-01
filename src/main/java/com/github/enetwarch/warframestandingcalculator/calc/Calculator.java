@@ -32,9 +32,9 @@ public class Calculator {
         this.userResources = new int[resourceRecords.length];
     }
 
-    private static final int[][] standingPerRank = {{0, 5000}, {0, 22000}, {0, 44000}, {0, 70000}, {0, 99000}, {0, 132000}};
     private static int masteryRank = -1;
     private static int standingCap = 16000;
+    private static final int[][] STANDING_PER_RANK = {{0, 5000}, {0, 22000}, {0, 44000}, {0, 70000}, {0, 99000}, {0, 132000}};
 
     public static void setMasteryRank() {
         final int masteryRankMin = 0;
@@ -48,109 +48,107 @@ public class Calculator {
         getRank();
         getStanding();
         getResources();
-        buildOutputHeader();
-        buildOutputRank();
-        buildOutputSacrifices();
-        buildOutputResources();
+        buildCalculatorOutputHeader();
+        buildCalculatorOutputRank();
+        buildCalculatorOutputSacrifices();
+        buildCalculatorOutputResources();
         System.out.print(calculatorOutput);
     }
 
-    public void getRank() {
-        printRankRecords();
-        final int rankMin = rankRecords[0].rankNumber();
-        final int rankMax = rankRecords[rankRecords.length - 1].rankNumber();
+    private void getRank() {
+        final int rankMin = Rank.getRankNumberMin(rankRecords);
+        final int rankMax = Rank.getRankNumberMax(rankRecords);
+        Rank.printRankRecords(rankRecords);
         userRank = Input.getUserInputInt("Enter your rank", rankMin, rankMax);
         Output.printSpace();
     }
 
-    private void printRankRecords() {
-        final StringBuilder printRankRecords = new StringBuilder();
-        for (Rank rankRecord : rankRecords) {
-            final int rankNumber = rankRecord.rankNumber();
-            final String rankTitle = rankRecord.rankTitle();
-            printRankRecords.append(String.format("%d %s%n", rankNumber, rankTitle));
-        }
-        System.out.print(printRankRecords);
-    }
-
-    public void getStanding() {
+    private void getStanding() {
         final String rankTitle = rankRecords[userRank].rankTitle();
-        int[] validStandingRange = standingPerRank[userRank];
-        final int validStandingMin = validStandingRange[0];
-        final int validStandingMax = validStandingRange[1];
+        final int validStandingMin = STANDING_PER_RANK[userRank][0];
+        final int validStandingMax = STANDING_PER_RANK[userRank][1];
         System.out.printf("Rank %d %s: %,d to %,d standing%n", userRank, rankTitle, validStandingMin, validStandingMax);
         userStanding = Input.getUserInputInt("Enter your standing", validStandingMin, validStandingMax);
         Output.printSpace();
     }
 
     public void getResources() {
-        if (!proceedGetResourcesOrNot()) {
+        if (!proceedToGetResourcesOrNot()) {
             Output.printSpace();
             return;
         }
         final int resourceMin = 0;
         final int resourceMax = Integer.MAX_VALUE;
         for (int index = 0; index < resourceRecords.length; index++) {
-            final String message = getMessage(index);
-            userResources[index] = Input.getUserInputInt(message, resourceMin, resourceMax);
+            final String inputPrompt = getResourcesInputPrompt(index);
+            userResources[index] = Input.getUserInputInt(inputPrompt, resourceMin, resourceMax);
         }
         Output.printSpace();
     }
 
-    private boolean proceedGetResourcesOrNot() {
+    private boolean proceedToGetResourcesOrNot() {
         if (userResources.length == 0) {
             return false;
         }
         return Input.getUserInputBoolean("Input standing resources");
     }
 
-    private String getMessage(int index) {
+    private String getResourcesInputPrompt(int index) {
         final String resourceName = resourceRecords[index].resourceName();
         final int resourceStanding = resourceRecords[index].resourceStanding();
         return String.format("%s owned (%,d standing)", resourceName, resourceStanding);
     }
 
-    public void buildOutputHeader() {
+    public void buildCalculatorOutputHeader() {
         calculatorOutput.append(String.format("USER INFO%n"));
         calculatorOutput.append(String.format("Mastery Rank: %d%n", masteryRank));
         calculatorOutput.append(String.format("Daily Standing Cap: %,d%n", standingCap));
         calculatorOutput.append(String.format("%n"));
     }
 
-    public void buildOutputRank() {
-        int userRankMaxStanding = standingPerRank[userRank][1];
+    public void buildCalculatorOutputRank() {
+        final int userRankMaxStanding = STANDING_PER_RANK[userRank][1];
         final int maxRank = rankRecords.length - 1;
-        buildOutputRankHeader();
-        buildOutputRankBody(userRankMaxStanding);
-        if (!proceedOutputRankOrNot(maxRank, userRankMaxStanding)) {
+        buildCalculatorOutputRankHeader();
+        buildCalculatorOutputRankBody(userRankMaxStanding);
+        if (!proceedToBuildCalculatorOutputRankOrNot(maxRank, userRankMaxStanding)) {
+            calculatorOutput.append(String.format("%n"));
             return;
         }
-        buildOutputRankFooter(userRankMaxStanding, maxRank);
+        buildCalculatorOutputRankFooter(userRankMaxStanding, maxRank);
         calculatorOutput.append(String.format("%n"));
     }
 
-    private boolean proceedOutputRankOrNot(int maxRank, int userRankMaxStanding) {
-        final boolean isAlreadyMax = userRank == maxRank;
-        final boolean edgeCase = userRank == maxRank - 1 && userStanding == userRankMaxStanding;
-        if (isAlreadyMax || edgeCase) {
-            buildOutputRankEdgeFooter(isAlreadyMax);
+    private void buildCalculatorOutputRankHeader() {
+        calculatorOutput.append(String.format("%s%n", syndicateName.toUpperCase()));
+    }
+
+    private void buildCalculatorOutputRankBody(int userRankMaxStanding) {
+        calculatorOutput.append(String.format("Rank: %d %s%n", userRank, rankRecords[userRank].rankTitle()));
+        calculatorOutput.append(String.format("Standing: %,d out of %,d%n", userStanding, userRankMaxStanding));
+    }
+
+    private boolean proceedToBuildCalculatorOutputRankOrNot(int maxRank, int userRankMaxStanding) {
+        if (isAlreadyMaxRank(maxRank)) {
+            calculatorOutput.append(String.format("Already max rank.%n"));
+            return false;
+        } else if (isEligibleForMaxRank(maxRank, userRankMaxStanding)) {
+            calculatorOutput.append(String.format("Eligible for max rank.%n"));
             return false;
         } else {
             return true;
         }
     }
 
-    private void buildOutputRankHeader() {
-        calculatorOutput.append(String.format("%s%n", syndicateName.toUpperCase()));
+    private boolean isAlreadyMaxRank(int maxRank) {
+        return userRank == maxRank;
     }
 
-    private void buildOutputRankBody(int userRankMaxStanding) {
-        final String rankTitle = rankRecords[userRank].rankTitle();
-        calculatorOutput.append(String.format("Rank: %d %s%n", userRank, rankTitle));
-        calculatorOutput.append(String.format("Standing: %,d out of %,d%n", userStanding, userRankMaxStanding));
+    private boolean isEligibleForMaxRank(int maxRank, int userRankMaxStanding) {
+        return userRank == maxRank - 1 && userStanding == userRankMaxStanding;
     }
 
-    private void buildOutputRankFooter(int userRankMaxStanding, int maxRank) {
+    private void buildCalculatorOutputRankFooter(int userRankMaxStanding, int maxRank) {
         int daysToMaxRank = 0;
         int standingToMaxRank = userRankMaxStanding - userStanding;
         while(true) {
@@ -164,42 +162,36 @@ public class Calculator {
                     return;
                 }
                 userStanding += standingCap - userRankMaxStanding;
-                userRankMaxStanding = standingPerRank[userRank][1];
+                userRankMaxStanding = STANDING_PER_RANK[userRank][1];
                 standingToMaxRank += userRankMaxStanding;
             }
             daysToMaxRank += 1;
         }
     }
 
-    private void buildOutputRankEdgeFooter(boolean isAlreadyMax) {
-        if (isAlreadyMax) {
-            calculatorOutput.append(String.format("Already max rank.%n"));
-        } else {
-            calculatorOutput.append(String.format("Eligible for max rank.%n"));
-        }
-        calculatorOutput.append(String.format("%n"));
-    }
-
-    public void buildOutputResources() {
-        if (!proceedOutputResourcesOrNot()) {
+    public void buildCalculatorOutputResources() {
+        if (!proceedToBuildCalculatorOutputResourcesOrNot()) {
             return;
         }
-        buildOutputResourcesHeader();
-        final int resourceStandingTotal = buildOutputResourcesBody();
-        buildOutputResourcesFooter(resourceStandingTotal);
+        buildCalculatorOutputResourcesHeader();
+        final int resourceStandingTotal = buildCalculatorOutputResourcesBody();
+        buildCalculatorOutputResourcesFooter(resourceStandingTotal);
         calculatorOutput.append(String.format("%n"));
     }
 
-    private boolean proceedOutputResourcesOrNot() {
-        final boolean noResource = IntStream.of(userResources).sum() == 0;
-        return !(noResource);
+    private boolean proceedToBuildCalculatorOutputResourcesOrNot() {
+        return !(noSyndicateOrUserResource());
     }
 
-    private void buildOutputResourcesHeader() {
+    private boolean noSyndicateOrUserResource() {
+        return IntStream.of(userResources).sum() == 0;
+    }
+
+    private void buildCalculatorOutputResourcesHeader() {
         calculatorOutput.append(String.format("STANDING RESOURCES%n"));
     }
 
-    private int buildOutputResourcesBody() {
+    private int buildCalculatorOutputResourcesBody() {
         int resourceStandingTotal = 0;
         for (int index = 0; index < resourceRecords.length; index++) {
             final String resourceName = resourceRecords[index].resourceName();
@@ -211,7 +203,7 @@ public class Calculator {
         return resourceStandingTotal;
     }
 
-    private void buildOutputResourcesFooter(int resourceStandingTotal) {
+    private void buildCalculatorOutputResourcesFooter(int resourceStandingTotal) {
         final int days = resourceStandingTotal / standingCap;
         if (days > 1) {
             final String pluralizedDay = Output.pluralizeNoun(days);
@@ -221,20 +213,26 @@ public class Calculator {
         }
     }
 
-    public void buildOutputSacrifices() {
-        if (!proceedOutputSacrificesOrNot()) {
+    public void buildCalculatorOutputSacrifices() {
+        if (!proceedToBuildCalculatorOutputSacrificesOrNot()) {
             return;
         }
         final ArrayList<HashMap.Entry<String, Integer>> sacrificesList = listSacrifices();
-        buildOutputSacrificesHeader(sacrificesList);
-        buildOutputSacrificesBody(sacrificesList);
+        buildCalculatorOutputSacrificesHeader(sacrificesList);
+        buildCalculatorOutputSacrificesBody(sacrificesList);
         calculatorOutput.append(String.format("%n"));
     }
 
-    private boolean proceedOutputSacrificesOrNot() {
-        final boolean noSacrifices = sacrificeRecords.length == 0;
-        final boolean isAlreadyMax = userRank == sacrificeRecords.length;
-        return !(noSacrifices || isAlreadyMax);
+    private boolean proceedToBuildCalculatorOutputSacrificesOrNot() {
+        return !(noSyndicateSacrifices() || isAlreadyMaxRankSacrifices());
+    }
+
+    private boolean noSyndicateSacrifices() {
+        return sacrificeRecords.length == 0;
+    }
+
+    private boolean isAlreadyMaxRankSacrifices() {
+        return userRank == sacrificeRecords.length;
     }
 
     private ArrayList<HashMap.Entry<String, Integer>> listSacrifices() {
@@ -257,12 +255,12 @@ public class Calculator {
         return sacrificesList;
     }
 
-    private void buildOutputSacrificesHeader(ArrayList<HashMap.Entry<String, Integer>> sacrificesList) {
+    private void buildCalculatorOutputSacrificesHeader(ArrayList<HashMap.Entry<String, Integer>> sacrificesList) {
         final String pluralizedSacrifice = Output.pluralizeNoun(sacrificesList.size()).toUpperCase();
         calculatorOutput.append(String.format("REQUIRED SACRIFICE%s%n", pluralizedSacrifice));
     }
 
-    private void buildOutputSacrificesBody(ArrayList<HashMap.Entry<String, Integer>> sacrificesList) {
+    private void buildCalculatorOutputSacrificesBody(ArrayList<HashMap.Entry<String, Integer>> sacrificesList) {
         for (HashMap.Entry<String, Integer> sacrificesMapEntry : sacrificesList) {
             final int sacrificeAmount = sacrificesMapEntry.getValue();
             final String sacrificeName = sacrificesMapEntry.getKey();

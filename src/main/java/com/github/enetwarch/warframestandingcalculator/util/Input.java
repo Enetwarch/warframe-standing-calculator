@@ -6,51 +6,51 @@ public class Input {
     public static final Scanner scanner = new Scanner(System.in);
     private static final String INPUT_ERROR = "INPUT ERROR";
 
-    private static void inputMessageInt(String message) {
-        System.out.printf("%s: ", message);
-    }
-
-    private static void inputErrorInt(int min, int max) {
-        System.out.printf("%s. Accepts integers %d to %d.%n", INPUT_ERROR, min, max);
-    }
-
-    public static int getUserInputInt(String message, int min, int max) {
+    public static int getUserInputInt(String inputPrompt, int min, int max) {
         int userInput;
         while (true) {
             try {
-                inputMessageInt(message);
+                printInputPromptInt(inputPrompt);
                 userInput = Integer.parseInt(scanner.nextLine().trim());
                 if (userInput >= min && userInput <= max) {
                     return userInput;
                 } else {
-                    inputErrorInt(min, max);
+                    printInputErrorInt(min, max);
                 }
             } catch (NumberFormatException e) {
-                inputErrorInt(min, max); 
+                printInputErrorInt(min, max);
                 continue;
             }
         }
     }
 
-    private static void inputMessageBoolean(String message) {
-        System.out.printf("%s? (y/n): ", message);
+    private static void printInputPromptInt(String inputPrompt) {
+        System.out.printf("%s: ", inputPrompt);
     }
 
-    private static void inputErrorBoolean() {
-        System.out.printf("%s. Accepts y or n.%n", INPUT_ERROR);
+    private static void printInputErrorInt(int min, int max) {
+        System.out.printf("%s. Accepts integers %d to %d.%n", INPUT_ERROR, min, max);
     }
 
-    public static boolean getUserInputBoolean(String message) {
+    public static boolean getUserInputBoolean(String inputPrompt) {
         String userInput;
         while (true) {
-            inputMessageBoolean(message);
+            printInputPromptBoolean(inputPrompt);
             userInput = scanner.nextLine().toLowerCase();
             switch (userInput) {
                 case "y": return true;
                 case "n": return false;
-                default: inputErrorBoolean();
+                default: printInputErrorBoolean();
             }
         }
+    }
+
+    private static void printInputPromptBoolean(String inputPrompt) {
+        System.out.printf("%s? (y/n): ", inputPrompt);
+    }
+
+    private static void printInputErrorBoolean() {
+        System.out.printf("%s. Accepts y or n.%n", INPUT_ERROR);
     }
 
     public static void inputBuffer() {

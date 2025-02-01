@@ -2,6 +2,8 @@ package com.github.enetwarch.warframestandingcalculator.util;
 
 public class Output {
 
+    public static final String EXIT_PROGRAM = "Exit Program";
+
     public static void printSpace() {
         System.out.printf("%n");
     }
